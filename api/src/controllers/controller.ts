@@ -1,10 +1,12 @@
 import { NextFunction, Request, Response } from 'express';
+import { Repository } from '../repository/repository';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 export abstract class Controller<T extends { id: string | number }> {
+  public repo!: Repository<T>;
+
   async getAll(req: Request, res: Response, next: NextFunction) {
     try {
-      const response = 'test123';
+      const response = await this.repo.queryAll();
       res.send(response);
     } catch (error) {
       next(error);

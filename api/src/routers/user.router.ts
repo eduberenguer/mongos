@@ -1,11 +1,17 @@
-// ./src/router.ts
-import { Router } from 'express';
+import { Router as createRouter } from 'express';
 import { UserController } from '../controllers/user.controller';
+import { UserRepo } from '../repository/user/user.m.repository';
+import { Interceptor } from '../middleware/register.interceptor';
 
-const router = Router();
+export const userRouter = createRouter();
 
-const controller = new UserController('/users');
+const repo: UserRepo = new UserRepo();
+const controller = new UserController(repo);
+const interceptor = new Interceptor(repo);
 
-router.get('/', controller.getAll.bind(controller));
-
-export default router;
+userRouter.get('/', controller.getAll.bind(controller));
+userRouter.post(
+  '/register/',
+  interceptor.authorizedForRegister.bind(interceptor),
+  controller.register.bind(controller),
+);

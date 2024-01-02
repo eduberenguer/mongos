@@ -1,10 +1,10 @@
 import { Response, Request, NextFunction } from 'express';
 import { Controller } from './controller';
-import { User } from '../entities/user.js';
-import { UserRepo } from '../repository/user/user.m.repository';
+import { ShelterRepo } from '../repository/shelter/shelter.m.repository';
+import { Shelter } from '../entities/shelter';
 
-export class UserController extends Controller<User> {
-  constructor(public repo: UserRepo) {
+export class ShelterController extends Controller<Shelter> {
+  constructor(public repo: ShelterRepo) {
     super();
   }
 

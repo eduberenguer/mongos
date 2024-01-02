@@ -1,14 +1,9 @@
-import controller from './user.controller';
+import { UserController } from './user.controller';
 
 describe('getUsers', () => {
   it('should return "Hola usuarios"', () => {
-    const req = {};
-    const res = {
-      send: jest.fn(),
-    };
+    const controller = new UserController('/users');
 
-    controller.users(req, res);
-
-    expect(res.send).toHaveBeenCalledWith('Hola usuarios');
+    expect(controller.getAll).toHaveBeenCalledWith('test123');
   });
 });

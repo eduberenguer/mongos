@@ -1,25 +1,45 @@
-// ./src/index.ts
-import express from "express";
-import mongoose from "mongoose";
-import router from "./routers/user.router";
+import express from 'express';
+import mongoose from 'mongoose';
+import morgan from 'morgan';
+import cors from 'cors';
+
+import { userRouter } from './routers/user.router';
+import { shelterRouter } from './routers/shelter.router';
+
 const app = express();
 
-import dotenv from "dotenv";
+import dotenv from 'dotenv';
 dotenv.config();
 
-// Ahora puedes acceder a las variables de entorno con process.env
 const port = process.env.PORT;
 const mongoUri = process.env.MONGO_URI as string;
 mongoose
   .connect(mongoUri, {})
-  .then(() => console.log("MongoDB connected..."))
+  .then(() => console.log('MongoDB connected...'))
   .catch((err) => console.log(err));
 
-app.get("/", (_req, res) => {
-  res.send("API Rest Info");
+app.get('/', (_req, res) => {
+  res.send('API Rest Info');
 });
 
-app.use("/users", router);
+const corsOptions = {
+  origin: '*',
+};
+
+app.set('trust proxy', true);
+
+app.use((req, res, next) => {
+  res.header('Content-Security-Policy', 'upgrade-insecure-requests;');
+  next();
+});
+
+app.use(morgan('dev'));
+app.use(cors(corsOptions));
+app.use(express.json());
+app.use(express.static('public'));
+
+app.use('/user', userRouter);
+app.use('/shelter', shelterRouter);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);
