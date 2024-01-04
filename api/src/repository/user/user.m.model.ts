@@ -11,6 +11,7 @@ const userSchema = new Schema<User>({
   registerDate: { type: Date, required: true },
   friends: { type: [String], required: true },
   lifestyle: { type: [String], required: true },
+  role: { type: String, required: true, enum: ['user'] },
 });
 
 userSchema.set('toJSON', {

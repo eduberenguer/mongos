@@ -6,4 +6,5 @@ export type Shelter = {
   avatar: string;
   address: string;
   registerDate: Date;
+  role: 'shelter';
 };

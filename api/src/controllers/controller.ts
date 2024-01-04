@@ -12,4 +12,12 @@ export abstract class Controller<T extends { id: string | number }> {
       next(error);
     }
   }
+
+  async getById(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.send(await this.repo.queryById(req.params.id));
+    } catch (error) {
+      next(error);
+    }
+  }
 }

@@ -1,17 +1,18 @@
 import { Router as createRouter } from 'express';
-import { UserController } from '../controllers/user.controller';
+import { AccountsController } from '../controllers/account.controller';
 import { UserRepo } from '../repository/user/user.m.repository';
-import { Interceptor } from '../middleware/register.interceptor';
+import { Interceptor } from '../middleware/auth.interceptor';
 
 export const userRouter = createRouter();
 
 const repo: UserRepo = new UserRepo();
-const controller = new UserController(repo);
+const accountController = new AccountsController(repo);
 const interceptor = new Interceptor(repo);
 
-userRouter.get('/', controller.getAll.bind(controller));
+userRouter.get('/', accountController.getAll.bind(accountController));
 userRouter.post(
   '/register/',
   interceptor.authorizedForRegister.bind(interceptor),
-  controller.register.bind(controller),
+  accountController.register.bind(accountController),
 );
+userRouter.post('/login/', accountController.login.bind(accountController));

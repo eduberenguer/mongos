@@ -8,6 +8,7 @@ const shelterSchema = new Schema<Shelter>({
   avatar: { type: String, required: true },
   address: { type: String, required: true },
   registerDate: { type: Date, required: true },
+  role: { type: String, required: true, enum: ['shelter'] },
 });
 
 shelterSchema.set('toJSON', {

@@ -6,14 +6,24 @@ export class UserRepo implements Repository<User> {
   constructor() {}
 
   async create(data: Omit<User, 'id'>): Promise<User> {
-    const userExist = await UserModel.findOne({ email: data.email });
-    if (userExist) throw new Error('User already exists');
     const newUser = await UserModel.create(data);
     return newUser;
+  }
+
+  async search({ key, value }: { key: string; value: unknown }): Promise<User> {
+    const result = await UserModel.find({ [key]: value });
+
+    return result[0];
   }
 
   async queryAll(): Promise<User[]> {
     const allData = await UserModel.find({});
     return allData;
+  }
+
+  async queryById(id: string): Promise<User> {
+    const result = await UserModel.findById(id);
+    if (result === null) throw new Error('Not found');
+    return result;
   }
 }

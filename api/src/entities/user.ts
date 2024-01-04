@@ -1,8 +1,11 @@
+type Role = 'user' | 'shelter';
+
 export type User = {
   id: string;
   userName: string;
   email: string;
   password: string;
+  role: Role;
   avatar: string;
   address: string;
   favourites: string[];

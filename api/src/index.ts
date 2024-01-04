@@ -5,6 +5,7 @@ import cors from 'cors';
 
 import { userRouter } from './routers/user.router';
 import { shelterRouter } from './routers/shelter.router';
+import { dogRouter } from './routers/dog.router';
 
 const app = express();
 
@@ -40,6 +41,7 @@ app.use(express.static('public'));
 
 app.use('/user', userRouter);
 app.use('/shelter', shelterRouter);
+app.use('/dog', dogRouter);
 
 app.listen(port, () => {
   console.log(`Server running on port ${port}`);

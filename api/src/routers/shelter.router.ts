@@ -1,17 +1,18 @@
 import { Router as createRouter } from 'express';
-import { ShelterController } from '../controllers/shelter.controller';
+import { AccountsController } from '../controllers/account.controller';
 import { ShelterRepo } from '../repository/shelter/shelter.m.repository';
-import { Interceptor } from '../middleware/register.interceptor';
+import { Interceptor } from '../middleware/auth.interceptor';
 
 export const shelterRouter = createRouter();
 
 const repo: ShelterRepo = new ShelterRepo();
-const controller = new ShelterController(repo);
+const accountController = new AccountsController(repo);
 const interceptor = new Interceptor(repo);
 
-shelterRouter.get('/', controller.getAll.bind(controller));
+shelterRouter.get('/', accountController.getAll.bind(accountController));
 shelterRouter.post(
   '/register',
   interceptor.authorizedForRegister.bind(interceptor),
-  controller.register.bind(controller),
+  accountController.register.bind(accountController),
 );
+shelterRouter.post('/login/', accountController.login.bind(accountController));
