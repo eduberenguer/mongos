@@ -12,7 +12,6 @@ export class ShelterRepo implements Repository<Shelter> {
 
   async search({ key, value }: { key: string; value: unknown }): Promise<Shelter> {
     const result = await ShelterModel.find({ [key]: value });
-
     return result[0];
   }
 
