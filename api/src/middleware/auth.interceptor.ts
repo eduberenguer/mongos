@@ -37,11 +37,9 @@ export class Interceptor {
       }
       const shelterExist = await ShelterModel.findOne({ email: req.body.email });
       const userExist = await UserModel.findOne({ email: req.body.email });
-
       if (shelterExist || userExist) {
         throw new Error('Mail already exists');
       }
-
       next();
     } catch (error) {
       next(error);

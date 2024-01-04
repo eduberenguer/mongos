@@ -25,4 +25,5 @@ export type Dog = {
   hasBreed: boolean;
   breed: string | undefined;
   registerDate: Date;
+  description: string;
 };
