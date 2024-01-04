@@ -1,9 +1,9 @@
 {
   "compilerOptions": {
-    "target": "ES2020",
+    "target": "ES2022",
     "useDefineForClassFields": true,
     "lib": ["ES2020", "DOM", "DOM.Iterable"],
-    "module": "ESNext",
+    "module": "ES2022",
     "skipLibCheck": true,
 
     /* Bundler mode */
@@ -14,12 +14,14 @@
     "noEmit": true,
     "jsx": "react-jsx",
     "esModuleInterop": true,
+
     /* Linting */
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
+    // Remove the invalid "arrow-body-style" option
   },
-  "include": ["src"],
+  "include": ["src", "setupTests.ts", "src/config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
