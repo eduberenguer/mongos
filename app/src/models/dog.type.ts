@@ -8,7 +8,7 @@ type Personality =
   | 'cat tested'
   | 'active';
 
-type Size = 'small' | 'medium' | 'large' | 'extra large' | 'giant';
+export type Size = 'small' | 'medium' | 'large' | 'extra large' | 'giant';
 
 type shelterDog = {
   _id: string;
@@ -18,9 +18,9 @@ type shelterDog = {
 export type Dog = {
   id: string;
   name: string;
-  image: string;
-  age: string;
-  size: Size;
+  image: string | undefined;
+  age: string | number;
+  size: Size | '';
   chipNumber: number;
   shelter: shelterDog;
   personality: Personality[];

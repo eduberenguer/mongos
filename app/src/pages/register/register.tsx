@@ -1,5 +1,6 @@
 import { useContext, useState } from 'react';
 import { AccountsContexts } from '../../context/context';
+import { handleImageUpload } from '../../cloudinary';
 
 interface ShelterFormFields {
   shelterName: string;
@@ -68,6 +69,23 @@ export default function Register() {
     });
   };
 
+  const handleImageUploadChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const imageUrl = await handleImageUpload(e);
+    if (role === 'shelter') {
+      setShelterFields((prevState) => ({
+        ...prevState,
+        avatar: imageUrl || '',
+      }));
+    } else {
+      setUserFields((prevState) => ({
+        ...prevState,
+        avatar: imageUrl || '',
+      }));
+    }
+  };
+
   const handleUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserFields({ ...userFields, [event.target.name]: event.target.value });
   };
@@ -80,13 +98,11 @@ export default function Register() {
       data = {
         ...shelterFields,
         registerDate: new Date(),
-        avatar: 'image shelter',
       };
     } else {
       data = {
         ...userFields,
         registerDate: new Date(),
-        avatar: 'image shelter',
       };
     }
     create(data);
@@ -138,6 +154,7 @@ export default function Register() {
             onChange={handleShelterChange}
             placeholder="Password"
           />
+          <input type="file" name="avatar" onChange={handleImageUploadChange} />
           <input
             type="text"
             name="address"
@@ -171,6 +188,7 @@ export default function Register() {
             onChange={handleUserChange}
             placeholder="Password"
           />
+          <input type="file" name="avatar" onChange={handleImageUploadChange} />
           <input
             type="text"
             name="address"

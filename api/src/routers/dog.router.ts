@@ -13,4 +13,10 @@ const repoDog: DogRepo = new DogRepo();
 const dogController = new DogController(repoDog);
 
 dogRouter.get('/', dogController.getAll.bind(dogController));
-dogRouter.post('/', interceptor.logged, interceptor.authorizedAddDog, dogController.addDog.bind(dogController));
+dogRouter.get('/dogByShelter/:id', dogController.getAllDogsByShelter.bind(dogController));
+dogRouter.post(
+  '/',
+  interceptor.logged.bind(interceptor),
+  interceptor.authorizedAddDog.bind(interceptor),
+  dogController.addDog.bind(dogController),
+);

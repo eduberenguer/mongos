@@ -1,7 +1,7 @@
 type Role = 'user' | 'shelter';
 
 export type User = {
-  id: string;
+  _id: string;
   userName: string;
   email: string;
   password: string;

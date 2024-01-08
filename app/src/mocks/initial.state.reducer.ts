@@ -6,5 +6,8 @@ export const initialStateDogs: dogState = {
 };
 
 export const initialStateAccount: accountState = {
-  accountLogged: undefined,
+  accountLogged: {
+    token: undefined,
+    user: undefined,
+  },
 };

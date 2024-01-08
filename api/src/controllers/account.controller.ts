@@ -16,7 +16,6 @@ export class AccountsController<T extends User | Shelter> extends Controller<T> 
 
   async register(req: Request, res: Response, next: NextFunction) {
     try {
-      console.log('req', req.body);
       const data = req.body as Omit<T, 'id'>;
       const password = await AuthServices.hash(data.password);
       req.body.password = password;

@@ -1,21 +1,33 @@
 import { Shelter } from '../../models/shelter.type';
 import { User } from '../../models/user.type';
 import { accountsActions } from '../actions/accounts.actions';
-import { AccountsActions } from '../actions.creators/accounts.action.creator';
 
 export type accountState = {
-  accountLogged: Shelter | User | undefined;
+  accountLogged: {
+    token?: string;
+    user: Shelter | User | undefined;
+  };
 };
 
 export const accountReducer = (
   state: accountState,
-  action: AccountsActions
+  action: any
 ): accountState => {
   switch (action.type) {
     case accountsActions.create:
       return {
         ...state,
-        accountLogged: action.payload as Shelter | User,
+        accountLogged: action.payload,
+      };
+    case accountsActions.login:
+      return {
+        ...state,
+        accountLogged: action.payload,
+      };
+    case accountsActions.logout:
+      return {
+        ...state,
+        accountLogged: action.payload,
       };
     default:
       return state;

@@ -13,6 +13,16 @@ export const dogReducer = (state: dogState, action: DogActions): dogState => {
         ...state,
         dogs: action.payload as Dog[],
       };
+    case dogsActions.loadByShelter:
+      return {
+        ...state,
+        dogs: action.payload as Dog[],
+      };
+    case dogsActions.addDog:
+      return {
+        ...state,
+        dogs: [...state.dogs, action.payload as Dog],
+      };
     default:
       return state;
   }

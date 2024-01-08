@@ -3,12 +3,26 @@ import { Dog } from '../../models/dog.type';
 
 export interface DogActions {
   type: string;
-  payload?: Dog | Dog[];
+  payload?: Dog | Dog[] | Partial<Dog>;
 }
 
 export const loadDogs = (payload: Dog[]): DogActions => {
   return {
     type: dogsActions.load,
+    payload,
+  };
+};
+
+export const loadByShelter = (payload: Dog[]): DogActions => {
+  return {
+    type: dogsActions.load,
+    payload,
+  };
+};
+
+export const addDog = (payload: Partial<Dog>): DogActions => {
+  return {
+    type: dogsActions.addDog,
     payload,
   };
 };

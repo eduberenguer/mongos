@@ -6,6 +6,7 @@ export const Card = (dog: Dog) => {
       <p>{dog.name}</p>
       <p>{dog.description}</p>
       <p>{dog.shelter.shelterName}</p>
+      <img src={dog.image} alt={dog.name} />
     </div>
   );
 };

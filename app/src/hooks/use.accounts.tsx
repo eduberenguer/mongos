@@ -1,6 +1,6 @@
 import { useReducer } from 'react';
 import { initialStateAccount } from '../mocks/initial.state.reducer';
-import { AccountRepository } from '../services/shelter.repository';
+import { AccountRepository } from '../services/account.repository';
 import { accountReducer } from '../store/reducers/accounts.reducer';
 import * as ac from '../store/actions.creators/accounts.action.creator';
 import { Shelter } from '../models/shelter.type';
@@ -15,12 +15,23 @@ export function useAccounts() {
 
   const create = async (item: Partial<Shelter | User>) => {
     const response = await repo.create(item);
-
     dispatch(ac.createAccounts(response));
+  };
+
+  const login = async (item: Partial<Shelter | User>) => {
+    const response = await repo.login(item);
+    dispatch(ac.loginAccounts(response));
+    return response;
+  };
+
+  const logout = async () => {
+    dispatch(ac.logout(initialStateAccount.accountLogged));
   };
 
   return {
     stateAccount,
     create,
+    login,
+    logout,
   };
 }

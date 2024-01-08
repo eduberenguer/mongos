@@ -12,8 +12,12 @@ export class UserRepo implements Repository<User> {
 
   async search({ key, value }: { key: string; value: unknown }): Promise<User> {
     const result = await UserModel.find({ [key]: value });
-
     return result[0];
+  }
+
+  async searchByOptions({ key, value }: { key: string; value: unknown }): Promise<User[]> {
+    const result = await UserModel.find({ [key]: value });
+    return result;
   }
 
   async queryAll(): Promise<User[]> {

@@ -20,4 +20,12 @@ export abstract class Controller<T extends { id: string | number }> {
       next(error);
     }
   }
+
+  async getAllDogsByShelter(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.send(await this.repo.searchByOptions({ key: 'shelter', value: req.params.id }));
+    } catch (error) {
+      next(error);
+    }
+  }
 }
