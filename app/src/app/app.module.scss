@@ -1,0 +1,117 @@
+body,
+html {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-image: url('/home-bg.webp');
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  height: 100vh;
+  overflow-x: hidden;
+  font-family: 'Verdana', sans-serif;
+}
+
+div,
+span,
+h1,
+h2,
+h3,
+p,
+a,
+img,
+ol,
+ul,
+li,
+form,
+label,
+legend,
+footer,
+menu,
+nav,
+section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  vertical-align: baseline;
+}
+
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+  display: block;
+}
+
+ol,
+ul {
+  list-style: none;
+}
+
+$color-primary-light: #fff;
+$color-primary-dark: #35363A;
+$color-tertiary: #000000;
+
+$color-button-primary: #7f7d7d;
+$color-button-disabled: #86857f;
+
+$color-text-primary: #222222;
+$color-text-secondary: #717171;
+
+.button {
+  background-color: $color-primary-light;
+  color: $color-text-primary;
+  display: flex;
+  align-items: center;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  cursor: pointer;
+  font-family: 'verdana';
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  padding: 10px 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  user-select: none;
+  border: 1px solid #DDDDDD;
+
+  &:hover {
+    background-color: $color-text-primary;
+    color: $color-primary-light;
+  }
+}
+
+.button_disabled {
+  background-color: $color-button-disabled;
+  border-radius: 8px;
+  border-style: none;
+  box-sizing: border-box;
+  font-family: 'verdana';
+  font-size: 14px;
+  font-weight: 500;
+  height: 40px;
+  padding: 10px 16px;
+  text-align: center;
+  text-decoration: none;
+  transition: color 100ms;
+  user-select: none;
+  cursor: not-allowed;
+  pointer-events: none;
+  color: $color-primary-light;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.input {
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #DDDDDD;
+}

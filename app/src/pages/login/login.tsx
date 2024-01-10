@@ -3,6 +3,9 @@ import { AccountsContexts } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
 import { accountState } from '../../store/actions.creators/accounts.action.creator';
 
+import style from './login.module.scss';
+import genericStyles from '../../app/app.module.scss';
+
 interface LoginFields {
   email: string;
   password: string;
@@ -44,46 +47,56 @@ export default function Login() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <input
-          type="radio"
-          name="role"
-          value="shelter"
-          checked={loginFields.role === 'shelter'}
-          onChange={handleLoginChange}
-        />{' '}
-        Shelter
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="role"
-          value="user"
-          checked={loginFields.role === 'user'}
-          onChange={handleLoginChange}
-        />{' '}
-        User
-      </label>
-      <label>
-        Email:
-        <input
-          type="email"
-          name="email"
-          value={loginFields.email}
-          onChange={handleLoginChange}
-        />
-      </label>
-      <label>
-        Password:
-        <input
-          type="password"
-          name="password"
-          value={loginFields.password}
-          onChange={handleLoginChange}
-        />
-      </label>
-      <button type="submit">Login</button>
+    <form onSubmit={handleSubmit} className={style.form}>
+      <p className={style.title}>Login</p>
+      <div className={style.user_type_container}>
+        <label>
+          {loginFields.role !== 'user' && loginFields.role !== 'shelter' && (
+            <span>Choose an option:</span>
+          )}
+          <input
+            type="radio"
+            name="role"
+            value="shelter"
+            checked={loginFields.role === 'shelter'}
+            onChange={handleLoginChange}
+          />{' '}
+          Shelter
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="role"
+            value="user"
+            checked={loginFields.role === 'user'}
+            onChange={handleLoginChange}
+          />{' '}
+          User
+        </label>
+      </div>
+      {loginFields.role !== '' && (
+        <div className={style.inputs}>
+          <input
+            className={style.input}
+            type="email"
+            name="email"
+            value={loginFields.email}
+            onChange={handleLoginChange}
+            placeholder="Email"
+          />
+          <input
+            className={style.input}
+            type="password"
+            name="password"
+            value={loginFields.password}
+            onChange={handleLoginChange}
+            placeholder="Password"
+          />
+          <button className={genericStyles.button} type="submit">
+            Login
+          </button>
+        </div>
+      )}
     </form>
   );
 }

@@ -1,6 +1,9 @@
 import { useContext, useState } from 'react';
 import { AccountsContexts } from '../../context/context';
-import { handleImageUpload } from '../../cloudinary';
+import { handleImageUpload } from '../../utils/cloudinary';
+
+import style from './register.module.scss';
+import genericStyles from '../../app/app.module.scss';
 
 interface ShelterFormFields {
   shelterName: string;
@@ -109,31 +112,37 @@ export default function Register() {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
-      <label>
-        <input
-          type="radio"
-          name="role"
-          value="shelter"
-          checked={role === 'shelter'}
-          onChange={handleRoleChange}
-        />{' '}
-        Shelter
-      </label>
-      <label>
-        <input
-          type="radio"
-          name="role"
-          value="user"
-          checked={role === 'user'}
-          onChange={handleRoleChange}
-        />{' '}
-        User
-      </label>
-
+    <form onSubmit={handleSubmit} className={style.form}>
+      <p className={style.title}>Register</p>
+      <div className={style.user_type_container}>
+        <label>
+          {role !== 'user' && role !== 'shelter' && (
+            <span>Choose an option:</span>
+          )}
+          <input
+            type="radio"
+            name="role"
+            value="shelter"
+            checked={role === 'shelter'}
+            onChange={handleRoleChange}
+          />{' '}
+          Shelter
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="role"
+            value="user"
+            checked={role === 'user'}
+            onChange={handleRoleChange}
+          />{' '}
+          User
+        </label>
+      </div>
       {role === 'shelter' && (
         <>
           <input
+            className={genericStyles.input}
             type="text"
             name="shelterName"
             value={shelterFields.shelterName}
@@ -141,6 +150,7 @@ export default function Register() {
             placeholder="Shelter name"
           />
           <input
+            className={genericStyles.input}
             type="email"
             name="email"
             value={shelterFields.email}
@@ -148,6 +158,7 @@ export default function Register() {
             placeholder="Email"
           />
           <input
+            className={genericStyles.input}
             type="password"
             name="password"
             value={shelterFields.password}
@@ -156,6 +167,7 @@ export default function Register() {
           />
           <input type="file" name="avatar" onChange={handleImageUploadChange} />
           <input
+            className={genericStyles.input}
             type="text"
             name="address"
             value={shelterFields.address}
@@ -168,6 +180,7 @@ export default function Register() {
       {role === 'user' && (
         <>
           <input
+            className={genericStyles.input}
             type="text"
             name="userName"
             value={userFields.userName}
@@ -175,6 +188,7 @@ export default function Register() {
             placeholder="User name"
           />
           <input
+            className={genericStyles.input}
             type="email"
             name="email"
             value={userFields.email}
@@ -182,6 +196,7 @@ export default function Register() {
             placeholder="Email"
           />
           <input
+            className={genericStyles.input}
             type="password"
             name="password"
             value={userFields.password}
@@ -190,6 +205,7 @@ export default function Register() {
           />
           <input type="file" name="avatar" onChange={handleImageUploadChange} />
           <input
+            className={genericStyles.input}
             type="text"
             name="address"
             value={userFields.address}
@@ -198,7 +214,9 @@ export default function Register() {
           />
         </>
       )}
-      <button type="submit">Registrarse</button>
+      <button type="submit" className={genericStyles.button}>
+        Registrarse
+      </button>
     </form>
   );
 }

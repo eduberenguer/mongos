@@ -1,4 +1,4 @@
-type Personality =
+export type Personality =
   | 'calm'
   | 'aggressive'
   | 'reactive'

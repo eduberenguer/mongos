@@ -1,0 +1,68 @@
+@import '../../app/app.module.scss';
+
+.container_dog_form {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  max-width: 500px;
+  padding: 20px;
+  border-radius: 10px;
+  z-index: 1000;
+  margin-top: 100px;
+  padding-bottom: 100px;
+
+  .dog_form {
+    width: 80%;
+    max-width: 400px;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    margin-bottom: 50px;
+    background-color: $color-primary-light;
+  }
+
+  .dog_form h2 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  .dog_form input,
+  .dog_form select {
+    width: 80%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ced4da;
+    border-radius: 4px;
+  }
+
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    z-index: 999;
+  }
+
+  .breed {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    border-radius: 5px;
+    width: 200px;
+  }
+
+  .breed label {
+    cursor: pointer;
+  }
+
+  .breed input[type="radio"] {
+    display: flex;
+    margin-left: 10px;
+    text-align: center;
+  }
+}

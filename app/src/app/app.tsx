@@ -8,6 +8,8 @@ const Register = lazy(() => import('../pages/register/register'));
 const Login = lazy(() => import('../pages/login/login'));
 const Admin = lazy(() => import('../pages/admin/admin'));
 
+import './app.module.scss';
+
 export default function App() {
   const { stateAccount } = useContext(AccountsContexts);
   return (

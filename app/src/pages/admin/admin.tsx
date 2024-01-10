@@ -3,6 +3,8 @@ import { AccountsContexts, DogsContexts } from '../../context/context';
 import DogForm from '../../components/dog.form/dog.form';
 import { Dog } from '../../models/dog.type';
 
+import style from './admin.module.scss';
+
 export default function Admin() {
   const { getDogsByShelter, stateDogs, addDog } = useContext(DogsContexts);
   const { stateAccount } = useContext(AccountsContexts);
@@ -27,11 +29,15 @@ export default function Admin() {
 
   return (
     <>
-      <h2>Soy admin</h2>
-      <p>My Dogs</p>
-      {stateDogs.dogs.map((dog) => {
-        return <p>{dog.name}</p>;
-      })}
+      <div
+        className={`${!showFormNewDog ? style.admin : style.admin_disabled}`}
+      >
+        <h2>Soy admin</h2>
+        <p>My Dogs</p>
+        {stateDogs.dogs.map((dog) => {
+          return <p>{dog.name}</p>;
+        })}
+      </div>
       {showFormNewDog ? (
         <>
           <DogForm
