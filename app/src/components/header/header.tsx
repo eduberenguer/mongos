@@ -1,11 +1,12 @@
 import { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { AccountsContexts } from '../../context/context';
 
 import style from './header.module.scss';
 import genericStyle from '../../app/app.module.scss';
 
 export const Header = () => {
+  let location = useLocation();
   const { logout, stateAccount } = useContext(AccountsContexts);
 
   const handleLogout = () => {
@@ -31,10 +32,16 @@ export const Header = () => {
           {stateAccount.accountLogged?.token !== undefined && (
             <img
               className={style.avatar}
-              src={stateAccount.accountLogged?.user?.avatar}
+              src={stateAccount.accountLogged?.user?.avatar as string}
               alt="avatar"
             />
           )}
+          {stateAccount.accountLogged?.user?.role === 'shelter' &&
+            location.pathname !== '/admin' && (
+              <Link to={'/admin'} className={style.link}>
+                <button className={genericStyle.button}>Admin</button>
+              </Link>
+            )}
           <span onClick={handleLogout}>
             <button className={genericStyle.button}>Logout</button>
           </span>

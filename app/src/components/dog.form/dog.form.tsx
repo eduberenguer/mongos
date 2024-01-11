@@ -1,8 +1,8 @@
 import { useState, ChangeEvent } from 'react';
 import { Dog, Personality, Size } from '../../models/dog.type';
-import { handleImageUpload } from '../../utils/cloudinary';
 import { optionsSize } from './form.options/size.options';
 import { optionsPersonality } from './form.options/personality.options';
+import { handleImageUpload } from '../../services/files.cloudinary.repository';
 
 import style from './dog.form.module.scss';
 import genericStyle from '../../app/app.module.scss';
@@ -17,15 +17,17 @@ export default function DogForm({
     formDataDog: Partial<Dog>
   ) => void;
 }) {
+  const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const [formDataDog, setModalFormDataDog] = useState<Partial<Dog>>({
     name: '',
-    age: '',
+    years: undefined,
+    months: undefined,
     size: '',
     chipNumber: undefined,
     hasBreed: false,
     breed: undefined,
     description: '',
-    image: undefined,
+    image: null,
     personality: [],
   });
 
@@ -39,7 +41,8 @@ export default function DogForm({
   const isFormValid = () => {
     const {
       name,
-      age,
+      years,
+      months,
       size,
       chipNumber,
       hasBreed,
@@ -50,7 +53,8 @@ export default function DogForm({
     } = formDataDog;
     if (
       name &&
-      age &&
+      years &&
+      months &&
       size &&
       chipNumber &&
       description &&
@@ -61,16 +65,6 @@ export default function DogForm({
       return true;
     }
     return false;
-  };
-
-  const handleImageUploadChange = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const imageUrl = await handleImageUpload(e);
-    setModalFormDataDog((prevState) => ({
-      ...prevState,
-      image: imageUrl || '',
-    }));
   };
 
   const handleRemovePersonality = (personalityToRemove: string) => {
@@ -101,7 +95,17 @@ export default function DogForm({
     }));
   };
 
-  console.log(formDataDog);
+  const handleImageUploadChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setLoadingImage(!loadingImage);
+    const imageUrl = await handleImageUpload(e);
+    if (imageUrl) setLoadingImage(false);
+    setModalFormDataDog((prevState) => ({
+      ...prevState,
+      image: imageUrl || '',
+    }));
+  };
 
   return (
     <div className={style.container_dog_form}>
@@ -122,17 +126,38 @@ export default function DogForm({
             setModalFormDataDog({ ...formDataDog, name: e.target.value })
           }
           placeholder="Name"
+          required
         />
-        <input
-          className={genericStyle.input}
-          type="text"
-          name="age"
-          value={formDataDog.age}
-          onChange={(e) =>
-            setModalFormDataDog({ ...formDataDog, age: e.target.value })
-          }
-          placeholder="Age"
-        />
+        <div className={style.age}>
+          <input
+            className={genericStyle.input}
+            type="number"
+            name="years"
+            value={formDataDog.years}
+            onChange={(e) =>
+              setModalFormDataDog({
+                ...formDataDog,
+                years: parseInt(e.target.value),
+              })
+            }
+            placeholder="Years"
+            required
+          />
+          <input
+            className={genericStyle.input}
+            type="number"
+            name="months"
+            value={formDataDog.months}
+            onChange={(e) =>
+              setModalFormDataDog({
+                ...formDataDog,
+                months: parseInt(e.target.value),
+              })
+            }
+            placeholder="Months"
+            required
+          />
+        </div>
         <select
           name="size"
           value={formDataDog.size}
@@ -142,6 +167,7 @@ export default function DogForm({
               size: e.target.value as Size,
             })
           }
+          required
         >
           <option value="">Select size</option>
           {optionsSize.map((size) => (
@@ -150,27 +176,45 @@ export default function DogForm({
             </option>
           ))}
         </select>
-
-        <input
-          type="file"
-          accept="image/*"
-          name="image"
-          onChange={handleImageUploadChange}
-        />
-
+        <div className={style.loadImage}>
+          <input
+            type="file"
+            accept="image/*"
+            name="image"
+            onChange={handleImageUploadChange}
+          />
+          {loadingImage ? (
+            <p className={style.textImage}>Loading image</p>
+          ) : (
+            <img
+              className={style.loadingImage}
+              src={formDataDog.image as string}
+              alt={formDataDog.name}
+            />
+          )}
+        </div>
         <input
           className={genericStyle.input}
           type="number"
           name="chipNumber"
           value={formDataDog.chipNumber}
-          onChange={(e) =>
-            setModalFormDataDog({
-              ...formDataDog,
-              chipNumber: parseInt(e.target.value),
-            })
-          }
+          pattern="\d{15}"
+          onChange={(e) => {
+            if (e.target.value.length <= 15) {
+              setModalFormDataDog({
+                ...formDataDog,
+                chipNumber: parseInt(e.target.value),
+              });
+            }
+          }}
           placeholder="ChipNumber"
+          required
         />
+        {formDataDog.chipNumber ? (
+          <p>{formDataDog.chipNumber.toString().length}/15</p>
+        ) : (
+          <p></p>
+        )}
         <div className={style.breed}>
           <label>Has breed?</label>
           <label>
@@ -204,6 +248,7 @@ export default function DogForm({
               setModalFormDataDog({ ...formDataDog, breed: e.target.value })
             }
             placeholder="Breed"
+            required
           />
         )}
         <label>Personality (max 3)</label>
@@ -211,6 +256,7 @@ export default function DogForm({
           multiple
           value={formDataDog.personality}
           onChange={handlePersonalityChange}
+          required
         >
           {optionsPersonality.map((personality: string, index: number) => (
             <option
@@ -249,6 +295,7 @@ export default function DogForm({
             setModalFormDataDog({ ...formDataDog, description: e.target.value })
           }
           placeholder="Description"
+          required
         ></textarea>
         <button
           className={`${

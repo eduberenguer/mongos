@@ -6,7 +6,7 @@ export type User = {
   email: string;
   password: string;
   role: Role;
-  avatar: string;
+  avatar: File | string | null | undefined;
   address: string;
   favourites: string[];
   registerDate: Date;

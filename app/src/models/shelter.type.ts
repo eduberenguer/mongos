@@ -3,7 +3,7 @@ export type Shelter = {
   shelterName: string;
   email: string;
   password: string;
-  avatar: string;
+  avatar: File | string | null | undefined;
   address: string;
   registerDate: Date;
   role: string;

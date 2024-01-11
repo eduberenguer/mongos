@@ -1,27 +1,26 @@
 import { Dog } from '../models/dog.type';
+import { apiUrl } from '../config';
 
 export type ApiResponseDataDog = Dog[];
 export type ApiResponseDog = Dog;
 
-const urlBase = 'http://localhost:3000/';
-
 export class DogRepository {
   async getAll() {
-    const urlFinal = `${urlBase}dog`;
+    const urlFinal = `${apiUrl}dog`;
     const data = await fetch(urlFinal);
     const response: ApiResponseDataDog = await data.json();
     return response;
   }
 
-  async getDogsByShelter(shelterId: string) {
-    const urlFinal = `${urlBase}dog/dogByShelter/${shelterId}`;
+  async getDogsByShelter(shelterId: string, showArchivedDogs: boolean) {
+    const urlFinal = `${apiUrl}dog/dogByShelter/${shelterId}/${showArchivedDogs}`;
     const data = await fetch(urlFinal);
     const response: ApiResponseDataDog = await data.json();
     return response;
   }
 
   async addDog(dog: Partial<Dog>, token: string) {
-    const urlFinal = `${urlBase}dog`;
+    const urlFinal = `${apiUrl}dog`;
     const data = await fetch(urlFinal, {
       method: 'POST',
       body: JSON.stringify(dog),

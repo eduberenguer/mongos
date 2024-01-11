@@ -1,9 +1,58 @@
+@import "../../app/app.module.scss";
+
 .admin {
   transition: filter 0.3s ease;
+  width: 80%;
+  padding: 40px;
+  margin: 0 auto;
+
+  .container_buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  }
+
+  .icon {
+    margin-top: 10px;
+    font-size: 30px;
+    color: $color-text-secondary;
+    cursor: pointer;
+    transition: color 0.3s ease;
+
+    &:hover {
+      color: $color-text-primary;
+    }
+  }
 }
 
 .admin_disabled {
   filter: blur(2px);
-  background: linear-gradient(rgba(237, 233, 233, 0.5), rgba(239, 236, 236, 0.9));
-  height: 100vh;
+}
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+  padding-left: 0px;
+}
+
+th,
+td {
+  text-align: left;
+  padding: 15px;
+  border-bottom: 1px solid #DDDDDD;
+
+  img {
+    width: 50px;
+    height: 50px;
+    border-radius: 150px;
+  }
+}
+
+th {
+  color: $color-text-secondary;
+}
+
+tr:nth-child(even) {
+  background-color: #f2f2f2;
 }

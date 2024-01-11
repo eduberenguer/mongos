@@ -4,7 +4,6 @@ export const handleImageUpload = async (
   e: React.ChangeEvent<HTMLInputElement>
 ) => {
   return new Promise<string | undefined>((resolve, reject) => {
-    e.preventDefault();
     const file = e.target.files?.[0];
 
     if (file) {

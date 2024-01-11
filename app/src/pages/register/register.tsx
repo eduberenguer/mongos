@@ -1,9 +1,10 @@
 import { useContext, useState } from 'react';
 import { AccountsContexts } from '../../context/context';
-import { handleImageUpload } from '../../utils/cloudinary';
+import { handleImageUpload } from '../../services/files.cloudinary.repository';
 
 import style from './register.module.scss';
 import genericStyles from '../../app/app.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 interface ShelterFormFields {
   shelterName: string;
@@ -11,7 +12,7 @@ interface ShelterFormFields {
   password: string;
   address: string;
   registerDate: Date;
-  avatar: string;
+  avatar: File | undefined | string | null;
   role: string;
 }
 
@@ -20,7 +21,7 @@ interface UserFormFields {
   email: string;
   password: string;
   address: string;
-  avatar: string;
+  avatar: File | undefined | string | null;
   favourites: string[];
   registerDate: Date;
   friends: string[];
@@ -34,7 +35,7 @@ const initialValueShelter = {
   password: '',
   address: '',
   registerDate: new Date(),
-  avatar: '',
+  avatar: null,
   role: 'shelter',
 };
 
@@ -43,7 +44,7 @@ const initialValueUser = {
   email: '',
   password: '',
   address: '',
-  avatar: '',
+  avatar: null,
   favourites: [],
   registerDate: new Date(),
   friends: [],
@@ -52,6 +53,8 @@ const initialValueUser = {
 };
 
 export default function Register() {
+  const navigate = useNavigate();
+  const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const { create } = useContext(AccountsContexts);
   const [role, setRole] = useState<'shelter' | 'user'>();
   const [shelterFields, setShelterFields] =
@@ -72,30 +75,41 @@ export default function Register() {
     });
   };
 
-  const handleImageUploadChange = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const imageUrl = await handleImageUpload(e);
-    if (role === 'shelter') {
-      setShelterFields((prevState) => ({
-        ...prevState,
-        avatar: imageUrl || '',
-      }));
-    } else {
-      setUserFields((prevState) => ({
-        ...prevState,
-        avatar: imageUrl || '',
-      }));
-    }
-  };
-
   const handleUserChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setUserFields({ ...userFields, [event.target.name]: event.target.value });
+  };
+
+  const ifFormValid = () => {
+    if (role === 'shelter') {
+      if (
+        shelterFields.shelterName &&
+        shelterFields.email &&
+        shelterFields.password &&
+        shelterFields.address
+      ) {
+        return true;
+      }
+      return false;
+    } else {
+      if (
+        userFields.userName &&
+        userFields.email &&
+        userFields.password &&
+        userFields.address
+      ) {
+        return true;
+      }
+      return false;
+    }
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let data = {};
+
+    if (!ifFormValid()) {
+      return;
+    }
 
     if (role === 'shelter') {
       data = {
@@ -109,6 +123,26 @@ export default function Register() {
       };
     }
     create(data);
+    navigate('/login');
+  };
+
+  const handleImageUploadChange = async (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    setLoadingImage(!loadingImage);
+    const imageUrl = await handleImageUpload(e);
+    if (imageUrl) setLoadingImage(false);
+    if (role === 'shelter') {
+      setShelterFields((prevState) => ({
+        ...prevState,
+        avatar: imageUrl || '',
+      }));
+    } else {
+      setUserFields((prevState) => ({
+        ...prevState,
+        avatar: imageUrl || '',
+      }));
+    }
   };
 
   return (
@@ -165,7 +199,38 @@ export default function Register() {
             onChange={handleShelterChange}
             placeholder="Password"
           />
-          <input type="file" name="avatar" onChange={handleImageUploadChange} />
+          <div className={style.loadImage}>
+            <input
+              type="file"
+              accept="image/*"
+              name="image"
+              onChange={handleImageUploadChange}
+            />
+            {loadingImage ? (
+              <p className={style.textImage}>Loading image</p>
+            ) : (
+              <img
+                className={style.loadingImage}
+                src={shelterFields.avatar as unknown as string}
+                alt={shelterFields.shelterName}
+              />
+            )}
+          </div>
+          {/* <input
+            type="file"
+            accept="image/*"
+            name="avatar"
+            onChange={(e) =>
+              setShelterFields({
+                ...shelterFields,
+                avatar:
+                  e.target.files && e.target.files[0]
+                    ? e.target.files[0]
+                    : undefined,
+              })
+            }
+            required
+          /> */}
           <input
             className={genericStyles.input}
             type="text"
@@ -203,7 +268,38 @@ export default function Register() {
             onChange={handleUserChange}
             placeholder="Password"
           />
-          <input type="file" name="avatar" onChange={handleImageUploadChange} />
+          <div className={style.loadImage}>
+            <input
+              type="file"
+              accept="image/*"
+              name="image"
+              onChange={handleImageUploadChange}
+            />
+            {loadingImage ? (
+              <p className={style.textImage}>Loading image</p>
+            ) : (
+              <img
+                className={style.loadingImage}
+                src={userFields.avatar as unknown as string}
+                alt={userFields.userName}
+              />
+            )}
+          </div>
+          {/* <input
+            type="file"
+            accept="image/*"
+            name="avatar"
+            onChange={(e) =>
+              setUserFields({
+                ...userFields,
+                avatar:
+                  e.target.files && e.target.files[0]
+                    ? e.target.files[0]
+                    : undefined,
+              })
+            }
+            required
+          /> */}
           <input
             className={genericStyles.input}
             type="text"
@@ -214,8 +310,13 @@ export default function Register() {
           />
         </>
       )}
-      <button type="submit" className={genericStyles.button}>
-        Registrarse
+      <button
+        className={`${
+          ifFormValid() ? genericStyles.button : genericStyles.button_disabled
+        }`}
+        type="submit"
+      >
+        Register
       </button>
     </form>
   );

@@ -21,6 +21,29 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
     margin-bottom: 50px;
     background-color: $color-primary-light;
+
+    .age {
+      display: flex;
+      justify-content: space-between;
+      width: 80%;
+      gap: 10px;
+    }
+
+    .loadImage {
+      display: flex;
+      gap: 10px;
+
+      .textImage {
+        font-size: 0.8rem;
+      }
+
+      .loadingImage {
+        width: 50px;
+        height: 50px;
+        border-radius: 150%;
+      }
+    }
+
   }
 
   .dog_form h2 {
