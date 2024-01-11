@@ -5,7 +5,8 @@ const dogSchema = new Schema<Dog>({
   name: { type: String, required: true },
   image: { type: String, required: true },
   registerDate: { type: Date, required: true },
-  age: { type: String, required: true },
+  years: { type: Number, required: true },
+  months: { type: Number, required: true },
   size: { type: String, required: true, enum: ['small', 'medium', 'large', 'extra large', 'giant'] },
   chipNumber: { type: Number, required: true },
   shelter: { type: String, ref: 'Shelter' },
@@ -20,6 +21,7 @@ const dogSchema = new Schema<Dog>({
   hasBreed: { type: Boolean, required: true },
   breed: { type: String, required: false },
   description: { type: String, required: true },
+  archived: { type: Boolean, required: true },
 });
 
 dogSchema.set('toJSON', {

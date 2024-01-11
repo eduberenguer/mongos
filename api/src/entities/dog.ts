@@ -14,7 +14,8 @@ export type Dog = {
   id: string;
   name: string;
   image: string;
-  age: string;
+  years: number;
+  months: number;
   size: Size;
   chipNumber: number;
   shelter: string;
@@ -26,4 +27,5 @@ export type Dog = {
   breed: string | undefined;
   registerDate: Date;
   description: string;
+  archived: boolean;
 };

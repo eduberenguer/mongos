@@ -15,8 +15,13 @@ export class ShelterRepo implements Repository<Shelter> {
     return result[0];
   }
 
-  async searchByOptions({ key, value }: { key: string; value: unknown }): Promise<Shelter[]> {
-    const result = await ShelterModel.find({ [key]: value });
+  async searchByOptions(queries: { key: string; value: unknown }[]): Promise<Shelter[]> {
+    const queryObj: { [key: string]: unknown } = {};
+    queries.forEach((query) => {
+      queryObj[query.key] = query.value;
+    });
+
+    const result = await ShelterModel.find(queryObj);
     return result;
   }
 

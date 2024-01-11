@@ -15,10 +15,13 @@ export class DogRepo implements Repository<Dog> {
     return result[0];
   }
 
-  async searchByOptions({ key, value }: { key: string; value: unknown }): Promise<Dog[]> {
-    const result = await DogModel.find({ [key]: value })
-      .populate('shelter', 'shelterName')
-      .exec();
+  async searchByOptions(queries: { key: string; value: unknown }[]): Promise<Dog[]> {
+    const queryObj: { [key: string]: unknown } = {};
+    queries.forEach((query) => {
+      queryObj[query.key] = query.value;
+    });
+
+    const result = await DogModel.find(queryObj).populate('shelter', 'shelterName').exec();
     return result;
   }
 

@@ -23,7 +23,12 @@ export abstract class Controller<T extends { id: string | number }> {
 
   async getAllDogsByShelter(req: Request, res: Response, next: NextFunction) {
     try {
-      res.send(await this.repo.searchByOptions({ key: 'shelter', value: req.params.id }));
+      res.send(
+        await this.repo.searchByOptions([
+          { key: 'shelter', value: req.params.id },
+          { key: 'archived', value: req.params.showArchivedDogs },
+        ]),
+      );
     } catch (error) {
       next(error);
     }
