@@ -3,6 +3,7 @@ import { Dog } from '../../entities/dog';
 
 const dogSchema = new Schema<Dog>({
   name: { type: String, required: true },
+  gender: { type: String, require: true, enum: ['male', 'female'] },
   image: { type: String, required: true },
   registerDate: { type: Date, required: true },
   years: { type: Number, required: true },

@@ -13,6 +13,7 @@ type Size = 'small' | 'medium' | 'large' | 'extra large' | 'giant';
 export type Dog = {
   id: string;
   name: string;
+  gender: string;
   image: string;
   years: number;
   months: number;
