@@ -1,12 +1,13 @@
 export type Personality =
   | 'calm'
   | 'aggressive'
-  | 'reactive'
   | 'anxious'
   | 'child friendly'
   | 'dog tested'
   | 'cat tested'
-  | 'active';
+  | 'active'
+  | 'familiar'
+  | 'independent';
 
 export type Size = 'small' | 'medium' | 'large' | 'extra large' | 'giant';
 
@@ -22,15 +23,15 @@ export type Dog = {
   image: File | string | null | undefined;
   years: number;
   months: number;
-  size: Size | '';
+  size: Size;
   chipNumber: number;
   shelter: shelterDog;
   personality: Personality[];
   views: number;
   requests: number;
-  adoptedBy: string | undefined;
+  adoptedBy: string;
   hasBreed: boolean;
-  breed: string | undefined;
+  breed: string;
   registerDate: Date;
   description: string;
   archived: boolean;

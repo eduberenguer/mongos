@@ -5,7 +5,7 @@ import style from './card.module.scss';
 export const Card = (dog: Dog) => {
   return (
     <div className={style.card}>
-      <img src={dog.image} alt={dog.name} />
+      <img src={dog.image as string} alt={dog.name} />
       <div className={style.content}>
         <div className={style.left}>
           <p className={style.name}>{dog.name}</p>

@@ -13,9 +13,11 @@ export default function Home() {
 
   return (
     <div className={style.container_card}>
-      {stateDogs.dogs.map((dog) => (
-        <Card {...dog} key={dog.chipNumber} />
-      ))}
+      {stateDogs.dogs.length ? (
+        stateDogs.dogs.map((dog) => <Card {...dog} key={dog.chipNumber} />)
+      ) : (
+        <p>No register dogs</p>
+      )}
     </div>
   );
 }

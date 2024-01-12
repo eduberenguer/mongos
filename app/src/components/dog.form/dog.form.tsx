@@ -23,7 +23,7 @@ export default function DogForm({
     gender: undefined,
     years: undefined,
     months: undefined,
-    size: '',
+    size: undefined,
     chipNumber: undefined,
     hasBreed: false,
     breed: undefined,
@@ -59,7 +59,7 @@ export default function DogForm({
       years &&
       months &&
       size &&
-      chipNumber &&
+      chipNumber!.toString().length === 15 &&
       description &&
       image &&
       personality!.length > 0 &&
@@ -68,34 +68,6 @@ export default function DogForm({
       return true;
     }
     return false;
-  };
-
-  const handleRemovePersonality = (personalityToRemove: string) => {
-    setModalFormDataDog((prevState) => {
-      const updatedPersonality = (prevState.personality ?? []).filter(
-        (personality) => personality !== personalityToRemove
-      );
-
-      return {
-        ...prevState,
-        personality: updatedPersonality,
-      };
-    });
-  };
-
-  const handlePersonalityChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const selectedOption = e.target.value;
-
-    if (formDataDog.personality?.length === 3) {
-      return;
-    }
-    setModalFormDataDog((prevState) => ({
-      ...prevState,
-      personality: [
-        ...(prevState.personality ?? []),
-        selectedOption,
-      ] as Personality[],
-    }));
   };
 
   const handleImageUploadChange = async (
@@ -110,7 +82,24 @@ export default function DogForm({
     }));
   };
 
-  console.log(formDataDog);
+  const handlePersonalityChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const personality = formDataDog.personality || [];
+    if (event.target.checked) {
+      setModalFormDataDog({
+        ...formDataDog,
+        personality: [...personality, event.target.value as Personality],
+      });
+    } else {
+      setModalFormDataDog({
+        ...formDataDog,
+        personality: personality.filter(
+          (personality) => personality !== event.target.value
+        ),
+      });
+    }
+  };
 
   return (
     <div className={style.container_dog_form}>
@@ -133,28 +122,30 @@ export default function DogForm({
           placeholder="Name"
           required
         />
-        <label>
-          <input
-            type="radio"
-            name="gender"
-            value="male"
-            onChange={(e) =>
-              setModalFormDataDog({ ...formDataDog, gender: e.target.value })
-            }
-          />{' '}
-          Male
-        </label>
-        <label>
-          <input
-            type="radio"
-            name="gender"
-            value="female"
-            onChange={(e) =>
-              setModalFormDataDog({ ...formDataDog, gender: e.target.value })
-            }
-          />{' '}
-          Female
-        </label>
+        <div className={style.gender}>
+          <label>
+            Male
+            <input
+              type="radio"
+              name="gender"
+              value="male"
+              onChange={(e) =>
+                setModalFormDataDog({ ...formDataDog, gender: e.target.value })
+              }
+            />{' '}
+          </label>
+          <label>
+            Female
+            <input
+              type="radio"
+              name="gender"
+              value="female"
+              onChange={(e) =>
+                setModalFormDataDog({ ...formDataDog, gender: e.target.value })
+              }
+            />{' '}
+          </label>
+        </div>
         <div className={style.age}>
           <input
             className={genericStyle.input}
@@ -278,39 +269,26 @@ export default function DogForm({
             required
           />
         )}
-        <label>Personality (max 3)</label>
-        <select
-          multiple
-          value={formDataDog.personality}
-          onChange={handlePersonalityChange}
-          required
-        >
-          {optionsPersonality.map((personality: string, index: number) => (
-            <option
-              key={index}
-              value={personality}
-              disabled={formDataDog.personality?.includes(
-                personality as Personality
-              )}
-            >
-              {personality}
-            </option>
-          ))}
-        </select>
-        <div>
-          {(formDataDog.personality ?? []).map(
-            (selectedPersonality: string, index: number) => (
-              <p key={index}>
-                {selectedPersonality}
-                <button
-                  type="button"
-                  onClick={() => handleRemovePersonality(selectedPersonality)}
-                >
-                  x
-                </button>
-              </p>
-            )
-          )}
+        <div className={style.container_personality}>
+          {' '}
+          <div className={style.personalities}>
+            {optionsPersonality.map((personality: Personality) => (
+              <div key={personality}>
+                <input
+                  type="checkbox"
+                  name="personality"
+                  value={personality}
+                  onChange={handlePersonalityChange}
+                  required
+                  disabled={
+                    formDataDog.personality?.length === 3 &&
+                    !formDataDog.personality?.includes(personality)
+                  }
+                />
+                <label htmlFor="">{personality}</label>
+              </div>
+            ))}
+          </div>
         </div>
         <textarea
           cols={40}
