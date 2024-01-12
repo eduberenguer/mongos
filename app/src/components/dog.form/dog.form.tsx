@@ -20,6 +20,7 @@ export default function DogForm({
   const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const [formDataDog, setModalFormDataDog] = useState<Partial<Dog>>({
     name: '',
+    gender: undefined,
     years: undefined,
     months: undefined,
     size: '',
@@ -41,6 +42,7 @@ export default function DogForm({
   const isFormValid = () => {
     const {
       name,
+      gender,
       years,
       months,
       size,
@@ -53,6 +55,7 @@ export default function DogForm({
     } = formDataDog;
     if (
       name &&
+      gender &&
       years &&
       months &&
       size &&
@@ -107,6 +110,8 @@ export default function DogForm({
     }));
   };
 
+  console.log(formDataDog);
+
   return (
     <div className={style.container_dog_form}>
       <button className={genericStyle.button} onClick={handlerFormDog}>
@@ -128,6 +133,28 @@ export default function DogForm({
           placeholder="Name"
           required
         />
+        <label>
+          <input
+            type="radio"
+            name="gender"
+            value="male"
+            onChange={(e) =>
+              setModalFormDataDog({ ...formDataDog, gender: e.target.value })
+            }
+          />{' '}
+          Male
+        </label>
+        <label>
+          <input
+            type="radio"
+            name="gender"
+            value="female"
+            onChange={(e) =>
+              setModalFormDataDog({ ...formDataDog, gender: e.target.value })
+            }
+          />{' '}
+          Female
+        </label>
         <div className={style.age}>
           <input
             className={genericStyle.input}

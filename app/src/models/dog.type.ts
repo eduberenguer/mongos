@@ -18,6 +18,7 @@ type shelterDog = {
 export type Dog = {
   id: string;
   name: string;
+  gender: string;
   image: File | string | null | undefined;
   years: number;
   months: number;

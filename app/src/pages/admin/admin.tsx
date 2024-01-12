@@ -16,12 +16,15 @@ export default function Admin() {
 
   const thTable = [
     'Name',
+    'Gender',
     'Size',
     'Years',
     'Months',
     'Chip Number',
     'Has Breed',
     'Has Adopted',
+    'Views',
+    'Requests',
     'Image',
     'Actions',
   ];
@@ -90,12 +93,15 @@ export default function Admin() {
                 return (
                   <tr>
                     <td>{dog.name}</td>
+                    <td>{dog.gender}</td>
                     <td>{dog.size}</td>
                     <td>{dog.years}</td>
                     <td>{dog.months}</td>
                     <td>{dog.chipNumber}</td>
                     <td>{`${dog.breed ? 'yes' : 'no'}`}</td>
                     <td>{`${dog.adoptedBy ? 'yes' : 'no'}`}</td>
+                    <td>{dog.views}</td>
+                    <td>{dog.requests}</td>
                     <td>
                       <img src={dog.image as string} alt={dog.name} />
                     </td>

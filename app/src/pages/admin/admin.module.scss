@@ -2,9 +2,9 @@
 
 .admin {
   transition: filter 0.3s ease;
-  width: 80%;
   padding: 40px;
   margin: 0 auto;
+  overflow: scroll;
 
   .container_buttons {
     display: flex;
