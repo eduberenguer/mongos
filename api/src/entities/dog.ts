@@ -1,12 +1,13 @@
 type Personality =
   | 'calm'
   | 'aggressive'
-  | 'reactive'
   | 'anxious'
   | 'child friendly'
   | 'dog tested'
   | 'cat tested'
-  | 'active';
+  | 'active'
+  | 'familiar'
+  | 'independent';
 
 type Size = 'small' | 'medium' | 'large' | 'extra large' | 'giant';
 

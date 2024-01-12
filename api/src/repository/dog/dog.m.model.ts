@@ -14,7 +14,7 @@ const dogSchema = new Schema<Dog>({
   personality: {
     type: [String],
     required: true,
-    enum: ['calm', 'aggressive', 'reactive', 'anxious', 'child friendly', 'dog tested', 'cat tested', 'active'],
+    enum: ['calm', 'aggressive', 'anxious', 'child friendly', 'dog tested', 'cat tested', 'active', 'familiar'],
   },
   views: { type: Number, required: true },
   requests: { type: Number, required: true },

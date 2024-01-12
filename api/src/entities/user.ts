@@ -14,4 +14,13 @@ export type User = {
   lifestyle: Lifestyle[];
 };
 
-export type Lifestyle = 'home lifestyle' | 'outdoor lifestyle' | 'sport lifestyle';
+export type Lifestyle =
+  | 'home'
+  | 'dog expert'
+  | 'sport'
+  | 'urban'
+  | 'nature'
+  | 'family'
+  | 'children'
+  | 'has dog'
+  | 'has cat';
