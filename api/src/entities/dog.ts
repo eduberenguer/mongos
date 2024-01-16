@@ -1,4 +1,4 @@
-type Personality =
+export type Personality =
   | 'calm'
   | 'aggressive'
   | 'anxious'
@@ -9,7 +9,7 @@ type Personality =
   | 'familiar'
   | 'independent';
 
-type Size = 'small' | 'medium' | 'large' | 'extra large' | 'giant';
+export type Size = 'small' | 'medium' | 'large' | 'extra large' | 'giant';
 
 export type Dog = {
   id: string;

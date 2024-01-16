@@ -1,4 +1,4 @@
-type Role = 'user' | 'shelter';
+export type Role = 'user' | 'shelter';
 
 export type User = {
   id: string;

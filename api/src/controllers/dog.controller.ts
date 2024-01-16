@@ -19,8 +19,21 @@ export class DogController extends Controller<Dog> {
       req.body.registerDate = new Date();
       req.body.archived = false;
       delete req.body.tokenPayload;
-      const newDog = await this.repo.create(req.body);
-      res.send(newDog);
+      const createdDog = await this.repo.create(req.body);
+      res.status(201).send(createdDog);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async getAllDogsByShelter(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.send(
+        await this.repo.searchByOptions([
+          { key: 'shelter', value: req.params.id },
+          { key: 'archived', value: req.params.showArchivedDogs },
+        ]),
+      );
     } catch (error) {
       next(error);
     }
