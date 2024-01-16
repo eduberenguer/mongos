@@ -5,7 +5,6 @@ export default {
   testEnvironment: 'jsdom',
   testPathIgnorePatterns: ['dist', '.d.ts', '.js', 'characters.repo.ts'],
   collectCoverageFrom: ['src/**/*.{ts,tsx}'],
-  coveragePathIgnorePatterns: [],
   resolver: 'jest-ts-webcompat-resolver',
   coveragePathIgnorePatterns: [
     'src/main.tsx',

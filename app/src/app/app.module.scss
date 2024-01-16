@@ -80,7 +80,6 @@ $color-text-secondary: #717171;
   transition: color 100ms;
   user-select: none;
   border: 1px solid #DDDDDD;
-  margin: 0 auto;
 
   &:hover {
     background-color: $color-text-primary;
@@ -105,7 +104,6 @@ $color-text-secondary: #717171;
   cursor: not-allowed;
   pointer-events: none;
   color: $color-primary-light;
-  margin: 0 auto;
 
   &:disabled {
     cursor: not-allowed;
