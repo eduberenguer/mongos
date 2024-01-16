@@ -65,8 +65,6 @@ export default function Register() {
     }
   };
 
-  console.log(userFields);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let data = {};

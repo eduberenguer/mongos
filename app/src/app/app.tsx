@@ -12,6 +12,7 @@ import './app.module.scss';
 
 export default function App() {
   const { stateAccount } = useContext(AccountsContexts);
+
   return (
     <>
       <Suspense>

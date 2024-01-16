@@ -19,7 +19,8 @@ export class AccountsController<T extends User | Shelter> extends Controller<T> 
       const data = req.body as Omit<T, 'id'>;
       const password = await AuthServices.hash(data.password);
       req.body.password = password;
-      res.send(await this.repo.create(data));
+      await this.repo.create(data);
+      res.status(201).send();
     } catch (error) {
       next(error);
     }

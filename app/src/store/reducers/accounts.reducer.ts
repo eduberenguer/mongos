@@ -17,12 +17,20 @@ export const accountReducer = (
     case accountsActions.create:
       return {
         ...state,
-        accountLogged: action.payload,
+        accountLogged: {
+          ...state.accountLogged,
+          token: action.payload.token,
+          user: action.payload.user,
+        },
       };
     case accountsActions.login:
       return {
         ...state,
-        accountLogged: action.payload,
+        accountLogged: {
+          ...state.accountLogged,
+          token: action.payload.token,
+          user: action.payload.user,
+        },
       };
     case accountsActions.logout:
       return {
