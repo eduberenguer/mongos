@@ -12,7 +12,7 @@ export const mockDog = {
   size: 'small' as Size,
   chipNumber: 123456789123231,
   shelter: {
-    _id: '1',
+    id: '1',
     shelterName: 'John Doe',
   },
   personality: ['calm', 'aggressive', 'anxious'] as Personality[],

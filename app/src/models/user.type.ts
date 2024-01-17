@@ -12,7 +12,7 @@ export type Lifestyle =
   | 'has cat';
 
 export type User = {
-  _id: string;
+  id: string;
   userName: string;
   email: string;
   password: string;

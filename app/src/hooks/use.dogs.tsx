@@ -35,5 +35,14 @@ export function useDogs() {
     }
   };
 
-  return { stateDogs, getDogs, getDogsByShelter, addDog, loading };
+  const updateDog = async (dogId: string, dog: Partial<Dog>, token: string) => {
+    try {
+      const response = await repo.updateDog(dogId, dog, token);
+      dispatch(ac.updateDog(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  return { stateDogs, getDogs, getDogsByShelter, addDog, updateDog, loading };
 }

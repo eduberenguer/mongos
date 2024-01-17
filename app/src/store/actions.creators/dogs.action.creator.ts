@@ -26,3 +26,10 @@ export const addDog = (payload: Partial<Dog>): DogActions => {
     payload,
   };
 };
+
+export const updateDog = (payload: Partial<Dog>): DogActions => {
+  return {
+    type: dogsActions.updateDog,
+    payload,
+  };
+};

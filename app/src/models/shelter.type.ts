@@ -1,5 +1,5 @@
 export type Shelter = {
-  _id: string;
+  id: string;
   shelterName: string;
   email: string;
   password: string;

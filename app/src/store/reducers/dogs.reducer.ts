@@ -23,6 +23,17 @@ export const dogReducer = (state: dogState, action: DogActions): dogState => {
         ...state,
         dogs: [...state.dogs, action.payload as Dog],
       };
+    case dogsActions.updateDog:
+      console.log(action);
+      return {
+        ...state,
+        dogs: state.dogs.map((dog) => {
+          if (dog.id === (action.payload as Dog).id) {
+            return action.payload as Dog;
+          }
+          return dog;
+        }),
+      };
     default:
       return state;
   }

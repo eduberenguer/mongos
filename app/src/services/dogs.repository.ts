@@ -39,4 +39,18 @@ export class DogRepository {
     const response: ApiResponseDog = await data.json();
     return response;
   }
+
+  async updateDog(dogId: string, dog: Partial<Dog>, token: string) {
+    const urlFinal = `${this.getApiUrl()}dog/${dogId}`;
+    const data = await fetch(urlFinal, {
+      method: 'PATCH',
+      body: JSON.stringify(dog),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    });
+    const response: ApiResponseDog = await data.json();
+    return response;
+  }
 }

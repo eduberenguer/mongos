@@ -59,7 +59,7 @@ export default function DogForm({
       years &&
       months &&
       size &&
-      chipNumber!.toString().length === 15 &&
+      chipNumber?.toString().length === 15 &&
       description &&
       image &&
       personality!.length > 0 &&
@@ -229,7 +229,7 @@ export default function DogForm({
           required
         />
         {formDataDog.chipNumber ? (
-          <p>{formDataDog.chipNumber.toString().length}/15</p>
+          <p>{formDataDog.chipNumber?.toString().length}/15</p>
         ) : (
           <p></p>
         )}

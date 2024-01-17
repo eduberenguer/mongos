@@ -8,7 +8,7 @@ import style from './admin.module.scss';
 import genericStyles from '../../app/app.module.scss';
 
 export default function Admin() {
-  const { getDogsByShelter, stateDogs, addDog, loading } =
+  const { getDogsByShelter, stateDogs, addDog, updateDog, loading } =
     useContext(DogsContexts);
   const { stateAccount } = useContext(AccountsContexts);
   const [showFormNewDog, setShowFormNewDog] = useState(false);
@@ -31,7 +31,7 @@ export default function Admin() {
 
   useEffect(() => {
     getDogsByShelter(
-      stateAccount.accountLogged.user?._id as string,
+      stateAccount.accountLogged.user?.id as string,
       showArchivedDogs
     );
   }, [showArchivedDogs]);
@@ -47,6 +47,15 @@ export default function Admin() {
     e.preventDefault();
     addDog(dog, stateAccount.accountLogged.token as string);
     handlerFormDog();
+  };
+
+  const handleUpdateDog = async (dogId: string) => {
+    await updateDog(
+      dogId,
+      { archived: !stateDogs.dogs.find((dog) => dog.id === dogId)?.archived },
+      stateAccount.accountLogged.token as string
+    );
+    setshowArchivedDogs((prev) => !prev);
   };
 
   return (
@@ -108,7 +117,9 @@ export default function Admin() {
                     <td>
                       <button>Edit</button>
                       <button>Delete</button>
-                      <button>Archive</button>
+                      <button onClick={() => handleUpdateDog(dog.id)}>
+                        Archive
+                      </button>
                     </td>
                   </tr>
                 );
