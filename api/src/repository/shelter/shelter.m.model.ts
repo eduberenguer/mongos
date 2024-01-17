@@ -13,8 +13,10 @@ const shelterSchema = new Schema<Shelter>({
 
 shelterSchema.set('toJSON', {
   transform: (_document, returnedObject) => {
+    returnedObject.id = returnedObject._id;
     delete returnedObject.__v;
     delete returnedObject.password;
+    delete returnedObject._id;
   },
 });
 

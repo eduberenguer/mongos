@@ -20,3 +20,4 @@ dogRouter.post(
   interceptor.authorizedAddDog.bind(interceptor),
   dogController.addDog.bind(dogController),
 );
+dogRouter.patch('/:id', interceptor.logged.bind(interceptor), dogController.updateDog.bind(dogController));

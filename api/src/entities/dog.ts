@@ -11,6 +11,11 @@ export type Personality =
 
 export type Size = 'small' | 'medium' | 'large' | 'extra large' | 'giant';
 
+export type ShelterDog = {
+  id: string;
+  shelterName: string;
+};
+
 export type Dog = {
   id: string;
   name: string;
@@ -20,7 +25,7 @@ export type Dog = {
   months: number;
   size: Size;
   chipNumber: number;
-  shelter: string;
+  shelter: string | ShelterDog;
   personality: Personality[];
   views: number;
   requests: number;

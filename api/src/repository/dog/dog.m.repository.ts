@@ -35,4 +35,11 @@ export class DogRepo implements Repository<Dog> {
     if (result === null) throw new Error('Not found');
     return result;
   }
+
+  async update(id: string, data: Partial<Dog>): Promise<Dog> {
+    const result = await DogModel.findOneAndUpdate({ _id: id }, data, { new: true });
+
+    if (result === null) throw new Error('Not found');
+    return result;
+  }
 }

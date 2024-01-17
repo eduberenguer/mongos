@@ -11,7 +11,7 @@ describe('DogRepo', () => {
   test('should create a new dog', async () => {
     const dog: Dog = {
       ...mockDog,
-      shelter: mockDog.shelter._id,
+      shelter: mockDog.shelter.id,
     };
 
     DogModel.create = jest.fn().mockReturnValueOnce(mockDog);

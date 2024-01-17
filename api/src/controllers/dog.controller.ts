@@ -38,4 +38,19 @@ export class DogController extends Controller<Dog> {
       next(error);
     }
   }
+
+  async updateDog(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.body.tokenPayload as PayloadToken;
+      const dog = await this.repo.queryById(req.params.id);
+      if (dog.shelter !== id) {
+        res.status(401).send({ message: 'You are not authorized to update this dog' });
+      } else {
+        const updatedDog = await this.repo.update(req.params.id, req.body);
+        res.status(202).send(updatedDog);
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
 }

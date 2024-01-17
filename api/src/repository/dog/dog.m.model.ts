@@ -27,8 +27,10 @@ const dogSchema = new Schema<Dog>({
 
 dogSchema.set('toJSON', {
   transform: (_document, returnedObject) => {
+    returnedObject.id = returnedObject._id;
     delete returnedObject.__v;
     delete returnedObject.password;
+    delete returnedObject._id;
   },
 });
 
