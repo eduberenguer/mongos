@@ -1,5 +1,5 @@
 import '@testing-library/jest-dom';
-import Admin from './admin';
+import Admin from './shelter.admin';
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter as Router } from 'react-router-dom';
 import { mockDogContext } from '../../mocks/dog.context.mock';

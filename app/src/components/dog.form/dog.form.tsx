@@ -270,7 +270,6 @@ export default function DogForm({
           />
         )}
         <div className={style.container_personality}>
-          {' '}
           <div className={style.personalities}>
             {optionsPersonality.map((personality: Personality) => (
               <div key={personality}>

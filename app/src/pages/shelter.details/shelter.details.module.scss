@@ -1,0 +1,39 @@
+.shelter_details {
+  display: flex;
+  align-items: center;
+  padding: 150px;
+  gap: 30px;
+
+  @media (max-width: 1080px) {
+    flex-direction: column;
+  }
+
+  .chrome {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    gap: 20px;
+
+    .name {
+      font-size: 2em;
+    }
+
+    img {
+      max-width: 50%;
+      border-radius: 10px;
+    }
+  }
+
+  .info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 60px;
+    width: 60%;
+
+    label {
+      font-weight: 600;
+    }
+  }
+
+}

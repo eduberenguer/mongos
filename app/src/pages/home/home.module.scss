@@ -2,7 +2,22 @@
   display: flex;
   justify-content: center;
   align-items: flex-start;
-  gap: 20px;
-  margin-top: 30px;
+  margin-top: 40px;
   flex-wrap: wrap;
+
+  @media (max-width: 1080px) {
+    gap: 50px;
+  }
+
+  .link {
+    text-decoration: none;
+  }
+
+
+}
+
+.total_dogs {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }

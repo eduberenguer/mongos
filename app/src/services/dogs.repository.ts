@@ -53,4 +53,28 @@ export class DogRepository {
     const response: ApiResponseDog = await data.json();
     return response;
   }
+
+  async deleteDog(dogId: string, token: string) {
+    const urlFinal = `${this.getApiUrl()}dog/${dogId}`;
+    const data = await fetch(urlFinal, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    });
+
+    const response: ApiResponseDog = await data.json();
+
+    return response;
+  }
+
+  async retrievedDogById(dogId: string) {
+    const urlFinal = `${this.getApiUrl()}dog/${dogId}`;
+    const data = await fetch(urlFinal);
+
+    const response: ApiResponseDog = await data.json();
+
+    return response;
+  }
 }

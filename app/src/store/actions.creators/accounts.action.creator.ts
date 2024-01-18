@@ -37,3 +37,10 @@ export const logout = (payload: accountState): AccountsActionsLogin => {
     payload,
   };
 };
+
+export const loadShelter = (payload: Shelter): any => {
+  return {
+    type: accountsActions.loadShelter,
+    payload,
+  };
+};

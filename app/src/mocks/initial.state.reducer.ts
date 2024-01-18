@@ -3,6 +3,7 @@ import { accountState } from '../store/reducers/accounts.reducer';
 
 export const initialStateDogs: dogState = {
   dogs: [],
+  dog: undefined,
 };
 
 export const initialStateAccount: accountState = {
@@ -10,4 +11,5 @@ export const initialStateAccount: accountState = {
     token: undefined,
     user: undefined,
   },
+  shelter: undefined,
 };

@@ -3,4 +3,5 @@ export const dogsActions = {
   loadByShelter: 'dogs@loadByShelter',
   addDog: 'dogs@addDog',
   updateDog: 'dogs@updateDog',
+  loadDog: 'dog@loadById',
 };

@@ -4,17 +4,18 @@ import DogForm from '../../components/dog.form/dog.form';
 import { Dog } from '../../models/dog.type';
 import { IoIosArchive, IoIosCheckboxOutline } from 'react-icons/io';
 
-import style from './admin.module.scss';
+import style from './shelter.admin.module.scss';
 import genericStyles from '../../app/app.module.scss';
 
 export default function Admin() {
-  const { getDogsByShelter, stateDogs, addDog, updateDog, loading } =
+  const { getDogsByShelter, stateDogs, addDog, updateDog, deleteDog, loading } =
     useContext(DogsContexts);
   const { stateAccount } = useContext(AccountsContexts);
   const [showFormNewDog, setShowFormNewDog] = useState(false);
   const [showArchivedDogs, setshowArchivedDogs] = useState<boolean>(false);
 
   const thTable = [
+    'Image',
     'Name',
     'Gender',
     'Size',
@@ -25,7 +26,6 @@ export default function Admin() {
     'Has Adopted',
     'Views',
     'Requests',
-    'Image',
     'Actions',
   ];
 
@@ -58,6 +58,14 @@ export default function Admin() {
     setshowArchivedDogs((prev) => !prev);
   };
 
+  const handleDelete = async (dogId: string) => {
+    await deleteDog(dogId, stateAccount.accountLogged.token as string);
+    await getDogsByShelter(
+      stateAccount.accountLogged.user?.id as string,
+      showArchivedDogs
+    );
+  };
+
   return (
     <div className={style.admin}>
       <div className={style.container_buttons}>
@@ -85,7 +93,12 @@ export default function Admin() {
       <div
         className={`${style.admin} ${showFormNewDog && style.admin_disabled} `}
       >
-        <h2> {showArchivedDogs ? 'Archived dogs' : 'Active dogs'}</h2>
+        <h2>
+          {' '}
+          {showArchivedDogs
+            ? `Archived dogs ${stateDogs.dogs.length}`
+            : `Active dogs ${stateDogs.dogs.length}`}
+        </h2>
         <table>
           <thead>
             <tr>
@@ -100,7 +113,10 @@ export default function Admin() {
             ) : (
               stateDogs.dogs.map((dog) => {
                 return (
-                  <tr>
+                  <tr key={dog.name}>
+                    <td>
+                      <img src={dog.image as string} alt={dog.name} />
+                    </td>
                     <td>{dog.name}</td>
                     <td>{dog.gender}</td>
                     <td>{dog.size}</td>
@@ -112,13 +128,12 @@ export default function Admin() {
                     <td>{dog.views}</td>
                     <td>{dog.requests}</td>
                     <td>
-                      <img src={dog.image as string} alt={dog.name} />
-                    </td>
-                    <td>
                       <button>Edit</button>
-                      <button>Delete</button>
+                      <button onClick={() => handleDelete(dog.id)}>
+                        Delete
+                      </button>
                       <button onClick={() => handleUpdateDog(dog.id)}>
-                        Archive
+                        {showArchivedDogs ? 'Activate' : 'Archive'}
                       </button>
                     </td>
                   </tr>

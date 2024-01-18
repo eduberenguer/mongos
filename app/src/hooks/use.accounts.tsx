@@ -36,11 +36,21 @@ export function useAccounts() {
     dispatch(ac.logout(initialStateAccount.accountLogged));
   };
 
+  const getShelterById = async (dogId: string) => {
+    try {
+      const response = await repo.retrievedShelterById(dogId);
+      dispatch(ac.loadShelter(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     stateAccount,
     create,
     login,
     logout,
     loading,
+    getShelterById,
   };
 }

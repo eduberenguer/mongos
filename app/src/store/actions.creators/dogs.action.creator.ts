@@ -33,3 +33,10 @@ export const updateDog = (payload: Partial<Dog>): DogActions => {
     payload,
   };
 };
+
+export const loadDog = (payload: Dog): DogActions => {
+  return {
+    type: dogsActions.loadDog,
+    payload,
+  };
+};

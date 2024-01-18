@@ -7,6 +7,7 @@ export type accountState = {
     token?: string;
     user: Shelter | User | undefined;
   };
+  shelter: Shelter | undefined;
 };
 
 export const accountReducer = (
@@ -36,6 +37,11 @@ export const accountReducer = (
       return {
         ...state,
         accountLogged: action.payload,
+      };
+    case accountsActions.loadShelter:
+      return {
+        ...state,
+        shelter: action.payload,
       };
     default:
       return state;

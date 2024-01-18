@@ -4,6 +4,7 @@ import { DogActions } from '../actions.creators/dogs.action.creator';
 
 export type dogState = {
   dogs: Dog[];
+  dog: Dog | undefined;
 };
 
 export const dogReducer = (state: dogState, action: DogActions): dogState => {
@@ -12,6 +13,7 @@ export const dogReducer = (state: dogState, action: DogActions): dogState => {
       return {
         ...state,
         dogs: action.payload as Dog[],
+        dog: undefined,
       };
     case dogsActions.loadByShelter:
       return {
@@ -24,7 +26,6 @@ export const dogReducer = (state: dogState, action: DogActions): dogState => {
         dogs: [...state.dogs, action.payload as Dog],
       };
     case dogsActions.updateDog:
-      console.log(action);
       return {
         ...state,
         dogs: state.dogs.map((dog) => {
@@ -33,6 +34,11 @@ export const dogReducer = (state: dogState, action: DogActions): dogState => {
           }
           return dog;
         }),
+      };
+    case dogsActions.loadDog:
+      return {
+        ...state,
+        dog: action.payload as Dog,
       };
     default:
       return state;
