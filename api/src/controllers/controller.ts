@@ -20,4 +20,12 @@ export abstract class Controller<T extends { id: string | number }> {
       next(error);
     }
   }
+
+  async delete(req: Request, res: Response, next: NextFunction) {
+    try {
+      res.send(await this.repo.delete(req.params.id));
+    } catch (error) {
+      next(error);
+    }
+  }
 }

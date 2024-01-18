@@ -16,3 +16,4 @@ shelterRouter.post(
   accountController.register.bind(accountController),
 );
 shelterRouter.post('/login/', accountController.login.bind(accountController));
+shelterRouter.get('/:id', accountController.getById.bind(accountController));

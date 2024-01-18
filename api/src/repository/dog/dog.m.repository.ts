@@ -26,12 +26,12 @@ export class DogRepo implements Repository<Dog> {
   }
 
   async queryAll(): Promise<Dog[]> {
-    const allData = await DogModel.find({}).populate('shelter', 'shelterName').exec();
+    const allData = await DogModel.find({ archived: false }).populate('shelter', 'shelterName').exec();
     return allData;
   }
 
   async queryById(id: string): Promise<Dog> {
-    const result = await DogModel.findById(id);
+    const result = await DogModel.findById(id).populate('shelter', 'shelterName').exec();
     if (result === null) throw new Error('Not found');
     return result;
   }
@@ -40,6 +40,13 @@ export class DogRepo implements Repository<Dog> {
     const result = await DogModel.findOneAndUpdate({ _id: id }, data, { new: true });
 
     if (result === null) throw new Error('Not found');
+    return result;
+  }
+
+  async delete(id: string): Promise<Dog> {
+    const result = await DogModel.findOneAndDelete({ _id: id });
+    if (result === null) throw new Error('Not found');
+
     return result;
   }
 }

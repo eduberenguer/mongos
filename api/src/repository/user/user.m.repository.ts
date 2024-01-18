@@ -35,4 +35,11 @@ export class UserRepo implements Repository<User> {
     if (result === null) throw new Error('Not found');
     return result;
   }
+
+  async delete(id: string): Promise<User> {
+    const result = await UserModel.findOneAndDelete({ id });
+    if (result === null) throw new Error('Not found');
+
+    return result;
+  }
 }

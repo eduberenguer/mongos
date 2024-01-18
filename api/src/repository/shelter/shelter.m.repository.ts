@@ -35,4 +35,11 @@ export class ShelterRepo implements Repository<Shelter> {
     if (result === null) throw new Error('Not found');
     return result;
   }
+
+  async delete(id: string): Promise<Shelter> {
+    const result = await ShelterModel.findOneAndDelete({ id });
+    if (result === null) throw new Error('Not found');
+
+    return result;
+  }
 }

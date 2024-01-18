@@ -1,4 +1,4 @@
-import { Dog } from '../entities/dog';
+import { Dog, ShelterDog } from '../entities/dog';
 import { DogRepo } from '../repository/dog/dog.m.repository';
 import { PayloadToken } from '../services/auth';
 import { Controller } from './controller';
@@ -43,7 +43,7 @@ export class DogController extends Controller<Dog> {
     try {
       const { id } = req.body.tokenPayload as PayloadToken;
       const dog = await this.repo.queryById(req.params.id);
-      if (dog.shelter !== id) {
+      if ((dog.shelter as ShelterDog).id !== id) {
         res.status(401).send({ message: 'You are not authorized to update this dog' });
       } else {
         const updatedDog = await this.repo.update(req.params.id, req.body);

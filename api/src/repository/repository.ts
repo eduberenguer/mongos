@@ -4,4 +4,5 @@ export interface Repository<T extends { id: string | number }> {
   search: (query: { key: string; value: unknown }) => Promise<T>;
   searchByOptions: (queries: { key: string; value: unknown }[]) => Promise<T[]>;
   queryById: (id: T['id']) => Promise<T>;
+  delete: (id: T['id']) => Promise<T>;
 }
