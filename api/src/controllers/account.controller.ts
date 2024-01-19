@@ -28,36 +28,61 @@ export class AccountsController<T extends User | Shelter> extends Controller<T> 
 
   async login(req: Request, res: Response, next: NextFunction) {
     try {
-      if (!req.body.email || !req.body.password) {
-        throw new Error('Missing email or password');
+      if (req.method === 'PATCH') {
+        const tokenHeader = req.get('Authorization');
+
+        if (!tokenHeader?.startsWith('Bearer')) throw new Error('Unauthorized');
+
+        const token = tokenHeader.split(' ')[1];
+        const tokenPayload = AuthServices.verifyJWTGettingPayload(token);
+
+        const user = await this.repo.search({
+          key: '_id',
+          value: tokenPayload.id,
+        });
+
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        const response = {
+          token,
+          user,
+        };
+
+        res.send(response);
+      } else {
+        if (!req.body.email || !req.body.password) {
+          throw new Error('Missing email or password');
+        }
+
+        const user = await this.repo.search({
+          key: 'email',
+          value: req.body.email,
+        });
+
+        if (!user) {
+          throw new Error('User not found');
+        }
+
+        const isUserValid = await AuthServices.compare(req.body.password, user.password);
+
+        if (!isUserValid) throw new Error('Invalid user or password');
+
+        const payload: PayloadToken = {
+          id: user.id,
+          userName: user.email,
+        };
+
+        const token = AuthServices.createJWT(payload);
+
+        const response: LoginResponse = {
+          token,
+          user,
+        };
+
+        res.send(response);
       }
-
-      const user = await this.repo.search({
-        key: 'email',
-        value: req.body.email,
-      });
-
-      if (!user) {
-        throw new Error('User not found');
-      }
-
-      const isUserValid = await AuthServices.compare(req.body.password, user.password);
-
-      if (!isUserValid) throw new Error('Invalid user or password');
-
-      const payload: PayloadToken = {
-        id: user.id,
-        userName: user.email,
-      };
-
-      const token = AuthServices.createJWT(payload);
-
-      const response: LoginResponse = {
-        token,
-        user,
-      };
-
-      res.send(response);
     } catch (error) {
       next(error);
     }

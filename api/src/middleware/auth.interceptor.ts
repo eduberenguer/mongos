@@ -30,6 +30,21 @@ export class Interceptor {
     }
   }
 
+  authorization(req: Request, res: Response, next: NextFunction) {
+    try {
+      const tokenHeader = req.get('Authorization');
+      if (!tokenHeader?.startsWith('Bearer')) throw new Error('Unauthorized');
+      const token = tokenHeader.split(' ')[1];
+      const tokenPayload = AuthServices.verifyJWTGettingPayload(token);
+      req.body.userId = tokenPayload.id;
+      req.body.tokenRole = tokenPayload.role;
+      next();
+    } catch (error) {
+      console.log('error', error);
+      next(error);
+    }
+  }
+
   async authorizedForRegister(req: Request, res: Response, next: NextFunction) {
     try {
       if (!req.body || typeof req.body !== 'object') {

@@ -16,3 +16,8 @@ userRouter.post(
   accountController.register.bind(accountController),
 );
 userRouter.post('/login/', accountController.login.bind(accountController));
+userRouter.patch(
+  '/login/',
+  interceptor.authorization.bind(interceptor),
+  accountController.login.bind(accountController),
+);
