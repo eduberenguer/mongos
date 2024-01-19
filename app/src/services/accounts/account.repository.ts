@@ -1,6 +1,6 @@
-import { apiUrl } from '../config';
-import { Shelter } from '../models/shelter.type';
-import { User } from '../models/user.type';
+import { apiUrl } from '../../config';
+import { Shelter } from '../../models/shelter.type';
+import { User } from '../../models/user.type';
 
 const urlBase = 'http://localhost:3000/';
 
@@ -36,6 +36,20 @@ export class AccountRepository {
     });
 
     return data.json();
+  }
+
+  async loginWithToken({ token, role }: { token: string; role: string }) {
+    const urlFinal = `${urlBase}${role}/login`;
+    const response = await fetch(urlFinal, {
+      method: 'PATCH',
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (!response.ok) {
+      throw new Error('Error');
+    }
+    return response.json();
   }
 
   async retrievedShelterById(shelterId: string) {

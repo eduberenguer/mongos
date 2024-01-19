@@ -1,4 +1,4 @@
-import { Shelter } from '../models/shelter.type';
+import { Shelter } from '../../models/shelter.type';
 import { AccountRepository } from './account.repository';
 
 describe('AccountRepository', () => {

@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react';
 import { AccountsContexts } from '../../context/context';
-import { handleImageUpload } from '../../services/files.cloudinary.repository';
+import { handleImageUpload } from '../../services/files/files.cloudinary.repository';
 import {
   ShelterFormFields,
   UserFormFields,

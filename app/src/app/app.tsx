@@ -1,4 +1,4 @@
-import { lazy, Suspense, useContext } from 'react';
+import { lazy, Suspense, useContext, useEffect } from 'react';
 import { Route, Routes, Navigate } from 'react-router-dom';
 import { Header } from '../components/header/header';
 import { AccountsContexts } from '../context/context';
@@ -15,7 +15,11 @@ const ShelterDetails = lazy(
 import './app.module.scss';
 
 export default function App() {
-  const { stateAccount } = useContext(AccountsContexts);
+  const { stateAccount, loginWithToken } = useContext(AccountsContexts);
+
+  useEffect(() => {
+    loginWithToken();
+  }, []);
 
   return (
     <>

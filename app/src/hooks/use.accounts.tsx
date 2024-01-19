@@ -1,10 +1,11 @@
 import { useReducer, useState } from 'react';
 import { initialStateAccount } from '../mocks/initial.state.reducer';
-import { AccountRepository } from '../services/account.repository';
+import { AccountRepository } from '../services/accounts/account.repository';
 import { accountReducer } from '../store/reducers/accounts.reducer';
 import * as ac from '../store/actions.creators/accounts.action.creator';
 import { Shelter } from '../models/shelter.type';
 import { User } from '../models/user.type';
+import { LocaStorage } from '../services/accounts/local.storage';
 
 export function useAccounts() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -13,6 +14,7 @@ export function useAccounts() {
     accountReducer,
     initialStateAccount
   );
+  const userStore = new LocaStorage<{ token: string; role: string }>('user');
 
   const create = async (item: Partial<Shelter | User>) => {
     try {
@@ -29,11 +31,27 @@ export function useAccounts() {
   const login = async (item: Partial<Shelter | User>) => {
     const response = await repo.login(item);
     dispatch(ac.loginAccounts(response));
+    userStore.set({ token: response.token, role: response.user.role });
     return response;
+  };
+
+  const loginWithToken = async () => {
+    const userStoreData = userStore.get();
+    if (userStoreData) {
+      const { token, role } = userStoreData;
+      const response = await repo.loginWithToken({ token, role });
+      dispatch(
+        ac.loginWithToken({
+          token: response.token,
+          user: response.user,
+        })
+      );
+    }
   };
 
   const logout = async () => {
     dispatch(ac.logout(initialStateAccount.accountLogged));
+    userStore.remove();
   };
 
   const getShelterById = async (dogId: string) => {
@@ -49,6 +67,7 @@ export function useAccounts() {
     stateAccount,
     create,
     login,
+    loginWithToken,
     logout,
     loading,
     getShelterById,

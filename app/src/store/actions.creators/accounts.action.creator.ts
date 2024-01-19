@@ -31,6 +31,13 @@ export const loginAccounts = (payload: accountState): AccountsActionsLogin => {
   };
 };
 
+export const loginWithToken = (payload: accountState): AccountsActionsLogin => {
+  return {
+    type: accountsActions.loginWithToken,
+    payload,
+  };
+};
+
 export const logout = (payload: accountState): AccountsActionsLogin => {
   return {
     type: accountsActions.logout,

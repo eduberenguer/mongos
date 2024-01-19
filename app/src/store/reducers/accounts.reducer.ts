@@ -33,6 +33,14 @@ export const accountReducer = (
           user: action.payload.user,
         },
       };
+    case accountsActions.loginWithToken:
+      return {
+        ...state,
+        accountLogged: {
+          ...state.accountLogged,
+          token: action.payload.token,
+        },
+      };
     case accountsActions.logout:
       return {
         ...state,

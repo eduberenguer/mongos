@@ -2,7 +2,7 @@ import { useState, ChangeEvent } from 'react';
 import { Dog, Personality, Size } from '../../models/dog.type';
 import { optionsSize } from './form.options/size.options';
 import { optionsPersonality } from './form.options/personality.options';
-import { handleImageUpload } from '../../services/files.cloudinary.repository';
+import { handleImageUpload } from '../../services/files/files.cloudinary.repository';
 
 import style from './dog.form.module.scss';
 import genericStyle from '../../app/app.module.scss';
