@@ -4,4 +4,5 @@ export const dogsActions = {
   addDog: 'dogs@addDog',
   updateDog: 'dogs@updateDog',
   loadDog: 'dog@loadById',
+  emptyDogs: 'dogs@emptyDogs',
 };

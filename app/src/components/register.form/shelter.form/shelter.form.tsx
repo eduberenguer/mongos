@@ -1,4 +1,5 @@
 import { ShelterFormFields } from '../types/types.form';
+import Autocomplete from '../../google.maps/autocomplete/react-google-maps-api-autocomplete';
 
 import style from './shelter.form.module.scss';
 import genericStyles from '../../../app/app.module.scss';
@@ -8,11 +9,13 @@ export const ShelterForm = ({
   shelterFields,
   handleImageUploadChange,
   loadingImage,
+  handleAddressChange,
 }: {
   handleShelterChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   shelterFields: ShelterFormFields;
   handleImageUploadChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   loadingImage: boolean;
+  handleAddressChange: any;
 }) => {
   return (
     <div className={style.container_shelter_form}>
@@ -24,6 +27,7 @@ export const ShelterForm = ({
         onChange={handleShelterChange}
         placeholder="Shelter name"
       />
+      <Autocomplete handleAddressChange={handleAddressChange} />
       <input
         className={`${genericStyles.input} ${style.input}`}
         type="email"
@@ -57,14 +61,6 @@ export const ShelterForm = ({
           />
         )}
       </div>
-      <input
-        className={`${genericStyles.input} ${style.input}`}
-        type="text"
-        name="address"
-        value={shelterFields.address}
-        onChange={handleShelterChange}
-        placeholder="Address"
-      />
     </div>
   );
 };

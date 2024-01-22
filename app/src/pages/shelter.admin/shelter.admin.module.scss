@@ -56,3 +56,13 @@ th {
 tr:nth-child(even) {
   background-color: #f2f2f2;
 }
+
+span {
+  font-size: 30px;
+  color: $color-text-secondary;
+  cursor: pointer;
+
+  &:hover {
+    color: $color-text-primary;
+  }
+}

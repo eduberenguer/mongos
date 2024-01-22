@@ -40,13 +40,21 @@ export default function Register() {
     });
   };
 
+  const handleAddressChange = (address: string) => {
+    setShelterFields({
+      ...shelterFields,
+      address,
+    });
+  };
+
   const ifFormValid = () => {
     if (role === 'shelter') {
       if (
         shelterFields.shelterName &&
         shelterFields.email &&
         shelterFields.password &&
-        shelterFields.address
+        shelterFields.address &&
+        shelterFields.avatar
       ) {
         return true;
       }
@@ -57,7 +65,8 @@ export default function Register() {
         userFields.email &&
         userFields.password &&
         userFields.address &&
-        userFields.lifestyle.length
+        userFields.lifestyle.length &&
+        userFields.avatar
       ) {
         return true;
       }
@@ -141,6 +150,7 @@ export default function Register() {
           shelterFields={shelterFields}
           handleImageUploadChange={handleImageUploadChange}
           loadingImage={loadingImage}
+          handleAddressChange={handleAddressChange}
         />
       )}
 
@@ -150,6 +160,7 @@ export default function Register() {
           handleImageUploadChange={handleImageUploadChange}
           loadingImage={loadingImage}
           setUserFields={setUserFields}
+          handleAddressChange={handleAddressChange}
         />
       )}
       <button

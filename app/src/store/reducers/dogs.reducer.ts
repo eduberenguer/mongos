@@ -40,6 +40,11 @@ export const dogReducer = (state: dogState, action: DogActions): dogState => {
         ...state,
         dog: action.payload as Dog,
       };
+    case dogsActions.emptyDogs:
+      return {
+        ...state,
+        dogs: [],
+      };
     default:
       return state;
   }

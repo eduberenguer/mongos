@@ -11,7 +11,8 @@
   .chrome {
     display: flex;
     flex-direction: column;
-    width: 40%;
+    align-items: center;
+    width: 50%;
     gap: 20px;
 
     .name {
@@ -22,14 +23,20 @@
       max-width: 50%;
       border-radius: 10px;
     }
+
+
   }
 
   .info {
     display: flex;
     flex-direction: column;
-    gap: 10px;
-    margin-top: 60px;
-    width: 60%;
+    justify-content: space-around;
+    gap: 20px;
+    width: 50%;
+
+    .link {
+      text-decoration: none;
+    }
 
     label {
       font-weight: 600;

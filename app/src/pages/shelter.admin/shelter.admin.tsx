@@ -3,6 +3,7 @@ import { AccountsContexts, DogsContexts } from '../../context/context';
 import DogForm from '../../components/dog.form/dog.form';
 import { Dog } from '../../models/dog.type';
 import { IoIosArchive, IoIosCheckboxOutline } from 'react-icons/io';
+import { MdDeleteForever, MdEdit } from 'react-icons/md';
 
 import style from './shelter.admin.module.scss';
 import genericStyles from '../../app/app.module.scss';
@@ -128,13 +129,19 @@ export default function Admin() {
                     <td>{dog.views}</td>
                     <td>{dog.requests}</td>
                     <td>
-                      <button>Edit</button>
-                      <button onClick={() => handleDelete(dog.id)}>
-                        Delete
-                      </button>
-                      <button onClick={() => handleUpdateDog(dog.id)}>
-                        {showArchivedDogs ? 'Activate' : 'Archive'}
-                      </button>
+                      <span>
+                        <MdEdit />
+                      </span>
+                      <span onClick={() => handleUpdateDog(dog.id)}>
+                        {!showArchivedDogs ? (
+                          <IoIosArchive />
+                        ) : (
+                          <IoIosCheckboxOutline />
+                        )}
+                      </span>
+                      <span onClick={() => handleDelete(dog.id)}>
+                        <MdDeleteForever />
+                      </span>
                     </td>
                   </tr>
                 );

@@ -40,3 +40,10 @@ export const loadDog = (payload: Dog): DogActions => {
     payload,
   };
 };
+
+export const emptyDogs = (): DogActions => {
+  return {
+    type: dogsActions.emptyDogs,
+    payload: [],
+  };
+};

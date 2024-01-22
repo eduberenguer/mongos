@@ -39,6 +39,7 @@ export const accountReducer = (
         accountLogged: {
           ...state.accountLogged,
           token: action.payload.token,
+          user: action.payload.user,
         },
       };
     case accountsActions.logout:

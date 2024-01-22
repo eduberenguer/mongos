@@ -54,9 +54,9 @@ export function useAccounts() {
     userStore.remove();
   };
 
-  const getShelterById = async (dogId: string) => {
+  const getShelterById = async (shelterId: string) => {
     try {
-      const response = await repo.retrievedShelterById(dogId);
+      const response = await repo.retrievedShelterById(shelterId);
       dispatch(ac.loadShelter(response));
     } catch (error) {
       console.log(error);
