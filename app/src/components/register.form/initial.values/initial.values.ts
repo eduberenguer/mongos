@@ -5,6 +5,7 @@ export const initialValueShelter = {
   email: '',
   password: '',
   address: '',
+  province: '',
   registerDate: new Date(),
   avatar: null,
   role: 'shelter',

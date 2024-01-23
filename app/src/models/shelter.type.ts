@@ -5,6 +5,7 @@ export type Shelter = {
   password: string;
   avatar: File | string | null | undefined;
   address: string;
+  province: string;
   registerDate: Date;
   role: string;
 };

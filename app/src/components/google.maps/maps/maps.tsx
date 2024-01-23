@@ -4,9 +4,10 @@ import style from './maps.module.scss';
 
 interface MapProps {
   address: string;
+  province: string;
 }
 
-function Map({ address }: MapProps) {
+function Map({ address, province }: MapProps) {
   const mapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -18,7 +19,10 @@ function Map({ address }: MapProps) {
 
       const geocoder = new window.google.maps.Geocoder();
 
-      geocoder.geocode({ address }, (results: any, status) => {
+      const finalAddress = `${address}, ${province}, Spain`;
+      console.log(finalAddress);
+
+      geocoder.geocode({ address: finalAddress }, (results: any, status) => {
         if (status === 'OK' && results[0]) {
           map.setCenter(results[0].geometry.location);
 

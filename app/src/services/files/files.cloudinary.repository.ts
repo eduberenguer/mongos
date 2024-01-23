@@ -1,11 +1,11 @@
 import axios from 'axios';
 
 export const handleImageUpload = async (
-  e: React.ChangeEvent<HTMLInputElement>
+  // e: React.ChangeEvent<HTMLInputElement>
+  file: any
 ) => {
   return new Promise<string | undefined>((resolve, reject) => {
-    const file = e.target.files?.[0];
-
+    // const file = e.target.files?.[0];
     if (file) {
       const formData = new FormData();
       formData.append('file', file);

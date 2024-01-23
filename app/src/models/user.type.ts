@@ -19,6 +19,7 @@ export type User = {
   role: Role;
   avatar: File | string | null | undefined;
   address: string;
+  province: string;
   favourites: string[];
   registerDate: Date;
   friends: string[];

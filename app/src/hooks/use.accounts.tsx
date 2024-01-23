@@ -6,6 +6,7 @@ import * as ac from '../store/actions.creators/accounts.action.creator';
 import { Shelter } from '../models/shelter.type';
 import { User } from '../models/user.type';
 import { LocaStorage } from '../services/accounts/local.storage';
+import { handleImageUpload } from '../services/files/files.cloudinary.repository';
 
 export function useAccounts() {
   const [loading, setLoading] = useState<boolean>(false);
@@ -19,6 +20,8 @@ export function useAccounts() {
   const create = async (item: Partial<Shelter | User>) => {
     try {
       setLoading(true);
+      const image = await handleImageUpload(item.avatar as File);
+      item.avatar = image;
       const response = await repo.create(item);
       dispatch(ac.createAccounts(response));
     } catch (error) {

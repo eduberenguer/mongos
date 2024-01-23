@@ -5,6 +5,7 @@ export interface ShelterFormFields {
   email: string;
   password: string;
   address: string;
+  province: string;
   registerDate: Date;
   avatar: File | undefined | string | null;
   role: string;
@@ -15,6 +16,7 @@ export interface UserFormFields {
   email: string;
   password: string;
   address: string;
+  province: string;
   avatar: File | undefined | string | null;
   favourites: string[];
   registerDate: Date;

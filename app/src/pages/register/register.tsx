@@ -1,6 +1,5 @@
 import { useContext, useState } from 'react';
 import { AccountsContexts } from '../../context/context';
-import { handleImageUpload } from '../../services/files/files.cloudinary.repository';
 import {
   ShelterFormFields,
   UserFormFields,
@@ -18,7 +17,6 @@ import { ShelterForm } from '../../components/register.form/shelter.form/shelter
 
 export default function Register() {
   const navigate = useNavigate();
-  const [loadingImage, setLoadingImage] = useState<boolean>(false);
   const { create } = useContext(AccountsContexts);
   const [role, setRole] = useState<'shelter' | 'user'>();
   const [shelterFields, setShelterFields] =
@@ -31,13 +29,6 @@ export default function Register() {
     setRole(event.target.value as 'shelter' | 'user');
     setShelterFields(initialValueShelter);
     setUserFields(initialValueUser as UserFormFields);
-  };
-
-  const handleShelterChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setShelterFields({
-      ...shelterFields,
-      [event.target.name]: event.target.value,
-    });
   };
 
   const handleAddressChange = (address: string) => {
@@ -54,7 +45,7 @@ export default function Register() {
         shelterFields.email &&
         shelterFields.password &&
         shelterFields.address &&
-        shelterFields.avatar
+        shelterFields.province
       ) {
         return true;
       }
@@ -65,8 +56,8 @@ export default function Register() {
         userFields.email &&
         userFields.password &&
         userFields.address &&
-        userFields.lifestyle.length &&
-        userFields.avatar
+        userFields.province &&
+        userFields.lifestyle.length
       ) {
         return true;
       }
@@ -95,25 +86,6 @@ export default function Register() {
     }
     create(data);
     navigate('/login');
-  };
-
-  const handleImageUploadChange = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setLoadingImage(!loadingImage);
-    const imageUrl = await handleImageUpload(e);
-    if (imageUrl) setLoadingImage(false);
-    if (role === 'shelter') {
-      setShelterFields((prevState) => ({
-        ...prevState,
-        avatar: imageUrl || '',
-      }));
-    } else {
-      setUserFields((prevState) => ({
-        ...prevState,
-        avatar: imageUrl || '',
-      }));
-    }
   };
 
   return (
@@ -146,10 +118,9 @@ export default function Register() {
       </div>
       {role === 'shelter' && (
         <ShelterForm
-          handleShelterChange={handleShelterChange}
           shelterFields={shelterFields}
-          handleImageUploadChange={handleImageUploadChange}
-          loadingImage={loadingImage}
+          setShelterFields={setShelterFields}
+          // handleImageUploadChange={handleImageUploadChange}
           handleAddressChange={handleAddressChange}
         />
       )}
@@ -157,9 +128,8 @@ export default function Register() {
       {role === 'user' && (
         <UserForm
           userFields={userFields}
-          handleImageUploadChange={handleImageUploadChange}
-          loadingImage={loadingImage}
           setUserFields={setUserFields}
+          // handleImageUploadChange={handleImageUploadChange}
           handleAddressChange={handleAddressChange}
         />
       )}

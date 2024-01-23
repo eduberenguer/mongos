@@ -2,7 +2,6 @@ import { useState, ChangeEvent } from 'react';
 import { Dog, Personality, Size } from '../../models/dog.type';
 import { optionsSize } from './form.options/size.options';
 import { optionsPersonality } from './form.options/personality.options';
-import { handleImageUpload } from '../../services/files/files.cloudinary.repository';
 
 import style from './dog.form.module.scss';
 import genericStyle from '../../app/app.module.scss';
@@ -17,7 +16,7 @@ export default function DogForm({
     formDataDog: Partial<Dog>
   ) => void;
 }) {
-  const [loadingImage, setLoadingImage] = useState<boolean>(false);
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [formDataDog, setModalFormDataDog] = useState<Partial<Dog>>({
     name: '',
     gender: undefined,
@@ -70,16 +69,19 @@ export default function DogForm({
     return false;
   };
 
-  const handleImageUploadChange = async (
-    e: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    setLoadingImage(!loadingImage);
-    const imageUrl = await handleImageUpload(e);
-    if (imageUrl) setLoadingImage(false);
-    setModalFormDataDog((prevState) => ({
-      ...prevState,
-      image: imageUrl || '',
-    }));
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      setModalFormDataDog({
+        ...formDataDog,
+        image: file,
+      });
+    }
   };
 
   const handlePersonalityChange = (
@@ -199,15 +201,13 @@ export default function DogForm({
             type="file"
             accept="image/*"
             name="image"
-            onChange={handleImageUploadChange}
+            onChange={handleImageChange}
           />
-          {loadingImage ? (
-            <p className={style.textImage}>Loading image</p>
-          ) : (
+          {imagePreview && (
             <img
               className={style.loadingImage}
-              src={formDataDog.image as string}
-              alt={formDataDog.name}
+              src={imagePreview}
+              alt="Preview1"
             />
           )}
         </div>

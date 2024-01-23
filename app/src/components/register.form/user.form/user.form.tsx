@@ -5,20 +5,35 @@ import Autocomplete from '../../google.maps/autocomplete/react-google-maps-api-a
 import style from './user.form.module.scss';
 import genericStyles from '../../../app/app.module.scss';
 import { Lifestyle } from '../../../models/user.type';
+import { useEffect, useState } from 'react';
 
 export const UserForm = ({
   userFields,
-  handleImageUploadChange,
-  loadingImage,
   setUserFields,
+  // handleImageUploadChange,
   handleAddressChange,
 }: {
   userFields: UserFormFields;
-  handleImageUploadChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  loadingImage: boolean;
   setUserFields: any;
+  // handleImageUploadChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
   handleAddressChange: any;
 }) => {
+  const [imagePreview, setImagePreview] = useState<string | null>(null);
+  const [provinces, setProvinces] = useState<[]>([]);
+
+  useEffect(() => {
+    const allProvinces = fetch(
+      'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/provincias-espanolas/records?select=provincia&group_by=provincia'
+    );
+    allProvinces
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        setProvinces(data.results);
+      });
+  }, []);
+
   const handleLifeStyleChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -37,6 +52,21 @@ export const UserForm = ({
     }
   };
 
+  const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files && event.target.files[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setImagePreview(reader.result as string);
+      };
+      reader.readAsDataURL(file);
+      setUserFields({
+        ...userFields,
+        avatar: file,
+      });
+    }
+  };
+
   return (
     <div className={style.container_user_form}>
       <input
@@ -50,7 +80,39 @@ export const UserForm = ({
         placeholder="User name"
         required
       />
-      <Autocomplete handleAddressChange={handleAddressChange} />
+      {/* <Autocomplete handleAddressChange={handleAddressChange} /> */}
+      <input
+        className={`${genericStyles.input} ${style.input}`}
+        type="text"
+        name="address"
+        value={userFields.address}
+        onChange={(e) => {
+          setUserFields({ ...userFields, address: e.target.value });
+        }}
+        placeholder="Address"
+      />
+      <select
+        className={`${genericStyles.input} ${style.input}`}
+        name="province"
+        value={userFields.province}
+        onChange={(e) => {
+          setUserFields({
+            ...userFields,
+            province: e.target.value,
+          });
+        }}
+        style={{ maxHeight: '120px', overflowY: 'auto' }}
+        size={5}
+      >
+        {provinces &&
+          provinces.map((province: any) => {
+            return (
+              <option key={province.provincia} value={province.provincia}>
+                {province.provincia}
+              </option>
+            );
+          })}
+      </select>
       <input
         className={`${genericStyles.input} ${style.input}`}
         type="email"
@@ -73,18 +135,17 @@ export const UserForm = ({
       />
       <div className={style.loadImage}>
         <input
+          className={`${genericStyles.input} ${style.input}`}
           type="file"
           accept="image/*"
-          name="image"
-          onChange={handleImageUploadChange}
+          name="avatar"
+          onChange={handleImageChange}
         />
-        {loadingImage ? (
-          <p className={style.textImage}>Loading image</p>
-        ) : (
+        {imagePreview && (
           <img
             className={style.loadingImage}
-            src={userFields.avatar as unknown as string}
-            alt={userFields.userName}
+            src={imagePreview}
+            alt="Preview1"
           />
         )}
       </div>

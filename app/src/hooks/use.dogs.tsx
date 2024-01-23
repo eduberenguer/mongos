@@ -4,6 +4,7 @@ import { DogRepository } from '../services/dogs/dogs.repository';
 import { dogReducer } from '../store/reducers/dogs.reducer';
 import * as ac from '../store/actions.creators/dogs.action.creator';
 import { Dog } from '../models/dog.type';
+import { handleImageUpload } from '../services/files/files.cloudinary.repository';
 
 export function useDogs() {
   const repo = new DogRepository();
@@ -26,6 +27,8 @@ export function useDogs() {
   const addDog = async (dog: Partial<Dog>, token: string) => {
     try {
       setLoading(true);
+      const urlImage = await handleImageUpload(dog.image as File);
+      dog.image = urlImage;
       const response = await repo.addDog(dog, token);
       dispatch(ac.addDog(response));
     } catch (error) {
