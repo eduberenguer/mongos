@@ -14,6 +14,7 @@ import genericStyles from '../../app/app.module.scss';
 import { useNavigate } from 'react-router-dom';
 import { UserForm } from '../../components/register.form/user.form/user.form';
 import { ShelterForm } from '../../components/register.form/shelter.form/shelter.form';
+import { isFormRegisterValid } from './validate/isFormRegisterValid';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -38,38 +39,11 @@ export default function Register() {
     });
   };
 
-  const ifFormValid = () => {
-    if (role === 'shelter') {
-      if (
-        shelterFields.shelterName &&
-        shelterFields.email &&
-        shelterFields.password &&
-        shelterFields.address &&
-        shelterFields.province
-      ) {
-        return true;
-      }
-      return false;
-    } else {
-      if (
-        userFields.userName &&
-        userFields.email &&
-        userFields.password &&
-        userFields.address &&
-        userFields.province &&
-        userFields.lifestyle.length
-      ) {
-        return true;
-      }
-      return false;
-    }
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     let data = {};
 
-    if (!ifFormValid()) {
+    if (!isFormRegisterValid(role, shelterFields, userFields)) {
       return;
     }
 
@@ -135,7 +109,9 @@ export default function Register() {
       )}
       <button
         className={`${
-          ifFormValid() ? genericStyles.button : genericStyles.button_disabled
+          isFormRegisterValid(role, shelterFields, userFields)
+            ? genericStyles.button
+            : genericStyles.button_disabled
         }`}
         type="submit"
       >

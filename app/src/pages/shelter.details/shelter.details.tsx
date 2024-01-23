@@ -33,7 +33,7 @@ export default function Details() {
             <label>Email:</label>
             <p>{shelter.email}</p>
             <label>Address:</label>
-            <p>{shelter.address}</p>
+            <p>{`${shelter.address}, ${shelter.province}`}</p>
             <Map address={shelter.address} province={shelter.province} />
           </div>
         </div>

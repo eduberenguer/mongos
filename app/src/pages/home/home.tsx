@@ -34,11 +34,14 @@ export default function Home() {
         )}
       </div>
       <div className={style.container_card}>
-        {stateDogs.dogs.length ? (
-          stateDogs.dogs.map((dog) => <Card {...dog} key={dog.chipNumber} />)
-        ) : (
-          <p>No register dogs</p>
-        )}
+        {id
+          ? stateDogs.shelterDogs.length &&
+            stateDogs.shelterDogs.map((dog) => (
+              <Card {...dog} key={dog.chipNumber} />
+            ))
+          : stateDogs.dogs.length &&
+            stateDogs.dogs.map((dog) => <Card {...dog} key={dog.chipNumber} />)}
+        {stateDogs.dogs.length === 0 && <h2>No registered dogs</h2>}
       </div>
     </>
   );

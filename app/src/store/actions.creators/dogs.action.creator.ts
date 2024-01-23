@@ -15,7 +15,7 @@ export const loadDogs = (payload: Dog[]): DogActions => {
 
 export const loadByShelter = (payload: Dog[]): DogActions => {
   return {
-    type: dogsActions.load,
+    type: dogsActions.loadByShelter,
     payload,
   };
 };

@@ -5,6 +5,7 @@ import { optionsPersonality } from './form.options/personality.options';
 
 import style from './dog.form.module.scss';
 import genericStyle from '../../app/app.module.scss';
+import { isFormDogValid } from './validate/isFormDogValid';
 
 export default function DogForm({
   handlerFormDog,
@@ -36,37 +37,6 @@ export default function DogForm({
       ...formDataDog,
       hasBreed: event.target.value === 'true',
     });
-  };
-
-  const isFormValid = () => {
-    const {
-      name,
-      gender,
-      years,
-      months,
-      size,
-      chipNumber,
-      hasBreed,
-      breed,
-      description,
-      image,
-      personality,
-    } = formDataDog;
-    if (
-      name &&
-      gender &&
-      years &&
-      months &&
-      size &&
-      chipNumber?.toString().length === 15 &&
-      description &&
-      image &&
-      personality!.length > 0 &&
-      (hasBreed === false || (hasBreed && breed))
-    ) {
-      return true;
-    }
-    return false;
   };
 
   const handleImageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -303,7 +273,9 @@ export default function DogForm({
         ></textarea>
         <button
           className={`${
-            isFormValid() ? genericStyle.button : genericStyle.button_disabled
+            isFormDogValid(formDataDog)
+              ? genericStyle.button
+              : genericStyle.button_disabled
           }`}
         >
           Add dog

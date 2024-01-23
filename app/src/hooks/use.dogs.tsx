@@ -41,6 +41,7 @@ export function useDogs() {
   const updateDog = async (dogId: string, dog: Partial<Dog>, token: string) => {
     try {
       const response = await repo.updateDog(dogId, dog, token);
+      console.log(response);
       dispatch(ac.updateDog(response));
     } catch (error) {
       console.log(error);

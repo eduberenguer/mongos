@@ -5,6 +5,7 @@ import { DogActions } from '../actions.creators/dogs.action.creator';
 export type dogState = {
   dogs: Dog[];
   dog: Dog | undefined;
+  shelterDogs: Dog[];
 };
 
 export const dogReducer = (state: dogState, action: DogActions): dogState => {
@@ -18,7 +19,7 @@ export const dogReducer = (state: dogState, action: DogActions): dogState => {
     case dogsActions.loadByShelter:
       return {
         ...state,
-        dogs: action.payload as Dog[],
+        shelterDogs: action.payload as Dog[],
       };
     case dogsActions.addDog:
       return {

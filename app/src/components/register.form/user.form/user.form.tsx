@@ -1,6 +1,5 @@
 import { UserFormFields } from '../types/types.form';
 import { optionsLifestyle } from '../form.options/lifestyle.options';
-import Autocomplete from '../../google.maps/autocomplete/react-google-maps-api-autocomplete';
 
 import style from './user.form.module.scss';
 import genericStyles from '../../../app/app.module.scss';
@@ -10,13 +9,9 @@ import { useEffect, useState } from 'react';
 export const UserForm = ({
   userFields,
   setUserFields,
-  // handleImageUploadChange,
-  handleAddressChange,
 }: {
   userFields: UserFormFields;
   setUserFields: any;
-  // handleImageUploadChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  handleAddressChange: any;
 }) => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [provinces, setProvinces] = useState<[]>([]);
@@ -80,7 +75,6 @@ export const UserForm = ({
         placeholder="User name"
         required
       />
-      {/* <Autocomplete handleAddressChange={handleAddressChange} /> */}
       <input
         className={`${genericStyles.input} ${style.input}`}
         type="text"

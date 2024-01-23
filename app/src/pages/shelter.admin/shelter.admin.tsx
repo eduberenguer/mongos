@@ -29,7 +29,20 @@ export default function Admin() {
     'Requests',
     'Actions',
   ];
-
+  const handleUpdateDog = async (dogId: string) => {
+    await updateDog(
+      dogId,
+      {
+        archived: !stateDogs.shelterDogs.find((dog) => dog.id === dogId)
+          ?.archived,
+      },
+      stateAccount.accountLogged.token as string
+    );
+    getDogsByShelter(
+      stateAccount.accountLogged.user?.id as string,
+      showArchivedDogs
+    );
+  };
   useEffect(() => {
     getDogsByShelter(
       stateAccount.accountLogged.user?.id as string,
@@ -48,15 +61,11 @@ export default function Admin() {
     e.preventDefault();
     addDog(dog, stateAccount.accountLogged.token as string);
     handlerFormDog();
-  };
-
-  const handleUpdateDog = async (dogId: string) => {
-    await updateDog(
-      dogId,
-      { archived: !stateDogs.dogs.find((dog) => dog.id === dogId)?.archived },
-      stateAccount.accountLogged.token as string
+    setshowArchivedDogs(true);
+    getDogsByShelter(
+      stateAccount.accountLogged.user?.id as string,
+      showArchivedDogs
     );
-    setshowArchivedDogs((prev) => !prev);
   };
 
   const handleDelete = async (dogId: string) => {
@@ -97,8 +106,8 @@ export default function Admin() {
         <h2>
           {' '}
           {showArchivedDogs
-            ? `Archived dogs ${stateDogs.dogs.length}`
-            : `Active dogs ${stateDogs.dogs.length}`}
+            ? `Archived dogs ${stateDogs.shelterDogs.length}`
+            : `Active dogs ${stateDogs.shelterDogs.length}`}
         </h2>
         <table>
           <thead>
@@ -112,9 +121,9 @@ export default function Admin() {
             {loading ? (
               <p>Loading</p>
             ) : (
-              stateDogs.dogs.map((dog) => {
+              stateDogs.shelterDogs.map((dog) => {
                 return (
-                  <tr key={dog.name}>
+                  <tr key={dog.id}>
                     <td>
                       <img src={dog.image as string} alt={dog.name} />
                     </td>
