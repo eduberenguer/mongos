@@ -7,6 +7,7 @@ const shelterSchema = new Schema<Shelter>({
   password: { type: String, required: true },
   avatar: { type: String, required: true },
   address: { type: String, required: true },
+  province: { type: String, required: true },
   registerDate: { type: Date, required: true },
   role: { type: String, required: true, enum: ['shelter'] },
 });

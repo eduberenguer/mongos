@@ -17,7 +17,7 @@ export class DogController extends Controller<Dog> {
       req.body.requests = 0;
       req.body.adoptedBy = undefined;
       req.body.registerDate = new Date();
-      req.body.archived = false;
+      req.body.archived = true;
       delete req.body.tokenPayload;
       const createdDog = await this.repo.create(req.body);
       res.status(201).send(createdDog);

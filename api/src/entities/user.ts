@@ -8,6 +8,7 @@ export type User = {
   role: Role;
   avatar: string;
   address: string;
+  province: string;
   favourites: string[];
   registerDate: Date;
   friends: string[];

@@ -5,6 +5,7 @@ export type Shelter = {
   password: string;
   avatar: string;
   address: string;
+  province: string;
   registerDate: Date;
   role: 'shelter';
 };
