@@ -54,6 +54,7 @@ ul {
 $color-primary-light: #fff;
 $color-primary-dark: #35363A;
 $color-tertiary: #000000;
+$color-secondary: #f0eeee;
 
 $color-button-primary: #7f7d7d;
 $color-button-disabled: #86857f;
@@ -61,15 +62,13 @@ $color-button-disabled: #86857f;
 $color-text-primary: #222222;
 $color-text-secondary: #717171;
 
+
 .button {
   background-color: $color-primary-light;
   color: $color-text-primary;
-  display: flex;
-  align-items: center;
   border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
-  cursor: pointer;
   font-family: 'verdana';
   font-size: 14px;
   font-weight: 500;
@@ -80,6 +79,7 @@ $color-text-secondary: #717171;
   transition: color 100ms;
   user-select: none;
   border: 1px solid #DDDDDD;
+  cursor: pointer;
 
   &:hover {
     background-color: $color-text-primary;

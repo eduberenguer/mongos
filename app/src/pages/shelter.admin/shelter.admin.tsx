@@ -4,13 +4,21 @@ import DogForm from '../../components/dog.form/dog.form';
 import { Dog } from '../../models/dog.type';
 import { IoIosArchive, IoIosCheckboxOutline } from 'react-icons/io';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
+import { transformDate } from '../../utils/transformDate';
 
 import style from './shelter.admin.module.scss';
 import genericStyles from '../../app/app.module.scss';
 
 export default function Admin() {
-  const { getDogsByShelter, stateDogs, addDog, updateDog, deleteDog, loading } =
-    useContext(DogsContexts);
+  const {
+    getDogsByShelter,
+    stateDogs,
+    addDog,
+    updateDog,
+    deleteDog,
+    loading,
+    getDogs,
+  } = useContext(DogsContexts);
   const { stateAccount } = useContext(AccountsContexts);
   const [showFormNewDog, setShowFormNewDog] = useState(false);
   const [showArchivedDogs, setshowArchivedDogs] = useState<boolean>(false);
@@ -25,6 +33,7 @@ export default function Admin() {
     'Chip Number',
     'Has Breed',
     'Has Adopted',
+    'Registered',
     'Views',
     'Requests',
     'Actions',
@@ -66,6 +75,7 @@ export default function Admin() {
       stateAccount.accountLogged.user?.id as string,
       showArchivedDogs
     );
+    getDogs();
   };
 
   const handleDelete = async (dogId: string) => {
@@ -91,14 +101,14 @@ export default function Admin() {
             Add new dog
           </button>
         )}
-        {
+        {!showFormNewDog && (
           <span
             className={style.icon}
             onClick={() => setshowArchivedDogs(!showArchivedDogs)}
           >
             {!showArchivedDogs ? <IoIosArchive /> : <IoIosCheckboxOutline />}
           </span>
-        }
+        )}
       </div>
       <div
         className={`${style.admin} ${showFormNewDog && style.admin_disabled} `}
@@ -135,6 +145,7 @@ export default function Admin() {
                     <td>{dog.chipNumber}</td>
                     <td>{`${dog.breed ? 'yes' : 'no'}`}</td>
                     <td>{`${dog.adoptedBy ? 'yes' : 'no'}`}</td>
+                    <td>{transformDate(dog.registerDate)}</td>
                     <td>{dog.views}</td>
                     <td>{dog.requests}</td>
                     <td>

@@ -1,16 +1,19 @@
-import { useContext } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { useContext, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { AccountsContexts } from '../../context/context';
+import { CiMenuBurger } from 'react-icons/ci';
 
 import style from './header.module.scss';
 import genericStyle from '../../app/app.module.scss';
+import { Navbar } from './navbar/navbar';
 
 export const Header = () => {
-  let location = useLocation();
-  const { logout, stateAccount } = useContext(AccountsContexts);
+  const { stateAccount, logout } = useContext(AccountsContexts);
+  const [dropdown, setDropdown] = useState(false);
 
   const handleLogout = () => {
     logout();
+    setDropdown(false);
   };
 
   return (
@@ -28,23 +31,18 @@ export const Header = () => {
           </Link>
         </div>
       ) : (
-        <div className={style.container_options}>
+        <div onClick={() => setDropdown(!dropdown)}>
           {stateAccount.accountLogged?.token !== undefined && (
-            <img
-              className={style.avatar}
-              src={stateAccount.accountLogged?.user?.avatar as string}
-              alt="avatar"
-            />
+            <div className={style.menu}>
+              <CiMenuBurger className={style.icon} />
+              <img
+                className={style.avatar}
+                src={stateAccount.accountLogged?.user?.avatar as string}
+                alt="avatar"
+              />
+            </div>
           )}
-          {stateAccount.accountLogged?.user?.role === 'shelter' &&
-            location.pathname !== '/admin' && (
-              <Link to={'/admin'} className={style.link}>
-                <button className={genericStyle.button}>Admin</button>
-              </Link>
-            )}
-          <span onClick={handleLogout}>
-            <button className={genericStyle.button}>Logout</button>
-          </span>
+          {dropdown && <Navbar handleLogout={handleLogout} />}
         </div>
       )}
     </header>

@@ -5,6 +5,7 @@ import style from './user.form.module.scss';
 import genericStyles from '../../../app/app.module.scss';
 import { Lifestyle } from '../../../models/user.type';
 import { useEffect, useState } from 'react';
+import { getProvinces } from '../../../services/provinces/getProvinces';
 
 export const UserForm = ({
   userFields,
@@ -17,16 +18,12 @@ export const UserForm = ({
   const [provinces, setProvinces] = useState<[]>([]);
 
   useEffect(() => {
-    const allProvinces = fetch(
-      'https://public.opendatasoft.com/api/explore/v2.1/catalog/datasets/provincias-espanolas/records?select=provincia&group_by=provincia'
-    );
-    allProvinces
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        setProvinces(data.results);
-      });
+    const retriever = async () => {
+      const result = await getProvinces();
+      setProvinces(result.results);
+    };
+
+    retriever();
   }, []);
 
   const handleLifeStyleChange = (
@@ -96,8 +93,9 @@ export const UserForm = ({
           });
         }}
         style={{ maxHeight: '120px', overflowY: 'auto' }}
-        size={5}
+        size={4}
       >
+        {!userFields.province && <option value="">Select a province:</option>}
         {provinces &&
           provinces.map((province: any) => {
             return (

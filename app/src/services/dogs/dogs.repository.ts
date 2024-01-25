@@ -54,6 +54,15 @@ export class DogRepository {
     return response;
   }
 
+  async updateDogViews(dogId: string) {
+    const urlFinal = `${this.getApiUrl()}dog/${dogId}/views`;
+    const data = await fetch(urlFinal, {
+      method: 'PATCH',
+    });
+    const response: ApiResponseDog = await data.json();
+    return response;
+  }
+
   async deleteDog(dogId: string, token: string) {
     const urlFinal = `${this.getApiUrl()}dog/${dogId}`;
     const data = await fetch(urlFinal, {

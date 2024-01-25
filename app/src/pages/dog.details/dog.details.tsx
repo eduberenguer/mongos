@@ -7,10 +7,11 @@ import style from './dog.details.module.scss';
 
 export default function Details() {
   let { id } = useParams();
-  const { stateDogs, getDogById } = useContext(DogsContexts);
+  const { stateDogs, getDogById, updateViewsDog } = useContext(DogsContexts);
 
   useEffect(() => {
     getDogById(String(id));
+    updateViewsDog(String(id));
   }, []);
 
   const { dog } = stateDogs;

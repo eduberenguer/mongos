@@ -48,6 +48,14 @@ export function useDogs() {
     }
   };
 
+  const updateViewsDog = async (dogId: string) => {
+    try {
+      await repo.updateDogViews(dogId);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   const deleteDog = async (dogId: string, token: string) => {
     try {
       await repo.deleteDog(dogId, token);
@@ -74,5 +82,6 @@ export function useDogs() {
     deleteDog,
     loading,
     getDogById,
+    updateViewsDog,
   };
 }

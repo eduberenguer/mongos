@@ -1,0 +1,39 @@
+@import '../../../app/app.module.scss';
+
+.navbar {
+  position: fixed;
+  z-index: 100;
+  cursor: pointer;
+
+  ul {
+    margin-top: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    width: 100px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    border-radius: 10px;
+    overflow: hidden;
+    text-align: center;
+    background-color: $color-primary-light;
+
+    li {
+      width: 100%;
+      padding: 10px;
+      font-size: 0.9em;
+
+      .link {
+        text-decoration: none;
+        color: $color-primary-dark;
+      }
+
+      &:hover {
+        background-color: $color-secondary;
+      }
+    }
+
+    .open {
+      transition: all 3.3s;
+    }
+  }
+}

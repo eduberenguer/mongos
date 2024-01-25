@@ -75,13 +75,16 @@ export default function DogForm({
 
   return (
     <div className={style.container_dog_form}>
-      <button className={genericStyle.button} onClick={handlerFormDog}>
-        x
-      </button>
       <form
         className={style.dog_form}
         onSubmit={(e) => handleAddDog(e, formDataDog)}
       >
+        <button
+          className={`${genericStyle.button} ${style.cancel_button}`}
+          onClick={handlerFormDog}
+        >
+          x
+        </button>
         <h2>New dog</h2>
         <input
           className={genericStyle.input}
@@ -123,6 +126,7 @@ export default function DogForm({
             className={genericStyle.input}
             type="number"
             name="years"
+            min={0}
             value={formDataDog.years}
             onChange={(e) =>
               setModalFormDataDog({
@@ -138,6 +142,8 @@ export default function DogForm({
             type="number"
             name="months"
             value={formDataDog.months}
+            min={1}
+            max={12}
             onChange={(e) =>
               setModalFormDataDog({
                 ...formDataDog,

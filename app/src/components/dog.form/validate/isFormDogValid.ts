@@ -18,7 +18,10 @@ export const isFormDogValid = (formDataDog: Partial<Dog>) => {
     name &&
     gender &&
     years &&
+    years > 0 &&
     months &&
+    months > 0 &&
+    months < 13 &&
     size &&
     chipNumber?.toString().length === 15 &&
     description &&

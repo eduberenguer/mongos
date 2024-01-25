@@ -94,18 +94,11 @@ export default function Register() {
         <ShelterForm
           shelterFields={shelterFields}
           setShelterFields={setShelterFields}
-          // handleImageUploadChange={handleImageUploadChange}
-          handleAddressChange={handleAddressChange}
         />
       )}
 
       {role === 'user' && (
-        <UserForm
-          userFields={userFields}
-          setUserFields={setUserFields}
-          // handleImageUploadChange={handleImageUploadChange}
-          handleAddressChange={handleAddressChange}
-        />
+        <UserForm userFields={userFields} setUserFields={setUserFields} />
       )}
       <button
         className={`${
