@@ -53,4 +53,14 @@ export class DogController extends Controller<Dog> {
       next(error);
     }
   }
+
+  async updateDogViews(req: Request, res: Response, next: NextFunction) {
+    try {
+      const dog = await this.repo.queryById(req.params.id);
+      const updatedDog = await this.repo.update(req.params.id, { views: dog.views + 1 });
+      res.status(202).send(updatedDog);
+    } catch (error) {
+      next(error);
+    }
+  }
 }
