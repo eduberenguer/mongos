@@ -1,17 +1,40 @@
-import { useEffect, useContext } from 'react';
-import { DogsContexts } from '../../context/context';
+import { useEffect, useContext, useState } from 'react';
+import { AccountsContexts, DogsContexts } from '../../context/context';
 import { Link, useParams } from 'react-router-dom';
 import { SlMagnifierAdd } from 'react-icons/sl';
+import { VscHeart } from 'react-icons/vsc';
+import { ImHeart } from 'react-icons/im';
 
 import style from './dog.details.module.scss';
+import { User } from '../../models/user.type';
 
 export default function Details() {
   let { id } = useParams();
-  const { stateDogs, getDogById, updateViewsDog } = useContext(DogsContexts);
+  const { stateDogs, getDogById, addNewViewDog } = useContext(DogsContexts);
+  const { updateDogToFavourite, stateAccount } = useContext(AccountsContexts);
+  const [isFavourite, setIsFavourite] = useState<boolean>();
+
+  const checkDogIsFavourite = async (id: string) => {
+    const dogFavourite = (
+      stateAccount.accountLogged.user as User
+    )?.favourites.includes(id);
+    setIsFavourite(dogFavourite);
+
+    return dogFavourite;
+  };
+
+  const handleFavourite = async () => {
+    await updateDogToFavourite(
+      id as string,
+      stateAccount.accountLogged.user?.id as string
+    );
+    setIsFavourite(!isFavourite);
+  };
 
   useEffect(() => {
+    checkDogIsFavourite(id as string);
     getDogById(String(id));
-    updateViewsDog(String(id));
+    addNewViewDog(String(id));
   }, []);
 
   const { dog } = stateDogs;
@@ -22,7 +45,17 @@ export default function Details() {
         <>
           <div className={style.chrome}>
             <p className={style.name}>{dog.name}</p>
-            <img src={dog.image as string} alt={dog.name} />
+            <div className={style.image_container}>
+              <img src={dog.image as string} alt={dog.name} />
+              {stateAccount.accountLogged.user?.role === 'user' && (
+                <span
+                  onClick={handleFavourite}
+                  className={style.icon_favourite}
+                >
+                  {isFavourite ? <ImHeart /> : <VscHeart />}
+                </span>
+              )}
+            </div>
           </div>
           <div className={style.info}>
             <label>Edad:</label>
@@ -40,7 +73,11 @@ export default function Details() {
             <label>Personality:</label>
             <div>
               {dog.personality.map((item) => {
-                return <ul className={style.category}>{item}</ul>;
+                return (
+                  <ul className={style.category} key={item}>
+                    {item}
+                  </ul>
+                );
               })}
             </div>
             <label>Description:</label>

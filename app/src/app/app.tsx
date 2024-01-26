@@ -11,6 +11,7 @@ const DogDetails = lazy(() => import('../pages/dog.details/dog.details'));
 const ShelterDetails = lazy(
   () => import('../pages/shelter.details/shelter.details')
 );
+const Favourites = lazy(() => import('../pages/favourites/favourites'));
 
 import './app.module.scss';
 
@@ -65,6 +66,16 @@ export default function App() {
             element={<ShelterDetails />}
           ></Route>
           <Route path="/dog/details/:id" element={<DogDetails />}></Route>
+          <Route
+            path="/favourites"
+            element={
+              stateAccount.accountLogged?.user?.role !== 'user' ? (
+                <Navigate to="/" />
+              ) : (
+                <Favourites />
+              )
+            }
+          ></Route>
         </Routes>
       </Suspense>
     </>

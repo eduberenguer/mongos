@@ -21,15 +21,32 @@
       font-size: 2em;
     }
 
-    img {
-      border-radius: 10px;
-      max-height: 500px;
-      max-width: 600px;
-      object-fit: cover;
+    .image_container {
+      position: relative;
 
-      @media (max-width: 1080px) {
-        max-height: 300px;
-        max-width: 400px;
+      img {
+        border-radius: 10px;
+        max-height: 500px;
+        max-width: 600px;
+        object-fit: cover;
+
+        @media (max-width: 1080px) {
+          max-height: 300px;
+          max-width: 400px;
+        }
+      }
+
+      .icon_favourite {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 2em;
+        cursor: pointer;
+        color: rgb(186, 122, 122);
+
+        &:hover {
+          color: rgb(224, 152, 152);
+        }
       }
     }
   }

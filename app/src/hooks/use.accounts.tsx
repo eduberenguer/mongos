@@ -66,6 +66,17 @@ export function useAccounts() {
     }
   };
 
+  const updateDogToFavourite = async (dogId: string, userId: string) => {
+    try {
+      const response = await repo.updateDogFavourite(dogId, userId);
+      dispatch(ac.updateDogFavourite(response));
+      return true;
+    } catch (error) {
+      console.log(error);
+      return false;
+    }
+  };
+
   return {
     stateAccount,
     create,
@@ -74,5 +85,6 @@ export function useAccounts() {
     logout,
     loading,
     getShelterById,
+    updateDogToFavourite,
   };
 }

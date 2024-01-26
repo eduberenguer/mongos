@@ -85,7 +85,6 @@ export default function Admin() {
       showArchivedDogs
     );
   };
-
   return (
     <div className={style.admin}>
       <div className={style.container_buttons}>

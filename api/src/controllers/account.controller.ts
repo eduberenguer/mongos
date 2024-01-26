@@ -87,4 +87,33 @@ export class AccountsController<T extends User | Shelter> extends Controller<T> 
       next(error);
     }
   }
+
+  async updateDogFavourite(req: Request, res: Response, next: NextFunction) {
+    try {
+      const dogId = req.params.dogId;
+      const userId = req.params.userId;
+
+      const user = await this.repo.search({
+        key: '_id',
+        value: userId,
+      });
+
+      if (!user) {
+        throw new Error('User not found');
+      }
+
+      const dog = (user as User).favourites.find((dog) => dog === dogId);
+
+      if (dog) {
+        (user as User).favourites = (user as User).favourites.filter((dog) => dog !== dogId);
+        this.repo.update(userId, { favourites: (user as User).favourites.filter((dog) => dog !== dogId) });
+      } else {
+        (user as User).favourites.push(dogId);
+        this.repo.update(userId, { favourites: [...(user as User).favourites] });
+      }
+      res.send(user);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

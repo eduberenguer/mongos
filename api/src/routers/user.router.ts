@@ -21,3 +21,8 @@ userRouter.patch(
   interceptor.authorization.bind(interceptor),
   accountController.login.bind(accountController),
 );
+userRouter.patch(
+  '/:userId/:dogId/favourite/',
+  interceptor.authorization.bind(interceptor),
+  accountController.updateDogFavourite.bind(accountController),
+);

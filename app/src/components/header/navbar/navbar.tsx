@@ -19,6 +19,13 @@ export const Navbar = ({ handleLogout }: { handleLogout: () => void }) => {
               </Link>
             </li>
           )}
+        {stateAccount.accountLogged?.user?.role === 'user' && (
+          <li>
+            <Link to={'/favourites'} className={style.link}>
+              <p>Favourites</p>
+            </Link>
+          </li>
+        )}
         <li>
           <p onClick={handleLogout}>Logout</p>
         </li>

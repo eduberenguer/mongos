@@ -1,10 +1,13 @@
 import { apiUrl } from '../../config';
 import { Shelter } from '../../models/shelter.type';
 import { User } from '../../models/user.type';
+import { LocaStorage } from '../../services/accounts/local.storage';
 
 const urlBase = 'http://localhost:3000/';
 
 export class AccountRepository {
+  userStore = new LocaStorage<{ token: string; role: string }>('user');
+
   private getApiUrl() {
     if (process.env.NODE_ENV === 'test') {
       return 'http://localhost:3000/';
@@ -55,6 +58,22 @@ export class AccountRepository {
   async retrievedShelterById(shelterId: string) {
     const urlFinal = `${this.getApiUrl()}shelter/${shelterId}`;
     const data = await fetch(urlFinal);
+
+    const response = await data.json();
+
+    return response;
+  }
+
+  async updateDogFavourite(dogId: string, userId: string) {
+    const token = this.userStore.get()?.token;
+    const apiUrlFinal = `${this.getApiUrl()}user/${userId}/${dogId}/favourite`;
+    const data = await fetch(apiUrlFinal, {
+      method: 'PATCH',
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Bearer ${token}`,
+      },
+    });
 
     const response = await data.json();
 

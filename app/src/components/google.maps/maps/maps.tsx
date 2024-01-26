@@ -20,7 +20,6 @@ function Map({ address, province }: MapProps) {
       const geocoder = new window.google.maps.Geocoder();
 
       const finalAddress = `${address}, ${province}, Spain`;
-      console.log(finalAddress);
 
       geocoder.geocode({ address: finalAddress }, (results: any, status) => {
         if (status === 'OK' && results[0]) {

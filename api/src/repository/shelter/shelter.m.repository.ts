@@ -42,4 +42,11 @@ export class ShelterRepo implements Repository<Shelter> {
 
     return result;
   }
+
+  async update(id: string, data: Partial<Shelter>): Promise<Shelter> {
+    console.log('llega', id, data);
+    const result = await ShelterModel.findById(id);
+    if (result === null) throw new Error('Not found');
+    return result;
+  }
 }

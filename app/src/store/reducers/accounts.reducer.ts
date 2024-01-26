@@ -52,6 +52,14 @@ export const accountReducer = (
         ...state,
         shelter: action.payload,
       };
+    case accountsActions.updateDogFavourite:
+      return {
+        ...state,
+        accountLogged: {
+          ...state.accountLogged,
+          user: action.payload,
+        },
+      };
     default:
       return state;
   }

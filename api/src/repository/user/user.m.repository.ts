@@ -42,4 +42,14 @@ export class UserRepo implements Repository<User> {
 
     return result;
   }
+
+  async update(id: string, data: Partial<User>): Promise<User> {
+    const user = await UserModel.findById(id);
+    if (user === null) throw new Error('Not found');
+
+    const result = await UserModel.findOneAndUpdate({ _id: id }, data, { new: true });
+    if (result === null) throw new Error('Not found');
+
+    return result;
+  }
 }

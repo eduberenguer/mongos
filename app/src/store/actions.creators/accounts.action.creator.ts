@@ -51,3 +51,10 @@ export const loadShelter = (payload: Shelter): any => {
     payload,
   };
 };
+
+export const updateDogFavourite = (payload: Partial<User>): any => {
+  return {
+    type: accountsActions.updateDogFavourite,
+    payload,
+  };
+};

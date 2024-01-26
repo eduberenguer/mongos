@@ -8,7 +8,6 @@ export const isFormRegisterValid = (
   shelterFields: Partial<ShelterFormFields>,
   userFields: Partial<UserFormFields>
 ) => {
-  console.log(role);
   if (role === 'shelter') {
     if (
       shelterFields.shelterName &&

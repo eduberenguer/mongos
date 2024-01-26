@@ -4,4 +4,5 @@ export const accountsActions = {
   loginWithToken: 'account@loginWithToken',
   logout: 'account@logout',
   loadShelter: 'account@loadById',
+  updateDogFavourite: 'account@updateDogFavourite',
 };

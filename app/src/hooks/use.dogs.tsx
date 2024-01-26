@@ -14,6 +14,7 @@ export function useDogs() {
   const getDogs = async () => {
     const response = await repo.getAll();
     dispatch(ac.loadDogs(response));
+    return response;
   };
 
   const getDogsByShelter = async (
@@ -22,6 +23,7 @@ export function useDogs() {
   ) => {
     const response = await repo.getDogsByShelter(shelterId, showArchivedDogs);
     dispatch(ac.loadByShelter(response));
+    return response;
   };
 
   const addDog = async (dog: Partial<Dog>, token: string) => {
@@ -41,14 +43,13 @@ export function useDogs() {
   const updateDog = async (dogId: string, dog: Partial<Dog>, token: string) => {
     try {
       const response = await repo.updateDog(dogId, dog, token);
-      console.log(response);
       dispatch(ac.updateDog(response));
     } catch (error) {
       console.log(error);
     }
   };
 
-  const updateViewsDog = async (dogId: string) => {
+  const addNewViewDog = async (dogId: string) => {
     try {
       await repo.updateDogViews(dogId);
     } catch (error) {
@@ -68,6 +69,7 @@ export function useDogs() {
     try {
       const response = await repo.retrievedDogById(dogId);
       dispatch(ac.loadDog(response));
+      return response;
     } catch (error) {
       console.log(error);
     }
@@ -82,6 +84,6 @@ export function useDogs() {
     deleteDog,
     loading,
     getDogById,
-    updateViewsDog,
+    addNewViewDog,
   };
 }
