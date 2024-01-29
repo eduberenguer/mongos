@@ -7,6 +7,7 @@ import { ImHeart } from 'react-icons/im';
 
 import style from './dog.details.module.scss';
 import { User } from '../../models/user.type';
+import { toast } from 'sonner';
 
 export default function Details() {
   let { id } = useParams();
@@ -29,6 +30,9 @@ export default function Details() {
       stateAccount.accountLogged.user?.id as string
     );
     setIsFavourite(!isFavourite);
+    isFavourite
+      ? toast.info('Dog removed from favourites')
+      : toast.success('Dog added to favourites');
   };
 
   useEffect(() => {

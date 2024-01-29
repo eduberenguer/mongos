@@ -2,7 +2,7 @@ import axios from 'axios';
 
 export const handleImageUpload = async (
   // e: React.ChangeEvent<HTMLInputElement>
-  file: any
+  file: File
 ) => {
   return new Promise<string | undefined>((resolve, reject) => {
     // const file = e.target.files?.[0];

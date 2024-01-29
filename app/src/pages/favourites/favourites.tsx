@@ -2,52 +2,38 @@ import { useContext, useEffect, useState } from 'react';
 import { AccountsContexts, DogsContexts } from '../../context/context';
 import { User } from '../../models/user.type';
 import { Dog } from '../../models/dog.type';
+import { Card } from '../../components/card/card';
+
+import style from './favourites.module.scss';
 
 export default function Favourites() {
   const { stateAccount } = useContext(AccountsContexts);
-  const { getDogById } = useContext(DogsContexts);
+  const { getDogsByIds } = useContext(DogsContexts);
   const [favouriteDogsInfo, setFavouriteDogsInfo] = useState<Dog[]>([]);
 
   useEffect(() => {
-    const fetchAllDogInfo = async () => {
+    const getFavouriteDogs = async () => {
       const favouriteDogIds =
         (stateAccount.accountLogged.user as User)?.favourites || [];
 
-      setFavouriteDogsInfo([]);
+      const result = await getDogsByIds(favouriteDogIds);
 
-      const newDogInfoArray = await Promise.all(
-        favouriteDogIds.map(async (dogId) => {
-          try {
-            const dogInfo = await getDogById(dogId);
-            return dogInfo;
-          } catch (error) {
-            console.error(
-              `Error al obtener la información del perro con ID ${dogId}`,
-              error
-            );
-            return null;
-          }
-        })
-      );
-
-      const filteredDogInfoArray = newDogInfoArray.filter(
-        (dogInfo): dogInfo is Dog => dogInfo !== null
-      );
-      setFavouriteDogsInfo([...filteredDogInfoArray]);
+      setFavouriteDogsInfo(result);
     };
 
-    fetchAllDogInfo();
+    getFavouriteDogs();
   }, []);
 
   return (
-    <div>
-      <h1>Favoritos</h1>
-      <ul>
-        {favouriteDogsInfo.length &&
-          favouriteDogsInfo.map((dogInfo) => (
-            <li key={dogInfo.id}>{dogInfo.name}</li>
-          ))}
-      </ul>
+    <div className={style.favourites}>
+      <h1 className={style.favourites_title}>My favourites dogs</h1>
+      <div className={style.container_cards}>
+        {favouriteDogsInfo.length > 0 ? (
+          favouriteDogsInfo.map((dogInfo) => <Card dog={dogInfo} />)
+        ) : (
+          <p>You don't have favourite dogs</p>
+        )}
+      </div>
     </div>
   );
 }

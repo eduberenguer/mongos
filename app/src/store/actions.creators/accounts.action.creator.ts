@@ -4,18 +4,24 @@ import { User } from '../../models/user.type';
 
 export interface AccountsActions {
   type: string;
-  payload?: Shelter | Shelter[] | User | User[] | Partial<Shelter | User>;
+  payload?:
+    | Shelter
+    | Shelter[]
+    | User
+    | User[]
+    | Partial<Shelter | User>
+    | Partial<Shelter | User>[];
+}
+
+export interface AccountsActionsLogin {
+  type: string;
+  payload?: accountState;
 }
 
 export type accountState = {
   token?: string;
   user: Shelter | User | undefined;
 };
-
-export interface AccountsActionsLogin {
-  type: string;
-  payload?: accountState;
-}
 
 export const createAccounts = (payload: Shelter | User): AccountsActions => {
   return {
@@ -45,14 +51,14 @@ export const logout = (payload: accountState): AccountsActionsLogin => {
   };
 };
 
-export const loadShelter = (payload: Shelter): any => {
+export const loadShelter = (payload: Shelter): AccountsActions => {
   return {
     type: accountsActions.loadShelter,
     payload,
   };
 };
 
-export const updateDogFavourite = (payload: Partial<User>): any => {
+export const updateDogFavourite = (payload: Partial<User>): AccountsActions => {
   return {
     type: accountsActions.updateDogFavourite,
     payload,

@@ -5,6 +5,7 @@ import { Dog } from '../../models/dog.type';
 import { IoIosArchive, IoIosCheckboxOutline } from 'react-icons/io';
 import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import { transformDate } from '../../utils/transformDate';
+import { toast } from 'sonner';
 
 import style from './shelter.admin.module.scss';
 import genericStyles from '../../app/app.module.scss';
@@ -75,6 +76,7 @@ export default function Admin() {
       stateAccount.accountLogged.user?.id as string,
       showArchivedDogs
     );
+    toast.success('Dog added');
     getDogs();
   };
 

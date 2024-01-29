@@ -5,7 +5,7 @@ import { AccountsContexts } from '../../../context/context';
 import style from './navbar.module.scss';
 
 export const Navbar = ({ handleLogout }: { handleLogout: () => void }) => {
-  let location = useLocation();
+  const location = useLocation();
   const { stateAccount } = useContext(AccountsContexts);
 
   return (
@@ -13,18 +13,18 @@ export const Navbar = ({ handleLogout }: { handleLogout: () => void }) => {
       <ul className="menus">
         {stateAccount.accountLogged?.user?.role === 'shelter' &&
           location.pathname !== '/admin' && (
-            <li>
-              <Link to={'/admin'} className={style.link}>
+            <Link to={'/admin'} className={style.link}>
+              <li>
                 <p>Admin</p>
-              </Link>
-            </li>
+              </li>
+            </Link>
           )}
         {stateAccount.accountLogged?.user?.role === 'user' && (
-          <li>
-            <Link to={'/favourites'} className={style.link}>
+          <Link to={'/favourites'} className={style.link}>
+            <li>
               <p>Favourites</p>
-            </Link>
-          </li>
+            </li>
+          </Link>
         )}
         <li>
           <p onClick={handleLogout}>Logout</p>

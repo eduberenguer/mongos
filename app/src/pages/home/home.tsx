@@ -38,7 +38,7 @@ export default function Home() {
           </button>
         )}
       </div>
-      <div className={style.container_card}>
+      <div className={style.container_cards}>
         {renderDogs.map((dog) => (
           <Card key={dog.id} dog={dog} />
         ))}

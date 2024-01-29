@@ -19,7 +19,7 @@ export default function DogForm({
 }) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [formDataDog, setModalFormDataDog] = useState<Partial<Dog>>({
-    name: '',
+    name: undefined,
     gender: undefined,
     years: undefined,
     months: undefined,
@@ -27,7 +27,7 @@ export default function DogForm({
     chipNumber: undefined,
     hasBreed: false,
     breed: undefined,
-    description: '',
+    description: undefined,
     image: null,
     personality: [],
   });

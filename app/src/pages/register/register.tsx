@@ -15,6 +15,7 @@ import { useNavigate } from 'react-router-dom';
 import { UserForm } from '../../components/register.form/user.form/user.form';
 import { ShelterForm } from '../../components/register.form/shelter.form/shelter.form';
 import { isFormRegisterValid } from './validate/isFormRegisterValid';
+import { toast } from 'sonner';
 
 export default function Register() {
   const navigate = useNavigate();
@@ -32,33 +33,20 @@ export default function Register() {
     setUserFields(initialValueUser as UserFormFields);
   };
 
-  const handleAddressChange = (address: string) => {
-    setShelterFields({
-      ...shelterFields,
-      address,
-    });
-  };
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    let data = {};
 
     if (!isFormRegisterValid(role, shelterFields, userFields)) {
       return;
     }
 
-    if (role === 'shelter') {
-      data = {
-        ...shelterFields,
-        registerDate: new Date(),
-      };
-    } else {
-      data = {
-        ...userFields,
-        registerDate: new Date(),
-      };
-    }
+    const data = {
+      ...(role === 'shelter' ? shelterFields : userFields),
+      registerDate: new Date(),
+    };
+
     create(data);
+    toast.success('Register successful');
     navigate('/login');
   };
 

@@ -14,6 +14,7 @@ const ShelterDetails = lazy(
 const Favourites = lazy(() => import('../pages/favourites/favourites'));
 
 import './app.module.scss';
+import { Toaster } from 'sonner';
 
 export default function App() {
   const { stateAccount, loginWithToken } = useContext(AccountsContexts);
@@ -25,6 +26,7 @@ export default function App() {
   return (
     <>
       <Suspense>
+        <Toaster position="top-center" richColors />
         <Header />
         <Routes>
           <Route path="/" element={<Home />}></Route>

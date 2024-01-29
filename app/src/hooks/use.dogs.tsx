@@ -75,6 +75,25 @@ export function useDogs() {
     }
   };
 
+  const getDogsByIds = async (dogsIds: string[]) => {
+    const newDogInfoArray = await Promise.all(
+      dogsIds.map(async (dogId) => {
+        try {
+          const dogInfo = await getDogById(dogId);
+          return dogInfo;
+        } catch (error) {
+          console.error(`Error with ${dogId}`, error);
+          return null;
+        }
+      })
+    );
+    const filteredDogInfoArray = newDogInfoArray.filter(
+      (dogInfo): dogInfo is Dog => dogInfo !== null
+    );
+
+    return filteredDogInfoArray;
+  };
+
   return {
     stateDogs,
     getDogs,
@@ -85,5 +104,6 @@ export function useDogs() {
     loading,
     getDogById,
     addNewViewDog,
+    getDogsByIds,
   };
 }

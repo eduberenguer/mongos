@@ -17,23 +17,20 @@
     text-align: center;
     background-color: $color-primary-light;
 
+    .link {
+      text-decoration: none;
+      color: $color-primary-dark;
+    }
+
     li {
       width: 100%;
       padding: 10px;
       font-size: 0.9em;
-
-      .link {
-        text-decoration: none;
-        color: $color-primary-dark;
-      }
+      text-decoration: none;
 
       &:hover {
         background-color: $color-secondary;
       }
-    }
-
-    .open {
-      transition: all 3.3s;
     }
   }
 }

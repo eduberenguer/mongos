@@ -5,6 +5,7 @@ import { accountState } from '../../store/actions.creators/accounts.action.creat
 
 import style from './login.module.scss';
 import genericStyles from '../../app/app.module.scss';
+import { toast } from 'sonner';
 
 interface LoginFields {
   email: string;
@@ -41,6 +42,7 @@ export default function Login() {
       };
       const result: accountState = await login(data);
       if (result.token) {
+        toast.success('Login successful');
         navigate('/admin');
       }
     }
