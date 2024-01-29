@@ -34,6 +34,7 @@ export class Interceptor {
     try {
       const tokenHeader = req.get('Authorization');
       if (!tokenHeader?.startsWith('Bearer')) throw new Error('Unauthorized');
+
       const token = tokenHeader.split(' ')[1];
       const tokenPayload = AuthServices.verifyJWTGettingPayload(token);
       req.body.userId = tokenPayload.id;
@@ -50,8 +51,10 @@ export class Interceptor {
       if (!req.body || typeof req.body !== 'object') {
         throw new Error('Invalid request body');
       }
+
       const shelterExist = await ShelterModel.findOne({ email: req.body.email });
       const userExist = await UserModel.findOne({ email: req.body.email });
+
       if (shelterExist || userExist) {
         throw new Error('Mail already exists');
       }
