@@ -1,6 +1,6 @@
 import { NextFunction, Request, Response } from 'express';
 import { AccountsController } from './account.controller';
-import { UserRepo } from '../repository/user/user.m.repository';
+import { UserRepo } from '../../repository/user/user.m.repository';
 
 describe('Given a UserController class', () => {
   describe('When its instantiated', () => {

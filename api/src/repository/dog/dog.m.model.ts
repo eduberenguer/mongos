@@ -10,7 +10,7 @@ const dogSchema = new Schema<Dog>({
   months: { type: Number, required: true },
   size: { type: String, required: true, enum: ['small', 'medium', 'large', 'extra large', 'giant'] },
   chipNumber: { type: Number, required: true },
-  shelter: { type: String, ref: 'Shelter' },
+  shelter: { type: String, required: true, ref: 'Shelter' },
   personality: {
     type: [String],
     required: true,

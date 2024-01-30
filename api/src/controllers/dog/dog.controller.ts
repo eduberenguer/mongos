@@ -1,8 +1,8 @@
-import { Dog, ShelterDog } from '../entities/dog';
-import { DogRepo } from '../repository/dog/dog.m.repository';
-import { PayloadToken } from '../services/auth';
-import { Controller } from './controller';
-import { Request, Response, NextFunction } from 'express-serve-static-core';
+import { Request, Response, NextFunction } from 'express';
+import { Dog, ShelterDog } from '../../entities/dog';
+import { DogRepo } from '../../repository/dog/dog.m.repository';
+import { PayloadToken } from '../../services/auth';
+import { Controller } from '../controller';
 
 export class DogController extends Controller<Dog> {
   constructor(public repo: DogRepo) {

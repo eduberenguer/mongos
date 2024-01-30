@@ -1,7 +1,7 @@
 import { NextFunction, Request, Response } from 'express';
 import { DogController } from './dog.controller';
-import { DogRepo } from '../repository/dog/dog.m.repository';
-import { mockDog } from '../mocks/dog.mock';
+import { DogRepo } from '../../repository/dog/dog.m.repository';
+import { mockDog } from '../../mocks/dog.mock';
 
 describe('Given a DogController class', () => {
   describe('When its instantiated', () => {

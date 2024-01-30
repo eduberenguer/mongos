@@ -1,5 +1,5 @@
 import { UserRepo } from '../repository/user/user.m.repository';
-import { AccountsController } from './account.controller';
+import { AccountsController } from './account/account.controller';
 import { NextFunction, Request, Response } from 'express';
 
 let mockUserRepo: UserRepo;

@@ -1,5 +1,5 @@
 import { Router as createRouter } from 'express';
-import { AccountsController } from '../controllers/account.controller';
+import { AccountsController } from '../controllers/account/account.controller';
 import { UserRepo } from '../repository/user/user.m.repository';
 import { Interceptor } from '../middleware/auth.interceptor';
 

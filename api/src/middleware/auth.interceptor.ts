@@ -5,9 +5,10 @@ import { DogModel } from '../repository/dog/dog.m.model';
 import { UserRepo } from '../repository/user/user.m.repository';
 import { UserModel } from '../repository/user/user.m.model';
 import { AuthServices } from '../services/auth';
+import { AdoptionRequestRepo } from '../repository/adoption.request/adoption.request.m.repository';
 
 export class Interceptor {
-  constructor(protected repo: ShelterRepo | UserRepo) {}
+  constructor(protected repo: ShelterRepo | UserRepo | AdoptionRequestRepo) {}
 
   logged(req: Request, res: Response, next: NextFunction) {
     try {

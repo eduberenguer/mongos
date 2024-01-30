@@ -1,6 +1,6 @@
 import { Router as createRouter } from 'express';
 import { Interceptor } from '../middleware/auth.interceptor';
-import { DogController } from '../controllers/dog.controller';
+import { DogController } from '../controllers/dog/dog.controller';
 import { DogRepo } from '../repository/dog/dog.m.repository';
 import { ShelterRepo } from '../repository/shelter/shelter.m.repository';
 

@@ -1,10 +1,10 @@
 import { Response, Request, NextFunction } from 'express';
-import { Controller } from './controller';
-import { User } from '../entities/user.js';
-import { Shelter } from '../entities/shelter';
-import { Repository } from '../repository/repository';
-import { AuthServices, PayloadToken } from '../services/auth';
-import { LoginResponse } from '../types/response.api';
+import { Controller } from '../controller';
+import { User } from '../../entities/user.js';
+import { Shelter } from '../../entities/shelter';
+import { Repository } from '../../repository/repository';
+import { AuthServices, PayloadToken } from '../../services/auth';
+import { LoginResponse } from '../../types/response.api';
 
 export class AccountsController<T extends User | Shelter> extends Controller<T> {
   public repo: Repository<T>;
