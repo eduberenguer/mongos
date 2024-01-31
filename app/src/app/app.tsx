@@ -12,6 +12,7 @@ const ShelterDetails = lazy(
   () => import('../pages/shelter.details/shelter.details')
 );
 const Favourites = lazy(() => import('../pages/favourites/favourites'));
+const Requests = lazy(() => import('../pages/requests/requests'));
 
 import './app.module.scss';
 import { Toaster } from 'sonner';
@@ -78,6 +79,17 @@ export default function App() {
               )
             }
           ></Route>
+          <Route
+            path="/requests"
+            element={
+              !stateAccount.accountLogged?.token ? (
+                <Navigate to="/" />
+              ) : (
+                <Requests />
+              )
+            }
+          ></Route>
+          <Route path="*" element={<Navigate to="/" />}></Route>
         </Routes>
       </Suspense>
     </>

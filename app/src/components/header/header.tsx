@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AccountsContexts } from '../../context/context';
 import { CiMenuBurger } from 'react-icons/ci';
 
@@ -8,12 +8,14 @@ import genericStyle from '../../app/app.module.scss';
 import { Navbar } from './navbar/navbar';
 
 export const Header = () => {
+  const navigate = useNavigate();
   const { stateAccount, logout } = useContext(AccountsContexts);
   const [dropdown, setDropdown] = useState(false);
 
   const handleLogout = () => {
     logout();
     setDropdown(false);
+    navigate('/');
   };
 
   return (

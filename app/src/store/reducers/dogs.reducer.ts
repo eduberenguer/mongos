@@ -46,6 +46,11 @@ export const dogReducer = (state: dogState, action: DogActions): dogState => {
         ...state,
         dogs: [],
       };
+    case dogsActions.deleteDog:
+      return {
+        ...state,
+        dogs: state.dogs.filter((dog) => dog.id !== (action.payload as Dog).id),
+      };
     default:
       return state;
   }

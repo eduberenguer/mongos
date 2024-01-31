@@ -48,6 +48,19 @@
           color: rgb(224, 152, 152);
         }
       }
+
+      .icon_request {
+        position: absolute;
+        bottom: 20px;
+        right: 20px;
+        font-size: 2em;
+        cursor: pointer;
+        color: rgb(70, 72, 70);
+
+        &:hover {
+          color: rgb(157, 161, 157);
+        }
+      }
     }
   }
 

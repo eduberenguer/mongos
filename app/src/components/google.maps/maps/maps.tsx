@@ -36,8 +36,6 @@ function Map({ address, province }: MapProps) {
     }
   }, [address]);
 
-  console.log('maps');
-
   return <div ref={mapRef} className={style.map} />;
 }
 

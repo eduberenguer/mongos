@@ -57,13 +57,3 @@
     }
   }
 }
-
-
-// const checkDogFavourite = (dog: Partial<Dog>) => {
-//   console.log('dogId', dog.id);
-//   const dogFavourite = (
-//     stateAccount.accountLogged.user as User
-//   ).favourites.find((favouriteDog) => favouriteDog === dog.id);
-//   console.log('dogFavourite', dogFavourite);
-//   return dogFavourite !== undefined ? false : true;
-// };

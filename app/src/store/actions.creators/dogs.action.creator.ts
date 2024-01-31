@@ -3,7 +3,7 @@ import { Dog } from '../../models/dog.type';
 
 export interface DogActions {
   type: string;
-  payload?: Dog | Dog[] | Partial<Dog>;
+  payload?: Dog | Dog[] | Partial<Dog> | string;
 }
 
 export const loadDogs = (payload: Dog[]): DogActions => {
@@ -45,5 +45,12 @@ export const emptyDogs = (): DogActions => {
   return {
     type: dogsActions.emptyDogs,
     payload: [],
+  };
+};
+
+export const deleteDog = (payload: string): DogActions => {
+  return {
+    type: dogsActions.deleteDog,
+    payload,
   };
 };

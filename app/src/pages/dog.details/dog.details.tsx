@@ -1,32 +1,57 @@
 import { useEffect, useContext, useState } from 'react';
-import { AccountsContexts, DogsContexts } from '../../context/context';
+import {
+  AccountsContexts,
+  AdoptionRequestsContexts,
+  DogsContexts,
+} from '../../context/context';
 import { Link, useParams } from 'react-router-dom';
 import { SlMagnifierAdd } from 'react-icons/sl';
 import { VscHeart } from 'react-icons/vsc';
 import { ImHeart } from 'react-icons/im';
+import {
+  IoIosInformationCircle,
+  IoIosInformationCircleOutline,
+} from 'react-icons/io';
 
 import style from './dog.details.module.scss';
 import { User } from '../../models/user.type';
 import { toast } from 'sonner';
+import AdoptionRequestForm from '../../components/adoption.request.form/adoption.request.form';
 
 export default function Details() {
-  let { id } = useParams();
+  let { id: dogId } = useParams();
   const { stateDogs, getDogById, addNewViewDog } = useContext(DogsContexts);
   const { updateDogToFavourite, stateAccount } = useContext(AccountsContexts);
-  const [isFavourite, setIsFavourite] = useState<boolean>();
+  const { checkDogIsAdoptionRequest } = useContext(AdoptionRequestsContexts);
+  const [showAdoptionRequestForm, setShowAdoptionRequestForm] =
+    useState<boolean>(false);
 
-  const checkDogIsFavourite = async (id: string) => {
+  const [isFavourite, setIsFavourite] = useState<boolean>();
+  const [isAdoptionRequest, setIsAdoptionRequest] = useState<boolean>();
+
+  const checkDogIsFavourite = async (dogId: string) => {
     const dogFavourite = (
       stateAccount.accountLogged.user as User
-    )?.favourites.includes(id);
+    )?.favourites.includes(dogId);
     setIsFavourite(dogFavourite);
 
     return dogFavourite;
   };
 
+  const checkDogIsAdoptionRequestByUser = async () => {
+    if (stateAccount.accountLogged.user) {
+      const result = await checkDogIsAdoptionRequest(
+        dogId as string,
+        stateAccount.accountLogged.user?.id as string
+      );
+
+      result && setIsAdoptionRequest(true);
+    }
+  };
+
   const handleFavourite = async () => {
     await updateDogToFavourite(
-      id as string,
+      dogId as string,
       stateAccount.accountLogged.user?.id as string
     );
     setIsFavourite(!isFavourite);
@@ -35,10 +60,20 @@ export default function Details() {
       : toast.success('Dog added to favourites');
   };
 
+  const handleAdoptionRequest = async () => {
+    if (isAdoptionRequest) {
+      toast.info('You have already requested this dog');
+      return;
+    } else {
+      setShowAdoptionRequestForm(!showAdoptionRequestForm);
+    }
+  };
+
   useEffect(() => {
-    checkDogIsFavourite(id as string);
-    getDogById(String(id));
-    addNewViewDog(String(id));
+    checkDogIsFavourite(dogId as string);
+    checkDogIsAdoptionRequestByUser();
+    getDogById(String(dogId));
+    addNewViewDog(String(dogId));
   }, []);
 
   const { dog } = stateDogs;
@@ -59,10 +94,22 @@ export default function Details() {
                   {isFavourite ? <ImHeart /> : <VscHeart />}
                 </span>
               )}
+              {stateAccount.accountLogged.user?.role === 'user' && (
+                <span
+                  onClick={handleAdoptionRequest}
+                  className={style.icon_request}
+                >
+                  {isAdoptionRequest ? (
+                    <IoIosInformationCircle />
+                  ) : (
+                    <IoIosInformationCircleOutline />
+                  )}
+                </span>
+              )}
             </div>
           </div>
           <div className={style.info}>
-            <label>Edad:</label>
+            <label>Age:</label>
             <p>{`${dog.years} years and ${dog.months} months`}</p>
             <label>Gender:</label>
             <p>{dog.gender}</p>
@@ -97,6 +144,13 @@ export default function Details() {
             </Link>
           </div>
         </>
+      )}
+      {showAdoptionRequestForm && dog && (
+        <AdoptionRequestForm
+          infoDog={dog}
+          setShowAdoptionRequestForm={setShowAdoptionRequestForm}
+          checkDogIsAdoptionRequestByUser={checkDogIsAdoptionRequestByUser}
+        />
       )}
     </div>
   );

@@ -19,13 +19,21 @@ export const Navbar = ({ handleLogout }: { handleLogout: () => void }) => {
               </li>
             </Link>
           )}
-        {stateAccount.accountLogged?.user?.role === 'user' && (
-          <Link to={'/favourites'} className={style.link}>
+        {location.pathname !== '/requests' && (
+          <Link to={'/requests'} className={style.link}>
             <li>
-              <p>Favourites</p>
+              <p>Requests</p>
             </li>
           </Link>
         )}
+        {stateAccount.accountLogged?.user?.role === 'user' &&
+          location.pathname !== '/favourites' && (
+            <Link to={'/favourites'} className={style.link}>
+              <li>
+                <p>Favourites</p>
+              </li>
+            </Link>
+          )}
         <li>
           <p onClick={handleLogout}>Logout</p>
         </li>

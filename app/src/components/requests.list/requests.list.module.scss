@@ -1,0 +1,66 @@
+  .adoption_request_card {
+    margin-bottom: 10px;
+    cursor: pointer;
+
+    .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-radius: 20px;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: #e0e0e0;
+      }
+
+      img {
+        width: 100px;
+        height: 100px;
+        object-fit: cover;
+        border-radius: 120px;
+      }
+    }
+
+    .expanded_content {
+      padding: 10px;
+      display: flex;
+      flex-direction: column;
+
+      p {
+        margin-bottom: 8px;
+      }
+
+      .actions {
+        display: flex;
+        gap: 10px;
+        justify-content: center;
+
+        .button_accepted {
+          background-color: #e0e0e0;
+          border: none;
+          padding: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: #91bc93;
+          }
+        }
+
+        .button_rejected {
+          background-color: #e0e0e0;
+          border: none;
+          padding: 10px;
+          border-radius: 5px;
+          cursor: pointer;
+          transition: all 0.3s ease;
+
+          &:hover {
+            background-color: rgb(185, 91, 91);
+          }
+        }
+      }
+    }
+  }

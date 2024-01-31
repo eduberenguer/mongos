@@ -51,7 +51,17 @@ export function useDogs() {
 
   const addNewViewDog = async (dogId: string) => {
     try {
-      await repo.updateDogViews(dogId);
+      const response = await repo.updateDogViews(dogId);
+      dispatch(ac.updateDog(response));
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const addNewRequestDog = async (dogId: string) => {
+    try {
+      const response = await repo.updateDogRequests(dogId);
+      dispatch(ac.updateDog(response));
     } catch (error) {
       console.log(error);
     }
@@ -60,6 +70,7 @@ export function useDogs() {
   const deleteDog = async (dogId: string, token: string) => {
     try {
       await repo.deleteDog(dogId, token);
+      dispatch(ac.deleteDog(dogId));
     } catch (error) {
       console.log(error);
     }
@@ -105,5 +116,6 @@ export function useDogs() {
     getDogById,
     addNewViewDog,
     getDogsByIds,
+    addNewRequestDog,
   };
 }

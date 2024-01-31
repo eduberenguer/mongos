@@ -11,11 +11,11 @@ export default function Home() {
   const { id } = useParams();
   const navigate = useNavigate();
   const [renderDogs, setRenderDogs] = useState<Dog[]>([]);
-  const { getDogs, getDogsByShelter } = useContext(DogsContexts);
+  const { stateDogs, getDogs, getDogsByShelter } = useContext(DogsContexts);
   const { stateAccount } = useContext(AccountsContexts);
 
   const handleClearFilters = async () => {
-    const response = await getDogs();
+    const response = stateDogs.dogs.length ? stateDogs.dogs : await getDogs();
     setRenderDogs(response);
     navigate('/');
   };
