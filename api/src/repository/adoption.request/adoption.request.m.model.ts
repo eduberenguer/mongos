@@ -8,7 +8,12 @@ const adoptionRequestSchema = new Schema<AdoptionRequest>({
   userId: { type: String, required: true, ref: 'User' },
   shelterId: { type: String, required: true, ref: 'Shelter' },
   text: { type: String, required: true },
-  state: { type: String, required: true, enum: ['pending', 'accepted', 'rejected'] },
+  hasDogs: { type: Boolean, required: true },
+  hasCats: { type: Boolean, required: true },
+  hasGarden: { type: Boolean, required: true },
+  hasExperience: { type: Boolean, required: true },
+  hasChildren: { type: Boolean, required: true },
+  status: { type: String, required: true, enum: ['pending', 'accepted', 'rejected'] },
   isRead: { type: Boolean, required: true },
 });
 

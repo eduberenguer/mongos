@@ -6,9 +6,9 @@ export class AdoptionRequestRepo implements Repository<AdoptionRequest> {
   constructor() {}
 
   async create(data: Omit<AdoptionRequest, 'id'>): Promise<AdoptionRequest> {
-    const newUser = await AdoptionRequestModel.create(data);
+    const newAdoptionRequest = await AdoptionRequestModel.create(data);
 
-    return newUser;
+    return newAdoptionRequest;
   }
 
   async search({ key, value }: { key: string; value: unknown }): Promise<AdoptionRequest> {
@@ -68,6 +68,7 @@ export class AdoptionRequestRepo implements Repository<AdoptionRequest> {
       .populate({
         path: 'dogId',
         select: 'name image',
+        model: 'dog',
       })
       .populate({
         path: 'userId',
@@ -88,6 +89,13 @@ export class AdoptionRequestRepo implements Repository<AdoptionRequest> {
 
   async delete(id: string): Promise<AdoptionRequest> {
     const result = await AdoptionRequestModel.findOneAndDelete({ _id: id });
+    if (result === null) throw new Error('Not found');
+
+    return result;
+  }
+
+  async checkDogIsAdoptionRequest(dogId: string, userId: string): Promise<AdoptionRequest> {
+    const result = await AdoptionRequestModel.findOne({ dogId, userId });
     if (result === null) throw new Error('Not found');
 
     return result;

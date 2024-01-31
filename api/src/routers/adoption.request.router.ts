@@ -16,7 +16,18 @@ adoptionRequestRouter.post(
   requestController.addRequest.bind(requestController),
 );
 adoptionRequestRouter.get(
-  '/:id',
+  '/shelter/:id',
   interceptor.logged.bind(interceptor),
   requestController.getAdoptionRequestByShelter.bind(requestController),
 );
+adoptionRequestRouter.get(
+  '/user/:id',
+  interceptor.logged.bind(interceptor),
+  requestController.getAdoptionRequestByUser.bind(requestController),
+);
+adoptionRequestRouter.patch(
+  '/:id',
+  interceptor.logged.bind(interceptor),
+  requestController.updateAdoptionRequest.bind(requestController),
+);
+adoptionRequestRouter.get('/:dogId/:userId', requestController.checkDogIsAdoptionRequest.bind(requestController));

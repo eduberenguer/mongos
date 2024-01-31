@@ -6,9 +6,13 @@ export type AdoptionRequest = {
   updatedAt: Date;
   dogId: string;
   userId: string;
-  userMail: string;
   shelterId: string;
   text: string;
-  state: State;
+  hasDogs: boolean;
+  hasCats: boolean;
+  hasGarden: boolean;
+  hasExperience: boolean;
+  hasChildren: boolean;
+  status: State;
   isRead: boolean;
 };

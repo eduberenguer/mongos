@@ -24,3 +24,4 @@ dogRouter.patch('/:id', interceptor.logged.bind(interceptor), dogController.upda
 dogRouter.delete('/:id', interceptor.logged.bind(interceptor), dogController.delete.bind(dogController));
 dogRouter.get('/:id', dogController.getById.bind(dogController));
 dogRouter.patch('/:id/views', dogController.updateDogViews.bind(dogController));
+dogRouter.patch('/:id/requests', dogController.updateDogRequests.bind(dogController));
