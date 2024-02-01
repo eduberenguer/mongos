@@ -31,3 +31,8 @@ adoptionRequestRouter.patch(
   requestController.updateAdoptionRequest.bind(requestController),
 );
 adoptionRequestRouter.get('/:dogId/:userId', requestController.checkDogIsAdoptionRequest.bind(requestController));
+adoptionRequestRouter.delete(
+  '/:id',
+  interceptor.logged.bind(interceptor),
+  requestController.deleteAdoptionRequest.bind(requestController),
+);

@@ -1,4 +1,4 @@
-type State = 'pending' | 'accepted' | 'rejected';
+type Status = 'pending' | 'accepted' | 'rejected';
 
 export type AdoptionRequest = {
   id: string;
@@ -13,6 +13,6 @@ export type AdoptionRequest = {
   hasGarden: boolean;
   hasExperience: boolean;
   hasChildren: boolean;
-  status: State;
+  status: Status;
   isRead: boolean;
 };

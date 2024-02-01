@@ -57,7 +57,7 @@ export class AdoptionRequestController extends Controller<AdoptionRequest> {
     try {
       const { id } = req.body.tokenPayload as PayloadToken;
       if (!id) {
-        res.status(401).send({ message: 'You are not authorized to create this request' });
+        res.status(401).send({ message: 'You are not authorized to update this request' });
       }
       const updatedRequest = await this.repo.update(req.params.id, req.body);
       res.status(200).send(updatedRequest);
@@ -71,6 +71,19 @@ export class AdoptionRequestController extends Controller<AdoptionRequest> {
       const { dogId, userId } = req.params;
       const request = await this.repo.checkDogIsAdoptionRequest(dogId, userId);
       res.status(200).send(request);
+    } catch (error) {
+      next(error);
+    }
+  }
+
+  async deleteAdoptionRequest(req: Request, res: Response, next: NextFunction) {
+    try {
+      const { id } = req.body.tokenPayload as PayloadToken;
+      if (!id) {
+        res.status(401).send({ message: 'You are not authorized to delete this request' });
+      }
+      const deletedRequest = await this.repo.delete(req.params.id);
+      res.status(200).send(deletedRequest);
     } catch (error) {
       next(error);
     }
