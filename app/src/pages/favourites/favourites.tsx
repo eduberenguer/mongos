@@ -29,7 +29,9 @@ export default function Favourites() {
       <h1 className={style.favourites_title}>My favourites dogs</h1>
       <div className={style.container_cards}>
         {favouriteDogsInfo.length > 0 ? (
-          favouriteDogsInfo.map((dogInfo) => <Card dog={dogInfo} />)
+          favouriteDogsInfo.map((dogInfo) => (
+            <Card key={dogInfo.id} dog={dogInfo} />
+          ))
         ) : (
           <p>You don't have favourite dogs</p>
         )}

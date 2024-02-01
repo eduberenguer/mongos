@@ -32,7 +32,7 @@ export default function Details() {
   const checkDogIsFavourite = async (dogId: string) => {
     const dogFavourite = (
       stateAccount.accountLogged.user as User
-    )?.favourites.includes(dogId);
+    )?.favourites?.includes(dogId);
     setIsFavourite(dogFavourite);
 
     return dogFavourite;
@@ -82,33 +82,44 @@ export default function Details() {
     <div className={style.dog_details}>
       {dog && (
         <>
-          <div className={style.chrome}>
+          <div
+            className={`${style.chrome} ${
+              showAdoptionRequestForm && style.dog_details_hidden
+            }`}
+          >
             <p className={style.name}>{dog.name}</p>
             <div className={style.image_container}>
               <img src={dog.image as string} alt={dog.name} />
-              {stateAccount.accountLogged.user?.role === 'user' && (
-                <span
-                  onClick={handleFavourite}
-                  className={style.icon_favourite}
-                >
-                  {isFavourite ? <ImHeart /> : <VscHeart />}
-                </span>
-              )}
-              {stateAccount.accountLogged.user?.role === 'user' && (
-                <span
-                  onClick={handleAdoptionRequest}
-                  className={style.icon_request}
-                >
-                  {isAdoptionRequest ? (
-                    <IoIosInformationCircle />
-                  ) : (
-                    <IoIosInformationCircleOutline />
-                  )}
-                </span>
-              )}
+              {dog.adoptedBy && <div className={style.adopted}>ADOPTED</div>}
+              {stateAccount.accountLogged.user?.role === 'user' &&
+                !dog.adoptedBy && (
+                  <span
+                    onClick={handleFavourite}
+                    className={style.icon_favourite}
+                  >
+                    {isFavourite ? <ImHeart /> : <VscHeart />}
+                  </span>
+                )}
+              {stateAccount.accountLogged.user?.role === 'user' &&
+                !dog.adoptedBy && (
+                  <span
+                    onClick={handleAdoptionRequest}
+                    className={style.icon_request}
+                  >
+                    {isAdoptionRequest ? (
+                      <IoIosInformationCircle />
+                    ) : (
+                      <IoIosInformationCircleOutline />
+                    )}
+                  </span>
+                )}
             </div>
           </div>
-          <div className={style.info}>
+          <div
+            className={`${style.info} ${
+              showAdoptionRequestForm && style.dog_details_hidden
+            }`}
+          >
             <label>Age:</label>
             <p>{`${dog.years} years and ${dog.months} months`}</p>
             <label>Gender:</label>

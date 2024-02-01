@@ -46,11 +46,36 @@ export function useAdoptionRequests() {
     return response;
   };
 
+  const deleteAdoptionRequest = async (
+    adoptionRequestId: string,
+    token: string
+  ) => {
+    const response = await repo.deleteAdoptionRequest(adoptionRequestId, token);
+    dispatch(ac.deleteAdoptionRequest(response));
+    return response;
+  };
+
+  const updateAdoptionRequest = async (
+    adoptionRequestId: string,
+    status: Partial<AdoptionRequestInput>,
+    token: string
+  ) => {
+    const response = await repo.updateAdoptionRequest(
+      adoptionRequestId,
+      status,
+      token
+    );
+    dispatch(ac.updateAdoptionRequest(response));
+    return response;
+  };
+
   return {
     stateAdoptionRequests,
     addAdoptionRequest,
     getAdoptionRequests,
     checkDogIsAdoptionRequest,
     getAdoptionRequestsByShelterId,
+    deleteAdoptionRequest,
+    updateAdoptionRequest,
   };
 }

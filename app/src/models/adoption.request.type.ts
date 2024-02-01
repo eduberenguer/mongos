@@ -1,9 +1,10 @@
-type State = 'pending' | 'accepted' | 'rejected';
+export type Status = 'pending' | 'accepted' | 'rejected';
 
 export type ShelterInfo = {
   id: string;
   shelterName: string;
   email: string;
+  province: string;
 };
 
 export type DogInfo = {
@@ -16,6 +17,7 @@ export type UserInfo = {
   id: string;
   userName: string;
   email: string;
+  province: string;
 };
 
 export type AdoptionRequest = {
@@ -31,7 +33,7 @@ export type AdoptionRequest = {
   hasGarden: boolean;
   hasExperience: boolean;
   hasChildren: boolean;
-  status: State;
+  status: Status;
   isRead: boolean;
 };
 
@@ -48,7 +50,7 @@ export type AdoptionRequestResponse = {
   hasGarden: boolean;
   hasExperience: boolean;
   hasChildren: boolean;
-  status: State;
+  status: Status;
   isRead: boolean;
 };
 

@@ -1,6 +1,6 @@
   .adoption_request_card {
     margin-bottom: 10px;
-    cursor: pointer;
+
 
     .container {
       display: flex;
@@ -10,8 +10,30 @@
       border-radius: 20px;
       transition: all 0.3s ease;
 
-      &:hover {
-        background-color: #e0e0e0;
+      .icon {
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .status {
+        border: 1px solid #e0e0e0;
+        padding: 5px;
+        border-radius: 5px;
+
+        &_accepted {
+          background-color: rgb(196, 218, 196)
+        }
+
+        &_rejected {
+          background-color: rgb(185, 91, 91);
+        }
+
+        &_pending {
+          background-color: rgb(230, 230, 142)
+        }
       }
 
       img {

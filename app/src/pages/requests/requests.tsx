@@ -8,9 +8,12 @@ import style from './requests.module.scss';
 import { RequestList } from '../../components/requests.list/requests.list';
 
 export default function Requests() {
-  const { stateAdoptionRequests, getAdoptionRequestsByShelterId } = useContext(
-    AdoptionRequestsContexts
-  );
+  const {
+    stateAdoptionRequests,
+    getAdoptionRequestsByShelterId,
+    deleteAdoptionRequest,
+    updateAdoptionRequest,
+  } = useContext(AdoptionRequestsContexts);
   const { stateAccount } = useContext(AccountsContexts);
 
   useEffect(() => {
@@ -25,11 +28,19 @@ export default function Requests() {
 
   return (
     <div className={style.requests}>
-      <h1>Requests</h1>
-      {adoptionRequests.length &&
+      <h1>My requests</h1>
+      {adoptionRequests.length ? (
         adoptionRequests.map((adoptionRequest) => (
-          <RequestList adoptionRequest={adoptionRequest} />
-        ))}
+          <RequestList
+            key={adoptionRequest.id}
+            adoptionRequest={adoptionRequest}
+            deleteAdoptionRequest={deleteAdoptionRequest}
+            updateAdoptionRequest={updateAdoptionRequest}
+          />
+        ))
+      ) : (
+        <p>No requests</p>
+      )}
     </div>
   );
 }

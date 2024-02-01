@@ -77,4 +77,39 @@ export class AdoptionRequestRepository {
 
     return transformResponse;
   }
+
+  async deleteAdoptionRequest(adoptionRequestId: string, token: string) {
+    const urlFinal = `${this.getApiUrl()}adoptionRequest/${adoptionRequestId}`;
+    const data = await fetch(urlFinal, {
+      method: 'DELETE',
+      headers: {
+        Authorization: 'Bearer ' + token,
+      },
+    });
+
+    const response: ApiResponseAdoptionRequest = await data.json();
+
+    return response;
+  }
+
+  async updateAdoptionRequest(
+    adoptionRequestId: string,
+    status: Partial<AdoptionRequestInput>,
+    token: string
+  ) {
+    const urlFinal = `${this.getApiUrl()}adoptionRequest/${adoptionRequestId}`;
+    const data = await fetch(urlFinal, {
+      method: 'PATCH',
+      body: JSON.stringify(status),
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: 'Bearer ' + token,
+      },
+    });
+
+    const response: ApiResponseAdoptionRequest = await data.json();
+    const transformResponse = transformDataResponse([response]);
+
+    return transformResponse[0];
+  }
 }

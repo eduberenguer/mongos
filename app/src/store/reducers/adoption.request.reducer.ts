@@ -24,6 +24,33 @@ export const adoptionRequestReducer = (
           action.payload as AdoptionRequest,
         ],
       };
+    case adoptionRequestActions.deleteAdoptionRequest:
+      return {
+        ...state,
+        adoptionRequests: [
+          ...(state.adoptionRequests as AdoptionRequest[]).filter(
+            (adoptionRequest) =>
+              adoptionRequest.id !== (action.payload as AdoptionRequest).id
+          ),
+        ],
+      };
+    case adoptionRequestActions.updateAdoptionRequest:
+      return {
+        ...state,
+        adoptionRequests: [
+          ...(state.adoptionRequests as AdoptionRequest[]).map(
+            (adoptionRequest) => {
+              if (
+                adoptionRequest.id === (action.payload as AdoptionRequest).id
+              ) {
+                return action.payload as AdoptionRequest;
+              }
+
+              return adoptionRequest;
+            }
+          ),
+        ],
+      };
     default:
       return state;
   }

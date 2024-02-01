@@ -7,6 +7,11 @@ import {
 import { Dog } from '../../models/dog.type';
 import { toast } from 'sonner';
 
+import style from './adoption.request.form.module.scss';
+import genericStyle from '../../app/app.module.scss';
+import { isFormDogValid } from '../dog.form/validate/isFormDogValid';
+import { isFormRequestValid } from './validate/isFormRequestValid';
+
 export default function AdoptionRequestForm({
   infoDog,
   setShowAdoptionRequestForm,
@@ -47,12 +52,19 @@ export default function AdoptionRequestForm({
   };
 
   return (
-    <form onSubmit={(e) => handleAdoptionRequest(e)}>
-      <button onClick={() => setShowAdoptionRequestForm(false)}>X</button>
+    <form onSubmit={(e) => handleAdoptionRequest(e)} className={style.form}>
+      <button
+        onClick={() => setShowAdoptionRequestForm(false)}
+        className={`${genericStyle.button} ${style.button_cancel}`}
+      >
+        X
+      </button>
       <h1>Adoption Form</h1>
-      <input
-        type="text"
+      <textarea
         name="text"
+        cols={40}
+        rows={5}
+        placeholder="Write a message to the shelter"
         required
         onChange={(e) =>
           setFormDataAdoptionRequest({
@@ -60,67 +72,88 @@ export default function AdoptionRequestForm({
             text: e.target.value,
           })
         }
+        className={genericStyle.input}
       />
-      <label htmlFor="">{'hasDogs'}</label>
-      <input
-        type="checkbox"
-        name="hasDogs"
-        onChange={(e) => {
-          setFormDataAdoptionRequest({
-            ...formDataAdoptionRequest,
-            hasDogs: e.target.checked,
-          });
-        }}
-      />
-      <label htmlFor="">{'hasCats'}</label>
-      <input
-        type="checkbox"
-        name="hasCats"
-        value="hasCats"
-        onChange={(e) => {
-          setFormDataAdoptionRequest({
-            ...formDataAdoptionRequest,
-            hasCats: e.target.checked,
-          });
-        }}
-      />
-      <label htmlFor="">{'hasGarden'}</label>
-      <input
-        type="checkbox"
-        name="hasGarden"
-        value="hasGarden"
-        onChange={(e) => {
-          setFormDataAdoptionRequest({
-            ...formDataAdoptionRequest,
-            hasGarden: e.target.checked,
-          });
-        }}
-      />
-      <label htmlFor="">{'hasExperience'}</label>
-      <input
-        type="checkbox"
-        name="hasExperience"
-        value="hasExperience"
-        onChange={(e) => {
-          setFormDataAdoptionRequest({
-            ...formDataAdoptionRequest,
-            hasExperience: e.target.checked,
-          });
-        }}
-      />
-      <label htmlFor="">{'hasChildren'}</label>
-      <input
-        type="checkbox"
-        name="hasChildren"
-        value="hasChildren"
-        onChange={(e) => {
-          setFormDataAdoptionRequest({
-            ...formDataAdoptionRequest,
-            hasChildren: e.target.checked,
-          });
-        }}
-      />
-      <button>Send</button>
+      <div className={style.checkbox}>
+        <div>
+          <label htmlFor="">{'Has dogs?'}</label>
+          <input
+            type="checkbox"
+            name="hasDogs"
+            onChange={(e) => {
+              setFormDataAdoptionRequest({
+                ...formDataAdoptionRequest,
+                hasDogs: e.target.checked,
+              });
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="">{'Has cats?'}</label>
+          <input
+            type="checkbox"
+            name="hasCats"
+            value="hasCats"
+            onChange={(e) => {
+              setFormDataAdoptionRequest({
+                ...formDataAdoptionRequest,
+                hasCats: e.target.checked,
+              });
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="">{'Has garden?'}</label>
+          <input
+            type="checkbox"
+            name="hasGarden"
+            value="hasGarden"
+            onChange={(e) => {
+              setFormDataAdoptionRequest({
+                ...formDataAdoptionRequest,
+                hasGarden: e.target.checked,
+              });
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="">{'Has experience?'}</label>
+          <input
+            type="checkbox"
+            name="hasExperience"
+            value="hasExperience"
+            onChange={(e) => {
+              setFormDataAdoptionRequest({
+                ...formDataAdoptionRequest,
+                hasExperience: e.target.checked,
+              });
+            }}
+          />
+        </div>
+        <div>
+          <label htmlFor="">{'Has children?'}</label>
+          <input
+            type="checkbox"
+            name="hasChildren"
+            value="hasChildren"
+            onChange={(e) => {
+              setFormDataAdoptionRequest({
+                ...formDataAdoptionRequest,
+                hasChildren: e.target.checked,
+              });
+            }}
+          />
+        </div>
+      </div>
+      <button
+        className={`${
+          isFormRequestValid(formDataAdoptionRequest)
+            ? genericStyle.button
+            : genericStyle.button_disabled
+        }`}
+      >
+        Send
+      </button>
     </form>
   );
 }

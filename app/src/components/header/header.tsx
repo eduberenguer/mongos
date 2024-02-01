@@ -1,4 +1,4 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AccountsContexts } from '../../context/context';
 import { CiMenuBurger } from 'react-icons/ci';
@@ -11,12 +11,34 @@ export const Header = () => {
   const navigate = useNavigate();
   const { stateAccount, logout } = useContext(AccountsContexts);
   const [dropdown, setDropdown] = useState(false);
+  const dropdownRef = useRef(null);
 
   const handleLogout = () => {
     logout();
     setDropdown(false);
     navigate('/');
   };
+
+  const closeDropdown = () => {
+    setDropdown(false);
+  };
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        dropdownRef.current &&
+        !(dropdownRef.current as HTMLElement).contains(event.target as Node)
+      ) {
+        closeDropdown();
+      }
+    };
+
+    document.addEventListener('click', handleClickOutside);
+
+    return () => {
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, []);
 
   return (
     <header className={style.header}>
@@ -33,7 +55,7 @@ export const Header = () => {
           </Link>
         </div>
       ) : (
-        <div onClick={() => setDropdown(!dropdown)}>
+        <div onClick={() => setDropdown(!dropdown)} ref={dropdownRef}>
           {stateAccount.accountLogged?.token !== undefined && (
             <div className={style.menu}>
               <CiMenuBurger className={style.icon} />

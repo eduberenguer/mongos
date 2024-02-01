@@ -8,6 +8,7 @@ export const Card = ({ dog }: { dog: Partial<Dog> }) => {
     <div className={style.card}>
       <Link to={`/dog/details/${dog.id}`} className={style.link}>
         <img src={dog.image as string} alt={dog.name} />
+        {dog.adoptedBy && <div className={style.adopted}>ADOPTED</div>}
       </Link>
       <div className={style.content}>
         <div className={style.left}>

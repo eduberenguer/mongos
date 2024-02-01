@@ -23,3 +23,21 @@ export const addAdoptionRequest = (
     payload,
   };
 };
+
+export const deleteAdoptionRequest = (
+  payload: Partial<AdoptionRequest>
+): AdoptionRequestActions => {
+  return {
+    type: adoptionRequestActions.deleteAdoptionRequest,
+    payload,
+  };
+};
+
+export const updateAdoptionRequest = (
+  payload: Partial<AdoptionRequest>
+): AdoptionRequestActions => {
+  return {
+    type: adoptionRequestActions.updateAdoptionRequest,
+    payload,
+  };
+};
