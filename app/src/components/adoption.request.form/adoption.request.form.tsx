@@ -5,12 +5,11 @@ import {
   AdoptionRequestsContexts,
 } from '../../context/context';
 import { Dog } from '../../models/dog.type';
+import { isFormRequestValid } from './validate/isFormRequestValid';
 import { toast } from 'sonner';
 
 import style from './adoption.request.form.module.scss';
 import genericStyle from '../../app/app.module.scss';
-import { isFormDogValid } from '../dog.form/validate/isFormDogValid';
-import { isFormRequestValid } from './validate/isFormRequestValid';
 
 export default function AdoptionRequestForm({
   infoDog,
@@ -80,6 +79,7 @@ export default function AdoptionRequestForm({
           <input
             type="checkbox"
             name="hasDogs"
+            id="hasDogs"
             onChange={(e) => {
               setFormDataAdoptionRequest({
                 ...formDataAdoptionRequest,
@@ -94,6 +94,7 @@ export default function AdoptionRequestForm({
             type="checkbox"
             name="hasCats"
             value="hasCats"
+            id="hasCats"
             onChange={(e) => {
               setFormDataAdoptionRequest({
                 ...formDataAdoptionRequest,
@@ -108,6 +109,7 @@ export default function AdoptionRequestForm({
             type="checkbox"
             name="hasGarden"
             value="hasGarden"
+            id="hasGarden"
             onChange={(e) => {
               setFormDataAdoptionRequest({
                 ...formDataAdoptionRequest,
@@ -122,6 +124,7 @@ export default function AdoptionRequestForm({
             type="checkbox"
             name="hasExperience"
             value="hasExperience"
+            id="hasExperience"
             onChange={(e) => {
               setFormDataAdoptionRequest({
                 ...formDataAdoptionRequest,
@@ -136,6 +139,7 @@ export default function AdoptionRequestForm({
             type="checkbox"
             name="hasChildren"
             value="hasChildren"
+            id="hasChildren"
             onChange={(e) => {
               setFormDataAdoptionRequest({
                 ...formDataAdoptionRequest,

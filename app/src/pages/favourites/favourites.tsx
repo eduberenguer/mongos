@@ -28,7 +28,7 @@ export default function Favourites() {
     <div className={style.favourites}>
       <h1 className={style.favourites_title}>My favourites dogs</h1>
       <div className={style.container_cards}>
-        {favouriteDogsInfo.length > 0 ? (
+        {favouriteDogsInfo && favouriteDogsInfo.length > 0 ? (
           favouriteDogsInfo.map((dogInfo) => (
             <Card key={dogInfo.id} dog={dogInfo} />
           ))

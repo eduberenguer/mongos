@@ -73,4 +73,19 @@ export class DogController extends Controller<Dog> {
       next(error);
     }
   }
+
+  async updateDogAdoptedBy(req: Request, res: Response, next: NextFunction) {
+    const { status, userId, dogId } = req.body;
+
+    if (status === 'rejected') {
+      return next();
+    }
+
+    try {
+      const updatedDog = await this.repo.update(dogId, { adoptedBy: userId });
+      res.status(202).send(updatedDog);
+    } catch (error) {
+      next(error);
+    }
+  }
 }

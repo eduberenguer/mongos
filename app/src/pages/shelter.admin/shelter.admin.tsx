@@ -144,8 +144,8 @@ export default function Admin() {
                     <td>{dog.years}</td>
                     <td>{dog.months}</td>
                     <td>{dog.chipNumber}</td>
-                    <td>{`${dog.breed ? 'yes' : 'no'}`}</td>
-                    <td>{`${dog.adoptedBy ? 'yes' : 'no'}`}</td>
+                    <td>{`${dog.breed ? '✅' : '❌'}`}</td>
+                    <td>{`${dog.adoptedBy ? '✅' : '❌'}`}</td>
                     <td>{transformDate(dog.registerDate)}</td>
                     <td>{dog.views}</td>
                     <td>{dog.requests}</td>
@@ -160,9 +160,11 @@ export default function Admin() {
                           <IoIosCheckboxOutline />
                         )}
                       </span>
-                      <span onClick={() => handleDelete(dog.id)}>
-                        <MdDeleteForever />
-                      </span>
+                      {!dog.adoptedBy && (
+                        <span onClick={() => handleDelete(dog.id)}>
+                          <MdDeleteForever />
+                        </span>
+                      )}
                     </td>
                   </tr>
                 );

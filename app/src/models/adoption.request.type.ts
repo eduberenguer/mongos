@@ -59,6 +59,7 @@ export type AdoptionRequestInput = {
   userId: string;
   shelterId: string;
   text: string;
+  status: Status;
   hasDogs: boolean;
   hasCats: boolean;
   hasGarden: boolean;

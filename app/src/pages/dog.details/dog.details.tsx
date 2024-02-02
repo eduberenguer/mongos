@@ -46,7 +46,10 @@ export default function Details() {
       );
 
       result && setIsAdoptionRequest(true);
+      return true;
     }
+
+    return false;
   };
 
   const handleFavourite = async () => {

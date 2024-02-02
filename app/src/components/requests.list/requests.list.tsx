@@ -1,7 +1,7 @@
 import { useContext, useState } from 'react';
 import { AccountsContexts } from '../../context/context';
 import { transformDate } from '../../utils/transformDate';
-import { AdoptionRequest, Status } from '../../models/adoption.request.type';
+import { AdoptionRequest } from '../../models/adoption.request.type';
 
 import style from './requests.list.module.scss';
 import genericStyle from '../../app/app.module.scss';
@@ -16,7 +16,9 @@ export const RequestList = ({
   deleteAdoptionRequest: (adoptionRequestId: string, token: string) => void;
   updateAdoptionRequest: (
     adoptionRequestId: string,
-    status: Partial<AdoptionRequest>,
+    status: string,
+    userId: string,
+    dogId: string,
     token: string
   ) => void;
 }) => {
@@ -34,11 +36,13 @@ export const RequestList = ({
 
   const handleChangeStatusdoptionRequest = (
     adoptionRequestId: string,
-    status: Status
+    status: string
   ) => {
     updateAdoptionRequest(
       adoptionRequestId,
-      { status: status },
+      status,
+      adoptionRequest.user.id,
+      adoptionRequest.dog.id,
       stateAccount.accountLogged?.token as string
     );
   };

@@ -83,7 +83,7 @@ export class AdoptionRequestRepo implements Repository<AdoptionRequest> {
     const result = await AdoptionRequestModel.findOneAndUpdate({ _id: id }, data, { new: true })
       .populate({
         path: 'shelterId',
-        select: 'shelterName email',
+        select: 'shelterName email province',
       })
       .populate({
         path: 'dogId',
@@ -91,7 +91,7 @@ export class AdoptionRequestRepo implements Repository<AdoptionRequest> {
       })
       .populate({
         path: 'userId',
-        select: 'userName email',
+        select: 'userName email province',
       })
       .exec();
     if (result === null) throw new Error('Not found');

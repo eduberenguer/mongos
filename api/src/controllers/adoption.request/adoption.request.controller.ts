@@ -61,6 +61,7 @@ export class AdoptionRequestController extends Controller<AdoptionRequest> {
       }
       const updatedRequest = await this.repo.update(req.params.id, req.body);
       res.status(200).send(updatedRequest);
+      next();
     } catch (error) {
       next(error);
     }

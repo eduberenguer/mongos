@@ -6,9 +6,9 @@ export class DogRepo implements Repository<Dog> {
   constructor() {}
 
   async create(data: Omit<Dog, 'id'>): Promise<Dog> {
-    const newUser = await DogModel.create(data);
+    const newDog = await DogModel.create(data);
 
-    return newUser;
+    return newDog;
   }
 
   async search({ key, value }: { key: string; value: unknown }): Promise<Dog> {
@@ -28,7 +28,7 @@ export class DogRepo implements Repository<Dog> {
   }
 
   async queryAll(): Promise<Dog[]> {
-    const allData = await DogModel.find({ archived: false }).populate('shelter', 'shelterName').exec();
+    const allData = await DogModel.find().populate('shelter', 'shelterName').exec();
 
     return allData;
   }

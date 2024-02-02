@@ -1,5 +1,5 @@
 import { useReducer } from 'react';
-import { AdoptionRequestInput } from '../models/adoption.request.type';
+import { AdoptionRequestInput, Status } from '../models/adoption.request.type';
 import { AdoptionRequestRepository } from '../services/adoption.request/adoption.request.repository';
 import { adoptionRequestReducer } from '../store/reducers/adoption.request.reducer';
 import { initialStateAdoptionRequest } from '../mocks/initial.state.reducer';
@@ -57,15 +57,24 @@ export function useAdoptionRequests() {
 
   const updateAdoptionRequest = async (
     adoptionRequestId: string,
-    status: Partial<AdoptionRequestInput>,
+    status: string,
+    userId: string,
+    dogId: string,
     token: string
   ) => {
+    const body: Partial<AdoptionRequestInput> = {
+      status: status as Status,
+      dogId,
+      userId,
+    };
+
     const response = await repo.updateAdoptionRequest(
       adoptionRequestId,
-      status,
+      body,
       token
     );
     dispatch(ac.updateAdoptionRequest(response));
+
     return response;
   };
 

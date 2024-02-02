@@ -111,8 +111,29 @@ export class AccountsController<T extends User | Shelter> extends Controller<T> 
         (user as User).favourites.push(dogId);
         this.repo.update(userId, { favourites: [...(user as User).favourites] });
       }
+
       res.send(user);
     } catch (error) {
+      next(error);
+    }
+  }
+
+  async checkDogDeletedandUpdateFavorites(req: Request, res: Response, next: NextFunction) {
+    try {
+      const users = await this.repo.queryAll();
+
+      const updatePromises = users.map(async (user) => {
+        if ((user as User).favourites.includes(req.params.id)) {
+          (user as User).favourites = (user as User).favourites.filter((dog) => dog !== req.params.id);
+          await this.repo.update(user.id, { favourites: (user as User).favourites });
+        }
+      });
+
+      await Promise.all(updatePromises);
+
+      res.send('Favorites updated successfully.');
+    } catch (error) {
+      console.error('Error updating favorites:', error);
       next(error);
     }
   }

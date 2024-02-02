@@ -94,13 +94,13 @@ export class AdoptionRequestRepository {
 
   async updateAdoptionRequest(
     adoptionRequestId: string,
-    status: Partial<AdoptionRequestInput>,
+    body: Partial<AdoptionRequestInput>,
     token: string
   ) {
     const urlFinal = `${this.getApiUrl()}adoptionRequest/${adoptionRequestId}`;
     const data = await fetch(urlFinal, {
       method: 'PATCH',
-      body: JSON.stringify(status),
+      body: JSON.stringify(body),
       headers: {
         'Content-Type': 'application/json',
         Authorization: 'Bearer ' + token,
