@@ -48,6 +48,7 @@
       padding: 10px;
       display: flex;
       flex-direction: column;
+      background-color: #f7f4f4;
 
       p {
         margin-bottom: 8px;
@@ -59,7 +60,6 @@
         justify-content: center;
 
         .button_accepted {
-          background-color: #e0e0e0;
           border: none;
           padding: 10px;
           border-radius: 5px;
@@ -72,7 +72,6 @@
         }
 
         .button_rejected {
-          background-color: #e0e0e0;
           border: none;
           padding: 10px;
           border-radius: 5px;

@@ -47,12 +47,14 @@ export const RequestList = ({
     );
   };
 
+  console.log(adoptionRequest);
+
   return (
     <div className={style.adoption_request_card}>
       <div className={style.container}>
         <p
           className={style.icon}
-          onClick={goToDetaildog(adoptionRequest.dog.id)}
+          onClick={goToDetaildog(adoptionRequest.dog?.id)}
         >
           🔍
         </p>

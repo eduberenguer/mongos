@@ -5,7 +5,6 @@ import {
   DogsContexts,
 } from '../../context/context';
 import { Link, useParams } from 'react-router-dom';
-import { SlMagnifierAdd } from 'react-icons/sl';
 import { VscHeart } from 'react-icons/vsc';
 import { ImHeart } from 'react-icons/im';
 import {
@@ -152,9 +151,7 @@ export default function Details() {
               to={`/shelter/details/${dog.shelter.id}`}
               className={style.link}
             >
-              <p>
-                {dog.shelter.shelterName} <SlMagnifierAdd />
-              </p>
+              <p>{dog.shelter.shelterName} 🔍</p>
             </Link>
           </div>
         </>

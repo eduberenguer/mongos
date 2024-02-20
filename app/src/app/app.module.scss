@@ -51,21 +51,18 @@ ul {
   list-style: none;
 }
 
-$color-primary-light: #fff;
-$color-primary-dark: #35363A;
-$color-tertiary: #000000;
-$color-secondary: #f0eeee;
+$color-primary: #8B9AB4;
+$color-secondary: #A6ACBD;
 
-$color-button-primary: #7f7d7d;
-$color-button-disabled: #86857f;
+$color-tertiary: #97B1AB;
+$color-quaternary: #7AA199;
 
-$color-text-primary: #222222;
-$color-text-secondary: #717171;
-
+$color-white: #FFFFFF;
+$color-black: #000000;
 
 .button {
-  background-color: $color-primary-light;
-  color: $color-text-primary;
+  background-color: $color-primary;
+  color: $color-white;
   border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
@@ -77,17 +74,19 @@ $color-text-secondary: #717171;
   text-decoration: none;
   transition: color 100ms;
   user-select: none;
-  border: 1px solid #DDDDDD;
+  border: 1px solid $color-secondary;
   cursor: pointer;
 
   &:hover {
-    background-color: $color-text-primary;
-    color: $color-primary-light;
+    background-color: #f0eeee;
+    color: $color-black;
+    border: $color-secondary 1px solid;
+    transform: scale(1.05);
   }
 }
 
 .button_disabled {
-  background-color: $color-button-disabled;
+  background-color: $color-secondary;
   border-radius: 8px;
   border-style: none;
   box-sizing: border-box;
@@ -101,7 +100,7 @@ $color-text-secondary: #717171;
   user-select: none;
   cursor: not-allowed;
   pointer-events: none;
-  color: $color-primary-light;
+  color: $color-white;
 
   &:disabled {
     cursor: not-allowed;
@@ -111,5 +110,5 @@ $color-text-secondary: #717171;
 .input {
   padding: 10px;
   border-radius: 10px;
-  border: 1px solid #DDDDDD;
+  border: 1px solid $color-secondary;
 }

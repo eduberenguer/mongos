@@ -117,8 +117,8 @@ export default function Admin() {
         <h2>
           {' '}
           {showArchivedDogs
-            ? `Archived dogs ${stateDogs.shelterDogs.length}`
-            : `Active dogs ${stateDogs.shelterDogs.length}`}
+            ? `Archived dogs: ${stateDogs.shelterDogs.length}`
+            : `Active dogs:  ${stateDogs.shelterDogs.length}`}
         </h2>
         <table>
           <thead>
@@ -150,10 +150,13 @@ export default function Admin() {
                     <td>{dog.views}</td>
                     <td>{dog.requests}</td>
                     <td>
-                      <span>
+                      <span className={style.icon}>
                         <MdEdit />
                       </span>
-                      <span onClick={() => handleUpdateDog(dog.id)}>
+                      <span
+                        className={style.icon}
+                        onClick={() => handleUpdateDog(dog.id)}
+                      >
                         {!showArchivedDogs ? (
                           <IoIosArchive />
                         ) : (
@@ -161,7 +164,10 @@ export default function Admin() {
                         )}
                       </span>
                       {!dog.adoptedBy && (
-                        <span onClick={() => handleDelete(dog.id)}>
+                        <span
+                          className={style.icon}
+                          onClick={() => handleDelete(dog.id)}
+                        >
                           <MdDeleteForever />
                         </span>
                       )}
@@ -173,7 +179,9 @@ export default function Admin() {
           </tbody>
         </table>
         {stateDogs.dogs.length === 0 && (
-          <h2 className={genericStyles.title}>No dogs registered</h2>
+          <h2 className={`${genericStyles.title} ${style.no_registered}`}>
+            No dogs registered
+          </h2>
         )}
       </div>
     </div>

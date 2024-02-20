@@ -9,7 +9,7 @@
   width: 350px;
   box-sizing: border-box;
   margin: 0 auto;
-  border: 1px solid #DDDDDD;
+  border: 1px solid $color-secondary;
   border-radius: 10px;
   padding: 20px;
   margin-top: 50px;
@@ -18,7 +18,7 @@
   .title {
     font-size: 20px;
     font-weight: 500;
-    color: $color-text-primary;
+    color: $color-primary;
     margin-bottom: 10px;
   }
 

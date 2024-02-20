@@ -13,12 +13,12 @@
   border-radius: 10px;
   padding: 20px;
   margin-top: 50px;
-  box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, 0.2);
+  box-shadow: 0px 0px 10px 0px #8B9AB4;
 
   .title {
     font-size: 20px;
     font-weight: 500;
-    color: $color-text-primary;
+    color: #8B9AB4;
     margin-bottom: 10px;
   }
 
@@ -36,6 +36,7 @@
     gap: 10px;
     text-align: right;
     padding: 10px;
+    color: #8B9AB4;
 
     button {
       margin: 0 auto;

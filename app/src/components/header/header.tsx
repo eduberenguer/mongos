@@ -48,10 +48,10 @@ export const Header = () => {
       {stateAccount.accountLogged?.token === undefined ? (
         <div className={style.container_options}>
           <Link to={'/login'} className={style.link}>
-            <button className={genericStyle.button}>Login</button>
+            <button className={genericStyle.button}>Log in</button>
           </Link>
           <Link to={'/register'} className={style.link}>
-            <button className={genericStyle.button}>Register</button>
+            <button className={genericStyle.button}>Sign up</button>
           </Link>
         </div>
       ) : (

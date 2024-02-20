@@ -85,7 +85,7 @@ export default function DogForm({
         >
           x
         </button>
-        <h2>New dog</h2>
+        <h2>Add new dog</h2>
         <input
           className={genericStyle.input}
           type="text"

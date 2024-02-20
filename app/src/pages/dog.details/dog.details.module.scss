@@ -61,10 +61,11 @@
         right: 20px;
         font-size: 2em;
         cursor: pointer;
-        color: rgb(186, 122, 122);
+        color: rgb(222, 83, 83);
 
         &:hover {
-          color: rgb(224, 152, 152);
+          color: rgb(222, 83, 83);
+          transform: scale(1.1);
         }
       }
 
@@ -74,10 +75,11 @@
         right: 20px;
         font-size: 2em;
         cursor: pointer;
-        color: rgb(70, 72, 70);
+        color: rgb(157, 161, 157);
 
         &:hover {
-          color: rgb(157, 161, 157);
+          color: rgb(89, 91, 89);
+          transform: scale(1.1);
         }
       }
     }

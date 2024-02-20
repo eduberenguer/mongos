@@ -15,20 +15,23 @@
     border-radius: 10px;
     overflow: hidden;
     text-align: center;
-    background-color: $color-primary-light;
+    background-color: $color-primary;
+
 
     .link {
       text-decoration: none;
-      color: $color-primary-dark;
+      color: $color-secondary;
     }
 
     li {
       padding: 10px;
       font-size: 0.9em;
       text-decoration: none;
+      color: #FFFFFF;
 
       &:hover {
-        background-color: $color-secondary;
+        background-color: #f0eeee;
+        color: $color-black;
       }
     }
   }

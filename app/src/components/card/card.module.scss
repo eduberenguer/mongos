@@ -49,11 +49,12 @@
 
   .name {
     margin-top: 15px;
-    color: $color-text-primary;
+    color: $color-black;
+    text-align: left;
   }
 
   .text {
-    color: $color-text-secondary;
+    color: $color-secondary;
     font-size: small;
   }
 

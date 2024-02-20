@@ -50,7 +50,7 @@ export default function Login() {
 
   return (
     <form onSubmit={handleSubmit} className={style.form}>
-      <p className={style.title}>Login</p>
+      <p className={style.title}>Log in</p>
       <div className={style.user_type_container}>
         <label>
           {loginFields.role !== 'user' && loginFields.role !== 'shelter' && (
@@ -95,7 +95,7 @@ export default function Login() {
             placeholder="Password"
           />
           <button className={genericStyles.button} type="submit">
-            Login
+            Log in
           </button>
         </div>
       )}
