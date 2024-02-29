@@ -28,7 +28,7 @@ export class DogRepo implements Repository<Dog> {
   }
 
   async queryAll(): Promise<Dog[]> {
-    const allData = await DogModel.find().populate('shelter', 'shelterName').exec();
+    const allData = await DogModel.find({ archived: false }).populate('shelter', 'shelterName').exec();
 
     return allData;
   }
