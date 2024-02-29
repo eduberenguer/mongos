@@ -3,6 +3,7 @@ import { AdoptionRequestInput } from '../../models/adoption.request.type';
 import {
   AccountsContexts,
   AdoptionRequestsContexts,
+  DogsContexts,
 } from '../../context/context';
 import { Dog } from '../../models/dog.type';
 import { isFormRequestValid } from './validate/isFormRequestValid';
@@ -22,6 +23,7 @@ export default function AdoptionRequestForm({
 }) {
   const { addAdoptionRequest } = useContext(AdoptionRequestsContexts);
   const { stateAccount } = useContext(AccountsContexts);
+  const { addNewRequestDog } = useContext(DogsContexts);
   const [formDataAdoptionRequest, setFormDataAdoptionRequest] = useState<
     Partial<AdoptionRequestInput>
   >({
@@ -46,6 +48,7 @@ export default function AdoptionRequestForm({
     if (result) {
       setShowAdoptionRequestForm(false);
       checkDogIsAdoptionRequestByUser();
+      addNewRequestDog(infoDog.id as string);
       toast.success('Adoption request sent');
     }
   };

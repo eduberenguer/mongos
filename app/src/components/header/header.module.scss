@@ -7,6 +7,14 @@
   justify-content: space-around;
   height: 80px;
   border-bottom: 1px solid #97B1AB;
+  position: sticky;
+  top: 0;
+  left: 0;
+  z-index: 1;
+
+  animation: header-enhance linear both;
+  animation-timeline: scroll();
+  animation-range: 0px 100px;
 
   .link {
     text-decoration: none;
@@ -47,5 +55,12 @@
     }
   }
 
-
+  @keyframes header-enhance {
+    100% {
+      background-color: $color-white;
+      border-bottom-left-radius: 10px;
+      border-bottom-right-radius: 10px;
+      box-shadow: 0px 0px 10px 0px rgba(0, 0, 0, .5);
+    }
+  }
 }

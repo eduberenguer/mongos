@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { cloudinaryUrl, cloudinaryPreset } from '../../config';
 
 export const handleImageUpload = async (
   // e: React.ChangeEvent<HTMLInputElement>
@@ -9,13 +10,10 @@ export const handleImageUpload = async (
     if (file) {
       const formData = new FormData();
       formData.append('file', file);
-      formData.append('upload_preset', 'txedrnrp');
+      formData.append('upload_preset', cloudinaryPreset as string);
 
       axios
-        .post(
-          'https://api.cloudinary.com/v1_1/eduBerenguer/image/upload',
-          formData
-        )
+        .post(cloudinaryUrl as string, formData)
         .then((response) => {
           resolve(response.data.secure_url);
         })

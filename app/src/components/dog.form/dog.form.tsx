@@ -10,26 +10,33 @@ import { isFormDogValid } from './validate/isFormDogValid';
 export default function DogForm({
   handlerFormDog,
   handleAddDog,
+  handleUpdateDog,
+  dataUpdateDog,
 }: {
   handlerFormDog: () => void;
   handleAddDog: (
     e: React.FormEvent<HTMLFormElement>,
     formDataDog: Partial<Dog>
   ) => void;
+  handleUpdateDog: (
+    e: React.FormEvent<HTMLFormElement>,
+    formDataDog: Partial<Dog>
+  ) => void;
+  dataUpdateDog: Partial<Dog>;
 }) {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [formDataDog, setModalFormDataDog] = useState<Partial<Dog>>({
-    name: undefined,
-    gender: undefined,
-    years: undefined,
-    months: undefined,
-    size: undefined,
-    chipNumber: undefined,
-    hasBreed: false,
-    breed: undefined,
-    description: undefined,
-    image: null,
-    personality: [],
+    name: dataUpdateDog.name || undefined,
+    gender: dataUpdateDog.gender || undefined,
+    years: dataUpdateDog.years || undefined,
+    months: dataUpdateDog.months || undefined,
+    size: dataUpdateDog.size || undefined,
+    chipNumber: dataUpdateDog.chipNumber || undefined,
+    hasBreed: dataUpdateDog.hasBreed || false,
+    breed: dataUpdateDog.breed || undefined,
+    description: dataUpdateDog.description || undefined,
+    image: dataUpdateDog.image || null,
+    personality: dataUpdateDog.personality || [],
   });
 
   const handleHasBreedChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -73,19 +80,25 @@ export default function DogForm({
     }
   };
 
+  const handleDogSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    if (dataUpdateDog.id) {
+      handleUpdateDog(e, formDataDog);
+    } else {
+      handleAddDog(e, formDataDog);
+    }
+  };
+
   return (
     <div className={style.container_dog_form}>
-      <form
-        className={style.dog_form}
-        onSubmit={(e) => handleAddDog(e, formDataDog)}
-      >
+      <form className={style.dog_form} onSubmit={handleDogSubmit}>
         <button
           className={`${genericStyle.button} ${style.cancel_button}`}
           onClick={handlerFormDog}
         >
           x
         </button>
-        <h2>Add new dog</h2>
+        <h2>{dataUpdateDog.id ? 'Update dog' : 'Add new dog'}</h2>
         <input
           className={genericStyle.input}
           type="text"
@@ -104,6 +117,7 @@ export default function DogForm({
               type="radio"
               name="gender"
               value="male"
+              defaultChecked={formDataDog.gender === 'male' ? true : false}
               onChange={(e) =>
                 setModalFormDataDog({ ...formDataDog, gender: e.target.value })
               }
@@ -254,6 +268,9 @@ export default function DogForm({
                   name="personality"
                   value={personality}
                   onChange={handlePersonalityChange}
+                  defaultChecked={formDataDog.personality?.includes(
+                    personality
+                  )}
                   required
                   disabled={
                     formDataDog.personality?.length === 3 &&
@@ -284,7 +301,7 @@ export default function DogForm({
               : genericStyle.button_disabled
           }`}
         >
-          Add dog
+          {dataUpdateDog.id ? 'Update dog' : 'Add dog'}
         </button>
       </form>
     </div>

@@ -9,6 +9,10 @@
   height: 300px;
   text-decoration: none;
 
+  animation: reveal linear both;
+  animation-timeline: view();
+  animation-range: entry 20% cover 30%;
+
   .link {
     position: relative;
     text-decoration: none;
@@ -44,6 +48,20 @@
         transform: scale(1.05);
         opacity: 1;
       }
+    }
+  }
+
+  @keyframes reveal {
+    0% {
+      opacity: 0;
+      translate: 0 100px;
+      scale: 0.5;
+    }
+
+    100% {
+      opacity: 1;
+      translate: 0 0;
+      scale: 1;
     }
   }
 

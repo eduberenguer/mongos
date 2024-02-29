@@ -9,6 +9,7 @@ import { toast } from 'sonner';
 
 import style from './shelter.admin.module.scss';
 import genericStyles from '../../app/app.module.scss';
+import { Link } from 'react-router-dom';
 
 export default function Admin() {
   const {
@@ -23,6 +24,7 @@ export default function Admin() {
   const { stateAccount } = useContext(AccountsContexts);
   const [showFormNewDog, setShowFormNewDog] = useState(false);
   const [showArchivedDogs, setshowArchivedDogs] = useState<boolean>(false);
+  const [dataUpdateDog, setDataUpdateDog] = useState({} as Partial<Dog>);
 
   const thTable = [
     'Image',
@@ -39,7 +41,19 @@ export default function Admin() {
     'Requests',
     'Actions',
   ];
-  const handleUpdateDog = async (dogId: string) => {
+
+  const handleGetDogsByShelter = async () => {
+    getDogsByShelter(
+      stateAccount.accountLogged.user?.id as string,
+      showArchivedDogs
+    );
+  };
+
+  useEffect(() => {
+    handleGetDogsByShelter();
+  }, [showArchivedDogs]);
+
+  const handleUpdateRegisteredDog = async (dogId: string) => {
     await updateDog(
       dogId,
       {
@@ -48,45 +62,55 @@ export default function Admin() {
       },
       stateAccount.accountLogged.token as string
     );
-    getDogsByShelter(
-      stateAccount.accountLogged.user?.id as string,
-      showArchivedDogs
-    );
-  };
-  useEffect(() => {
-    getDogsByShelter(
-      stateAccount.accountLogged.user?.id as string,
-      showArchivedDogs
-    );
-  }, [showArchivedDogs]);
-
-  const handlerFormDog = () => {
-    setShowFormNewDog(!showFormNewDog);
-  };
-
-  const handleAddDog = (
-    e: React.FormEvent<HTMLFormElement>,
-    dog: Partial<Dog>
-  ) => {
-    e.preventDefault();
-    addDog(dog, stateAccount.accountLogged.token as string);
-    handlerFormDog();
-    setshowArchivedDogs(true);
-    getDogsByShelter(
-      stateAccount.accountLogged.user?.id as string,
-      showArchivedDogs
-    );
-    toast.success('Dog added');
-    getDogs();
-  };
-
-  const handleDelete = async (dogId: string) => {
-    await deleteDog(dogId, stateAccount.accountLogged.token as string);
     await getDogsByShelter(
       stateAccount.accountLogged.user?.id as string,
       showArchivedDogs
     );
   };
+
+  const handlerFormDog = () => {
+    setShowFormNewDog(!showFormNewDog);
+    setDataUpdateDog({});
+  };
+
+  const handleAddDog = async (
+    e: React.FormEvent<HTMLFormElement>,
+    dog: Partial<Dog>
+  ) => {
+    e.preventDefault();
+    await addDog(dog, stateAccount.accountLogged.token as string);
+    handlerFormDog();
+    setshowArchivedDogs(true);
+    await handleGetDogsByShelter();
+    toast.success('Dog added');
+    getDogs();
+  };
+
+  const handleRetrieveDataDog = async (dog: Partial<Dog>) => {
+    setShowFormNewDog(true);
+    setDataUpdateDog(dog);
+  };
+
+  const handleUpdateDog = async (
+    e: React.FormEvent<HTMLFormElement>,
+    dog: Partial<Dog>
+  ) => {
+    e.preventDefault();
+    await updateDog(
+      dataUpdateDog.id as string,
+      dog,
+      stateAccount.accountLogged.token as string
+    );
+    handlerFormDog();
+    await handleGetDogsByShelter();
+    toast.success('Dog updated');
+  };
+
+  const handleDelete = async (dogId: string) => {
+    await deleteDog(dogId, stateAccount.accountLogged.token as string);
+    await handleGetDogsByShelter();
+  };
+
   return (
     <div className={style.admin}>
       <div className={style.container_buttons}>
@@ -95,6 +119,8 @@ export default function Admin() {
             <DogForm
               handlerFormDog={handlerFormDog}
               handleAddDog={handleAddDog}
+              handleUpdateDog={handleUpdateDog}
+              dataUpdateDog={dataUpdateDog}
             />
           </>
         ) : (
@@ -136,7 +162,12 @@ export default function Admin() {
                 return (
                   <tr key={dog.id}>
                     <td>
-                      <img src={dog.image as string} alt={dog.name} />
+                      <Link
+                        to={`/dog/details/${dog.id}`}
+                        className={style.link}
+                      >
+                        <img src={dog.image as string} alt={dog.name} />
+                      </Link>
                     </td>
                     <td>{dog.name}</td>
                     <td>{dog.gender}</td>
@@ -150,12 +181,17 @@ export default function Admin() {
                     <td>{dog.views}</td>
                     <td>{dog.requests}</td>
                     <td>
-                      <span className={style.icon}>
+                      <span
+                        className={style.icon}
+                        onClick={() => {
+                          handleRetrieveDataDog(dog);
+                        }}
+                      >
                         <MdEdit />
                       </span>
                       <span
                         className={style.icon}
-                        onClick={() => handleUpdateDog(dog.id)}
+                        onClick={() => handleUpdateRegisteredDog(dog.id)}
                       >
                         {!showArchivedDogs ? (
                           <IoIosArchive />
