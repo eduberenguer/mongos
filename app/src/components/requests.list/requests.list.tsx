@@ -2,10 +2,15 @@ import { useContext, useState } from 'react';
 import { AccountsContexts } from '../../context/context';
 import { transformDate } from '../../utils/transformDate';
 import { AdoptionRequest } from '../../models/adoption.request.type';
+import { useNavigate } from 'react-router-dom';
 
 import style from './requests.list.module.scss';
 import genericStyle from '../../app/app.module.scss';
-import { useNavigate } from 'react-router-dom';
+import {
+  TrashIcon,
+  MagnifyingGlassIcon,
+  ChevronDownIcon,
+} from '@heroicons/react/24/outline';
 
 export const RequestList = ({
   adoptionRequest,
@@ -52,17 +57,16 @@ export const RequestList = ({
   return (
     <div className={style.adoption_request_card}>
       <div className={style.container}>
-        <p
+        <MagnifyingGlassIcon
           className={style.icon}
           onClick={goToDetaildog(adoptionRequest.dog?.id)}
-        >
-          🔍
-        </p>
-        <p className={style.icon} onClick={handleExpand}>
-          🔽
-        </p>
+        />
+        <ChevronDownIcon className={style.icon} onClick={handleExpand} />
         <p>{transformDate(adoptionRequest.createdAt)}</p>
-        <p onClick={goToDetaildog(adoptionRequest.dog.id)}>
+        <p
+          onClick={goToDetaildog(adoptionRequest.dog.id)}
+          style={{ width: '150px' }}
+        >
           {adoptionRequest.dog.name}
         </p>
         <img
@@ -99,17 +103,15 @@ export const RequestList = ({
         </p>
         {stateAccount.accountLogged.user?.role === 'user' &&
           adoptionRequest.status === 'pending' && (
-            <p
-              className={style.icon}
+            <TrashIcon
+              className={style.trash}
               onClick={() =>
                 deleteAdoptionRequest(
                   adoptionRequest.id,
                   stateAccount.accountLogged?.token as string
                 )
               }
-            >
-              🗑️
-            </p>
+            />
           )}
       </div>
 

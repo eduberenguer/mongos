@@ -10,11 +10,12 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
+
   }
 
   .icon {
+    width: 20px;
     margin-top: 10px;
-    font-size: 30px;
     color: $color-secondary;
     cursor: pointer;
     transition: color 0.3s ease;

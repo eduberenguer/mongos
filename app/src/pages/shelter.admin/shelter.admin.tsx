@@ -2,13 +2,18 @@ import { useContext, useEffect, useState } from 'react';
 import { AccountsContexts, DogsContexts } from '../../context/context';
 import DogForm from '../../components/dog.form/dog.form';
 import { Dog } from '../../models/dog.type';
-import { IoIosArchive, IoIosCheckboxOutline } from 'react-icons/io';
-import { MdDeleteForever, MdEdit } from 'react-icons/md';
 import { transformDate } from '../../utils/transformDate';
 import { toast } from 'sonner';
 
 import style from './shelter.admin.module.scss';
 import genericStyles from '../../app/app.module.scss';
+import {
+  PencilSquareIcon,
+  ArchiveBoxArrowDownIcon,
+  TrashIcon,
+  ArchiveBoxXMarkIcon,
+} from '@heroicons/react/24/outline';
+import { ArchiveBoxIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
 import { Link } from 'react-router-dom';
 
 export default function Admin() {
@@ -129,11 +134,12 @@ export default function Admin() {
           </button>
         )}
         {!showFormNewDog && (
-          <span
-            className={style.icon}
-            onClick={() => setshowArchivedDogs(!showArchivedDogs)}
-          >
-            {!showArchivedDogs ? <IoIosArchive /> : <IoIosCheckboxOutline />}
+          <span onClick={() => setshowArchivedDogs(!showArchivedDogs)}>
+            {!showArchivedDogs ? (
+              <ArchiveBoxIcon className={style.icon} />
+            ) : (
+              <ArrowLeftIcon className={style.icon} />
+            )}
           </span>
         )}
       </div>
@@ -182,29 +188,22 @@ export default function Admin() {
                     <td>{dog.requests}</td>
                     <td>
                       <span
-                        className={style.icon}
                         onClick={() => {
                           handleRetrieveDataDog(dog);
                         }}
                       >
-                        <MdEdit />
+                        <PencilSquareIcon className={style.icon} />
                       </span>
-                      <span
-                        className={style.icon}
-                        onClick={() => handleUpdateRegisteredDog(dog.id)}
-                      >
+                      <span onClick={() => handleUpdateRegisteredDog(dog.id)}>
                         {!showArchivedDogs ? (
-                          <IoIosArchive />
+                          <ArchiveBoxIcon className={style.icon} />
                         ) : (
-                          <IoIosCheckboxOutline />
+                          <ArchiveBoxXMarkIcon className={style.icon} />
                         )}
                       </span>
                       {!dog.adoptedBy && (
-                        <span
-                          className={style.icon}
-                          onClick={() => handleDelete(dog.id)}
-                        >
-                          <MdDeleteForever />
+                        <span onClick={() => handleDelete(dog.id)}>
+                          <TrashIcon className={style.icon} />
                         </span>
                       )}
                     </td>

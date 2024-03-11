@@ -56,6 +56,7 @@
       }
 
       .icon_favourite {
+        width: 40px;
         position: absolute;
         top: 20px;
         right: 20px;
@@ -64,21 +65,20 @@
         color: rgb(222, 83, 83);
 
         &:hover {
-          color: rgb(222, 83, 83);
           transform: scale(1.1);
         }
       }
 
       .icon_request {
+        width: 40px;
         position: absolute;
         bottom: 20px;
         right: 20px;
         font-size: 2em;
         cursor: pointer;
-        color: rgb(157, 161, 157);
+        color: rgb(228, 231, 228);
 
         &:hover {
-          color: rgb(89, 91, 89);
           transform: scale(1.1);
         }
       }
@@ -99,6 +99,14 @@
     .link {
       text-decoration: none;
       color: black;
+    }
+
+    .icon {
+      width: 20px;
+
+      &:hover {
+        transform: scale(1.1);
+      }
     }
   }
 

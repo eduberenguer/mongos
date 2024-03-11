@@ -4,16 +4,21 @@ import {
   AdoptionRequestsContexts,
   DogsContexts,
 } from '../../context/context';
+import { User } from '../../models/user.type';
 import { Link, useParams } from 'react-router-dom';
-import { VscHeart } from 'react-icons/vsc';
-import { ImHeart } from 'react-icons/im';
-import {
-  IoIosInformationCircle,
-  IoIosInformationCircleOutline,
-} from 'react-icons/io';
 
 import style from './dog.details.module.scss';
-import { User } from '../../models/user.type';
+import {
+  HeartIcon,
+  InformationCircleIcon,
+  MagnifyingGlassIcon,
+} from '@heroicons/react/24/outline';
+
+import {
+  HeartIcon as HeartIconSolid,
+  InformationCircleIcon as InformationCircleIconSolid,
+} from '@heroicons/react/24/solid';
+
 import { toast } from 'sonner';
 import AdoptionRequestForm from '../../components/adoption.request.form/adoption.request.form';
 
@@ -99,19 +104,22 @@ export default function Details() {
                     onClick={handleFavourite}
                     className={style.icon_favourite}
                   >
-                    {isFavourite ? <ImHeart /> : <VscHeart />}
+                    {isFavourite ? <HeartIconSolid /> : <HeartIcon />}
                   </span>
                 )}
               {stateAccount.accountLogged.user?.role === 'user' &&
                 !dog.adoptedBy && (
-                  <span
-                    onClick={handleAdoptionRequest}
-                    className={style.icon_request}
-                  >
+                  <span>
                     {isAdoptionRequest ? (
-                      <IoIosInformationCircle />
+                      <InformationCircleIconSolid
+                        className={style.icon_request}
+                        onClick={handleAdoptionRequest}
+                      />
                     ) : (
-                      <IoIosInformationCircleOutline />
+                      <InformationCircleIcon
+                        className={style.icon_request}
+                        onClick={handleAdoptionRequest}
+                      />
                     )}
                   </span>
                 )}
@@ -151,7 +159,10 @@ export default function Details() {
               to={`/shelter/details/${dog.shelter.id}`}
               className={style.link}
             >
-              <p>{dog.shelter.shelterName} 🔍</p>
+              <p>
+                {dog.shelter.shelterName}{' '}
+                <MagnifyingGlassIcon className={style.icon} />
+              </p>
             </Link>
           </div>
         </>

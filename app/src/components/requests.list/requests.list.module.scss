@@ -9,8 +9,21 @@
       padding: 10px;
       border-radius: 20px;
       transition: all 0.3s ease;
+      position: relative;
 
       .icon {
+        width: 20px;
+        cursor: pointer;
+
+        &:hover {
+          transform: scale(1.1);
+        }
+      }
+
+      .trash {
+        width: 20px;
+        position: absolute;
+        right: -10px;
         cursor: pointer;
 
         &:hover {

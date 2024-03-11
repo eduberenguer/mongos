@@ -1,10 +1,10 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { AccountsContexts } from '../../context/context';
-import { CiMenuBurger } from 'react-icons/ci';
 
 import style from './header.module.scss';
 import genericStyle from '../../app/app.module.scss';
+import { Bars3Icon } from '@heroicons/react/24/solid';
 import { Navbar } from './navbar/navbar';
 
 export const Header = () => {
@@ -58,7 +58,7 @@ export const Header = () => {
         <div onClick={() => setDropdown(!dropdown)} ref={dropdownRef}>
           {stateAccount.accountLogged?.token !== undefined && (
             <div className={style.menu}>
-              <CiMenuBurger className={style.icon} />
+              <Bars3Icon className={style.icon} />
               <img
                 className={style.avatar}
                 src={stateAccount.accountLogged?.user?.avatar as string}
