@@ -1,16 +1,16 @@
 import { useContext, useState } from 'react';
-import { AdoptionRequestInput } from '../../models/adoption.request.type';
+import { AdoptionRequestInput } from '@/models/adoption.request.type';
 import {
   AccountsContexts,
   AdoptionRequestsContexts,
   DogsContexts,
-} from '../../context/context';
-import { Dog } from '../../models/dog.type';
+} from '@/context/context';
+import { Dog } from '@/models/dog.type';
 import { isFormRequestValid } from './validate/isFormRequestValid';
 import { toast } from 'sonner';
 
 import style from './adoption.request.form.module.scss';
-import genericStyle from '../../app/app.module.scss';
+import genericStyle from '@/app/app.module.scss';
 
 export default function AdoptionRequestForm({
   infoDog,

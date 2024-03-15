@@ -1,4 +1,4 @@
-import { Personality } from '../../../models/dog.type';
+import { Personality } from '@/models/dog.type';
 
 export const optionsPersonality: Personality[] = [
   'calm',

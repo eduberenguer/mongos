@@ -1,4 +1,4 @@
-import { Personality, Size } from '../models/dog.type';
+import { Personality, Size } from '@/models/dog.type';
 
 export const mockDog = {
   id: '1',

@@ -1,7 +1,7 @@
-import { apiUrl } from '../../config';
-import { Shelter } from '../../models/shelter.type';
-import { User } from '../../models/user.type';
-import { LocaStorage } from '../../services/accounts/local.storage';
+import { apiUrl } from '@/config';
+import { Shelter } from '@/models/shelter.type';
+import { User } from '@/models/user.type';
+import { LocaStorage } from '@/services/accounts/local.storage';
 
 const urlBase = 'http://localhost:3000/';
 

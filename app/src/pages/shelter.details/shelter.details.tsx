@@ -1,10 +1,10 @@
 import { useEffect, useContext } from 'react';
-import { AccountsContexts } from '../../context/context';
 import { Link, useParams } from 'react-router-dom';
-import Map from '../../components/google.maps/maps/maps';
+import { AccountsContexts } from '@/context/context';
+import Map from '@/components/google.maps/maps/maps';
 
 import style from './shelter.details.module.scss';
-import genericStyles from '../../app/app.module.scss';
+import genericStyles from '@/app/app.module.scss';
 
 export default function Details() {
   let { id } = useParams();

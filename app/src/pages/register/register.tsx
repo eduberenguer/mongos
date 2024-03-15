@@ -1,21 +1,22 @@
 import { useContext, useState } from 'react';
-import { AccountsContexts } from '../../context/context';
+import { useNavigate } from 'react-router-dom';
+import { AccountsContexts } from '@/context/context';
 import {
   ShelterFormFields,
   UserFormFields,
-} from '../../components/register.form/types/types.form';
+} from '@/components/register.form/types/types.form';
 import {
   initialValueShelter,
   initialValueUser,
-} from '../../components/register.form/initial.values/initial.values';
+} from '@/components/register.form/initial.values/initial.values';
 
-import style from './register.module.scss';
-import genericStyles from '../../app/app.module.scss';
-import { useNavigate } from 'react-router-dom';
-import { UserForm } from '../../components/register.form/user.form/user.form';
-import { ShelterForm } from '../../components/register.form/shelter.form/shelter.form';
+import { UserForm } from '@/components/register.form/user.form/user.form';
+import { ShelterForm } from '@/components/register.form/shelter.form/shelter.form';
 import { isFormRegisterValid } from './validate/isFormRegisterValid';
 import { toast } from 'sonner';
+
+import style from './register.module.scss';
+import genericStyles from '@/app/app.module.scss';
 
 export default function Register() {
   const navigate = useNavigate();

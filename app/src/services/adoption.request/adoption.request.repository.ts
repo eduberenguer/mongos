@@ -1,9 +1,9 @@
 import {
   AdoptionRequestInput,
   AdoptionRequestResponse,
-} from '../../models/adoption.request.type';
-import { apiUrl } from '../../config';
-import { transformDataResponse } from '../../utils/transformDataResponse';
+} from '@/models/adoption.request.type';
+import { apiUrl } from '@/config';
+import { transformDataResponse } from '@/utils/transformDataResponse';
 
 export type ApiResponseDataAdoptionRequest = AdoptionRequestResponse[];
 export type ApiResponseAdoptionRequest = AdoptionRequestResponse;

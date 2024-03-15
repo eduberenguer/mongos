@@ -1,5 +1,5 @@
 import { adoptionRequestActions } from '../actions/adoption.request.action';
-import { AdoptionRequest } from '../../models/adoption.request.type';
+import { AdoptionRequest } from '@/models/adoption.request.type';
 
 export interface AdoptionRequestActions {
   type: string;

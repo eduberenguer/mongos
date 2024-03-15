@@ -1,7 +1,7 @@
 import {
   ShelterFormFields,
   UserFormFields,
-} from '../../../components/register.form/types/types.form';
+} from '@/components/register.form/types/types.form';
 
 export const isFormRegisterValid = (
   role: string | undefined,

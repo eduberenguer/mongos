@@ -1,11 +1,11 @@
+import { useEffect, useState } from 'react';
 import { UserFormFields } from '../types/types.form';
 import { optionsLifestyle } from '../form.options/lifestyle.options';
+import { Lifestyle } from '@/models/user.type';
+import { getProvinces } from '@/services/provinces/getProvinces';
 
 import style from './user.form.module.scss';
-import genericStyles from '../../../app/app.module.scss';
-import { Lifestyle } from '../../../models/user.type';
-import { useEffect, useState } from 'react';
-import { getProvinces } from '../../../services/provinces/getProvinces';
+import genericStyles from '@/app/app.module.scss';
 
 export const UserForm = ({
   userFields,

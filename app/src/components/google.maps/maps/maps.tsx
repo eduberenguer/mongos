@@ -1,5 +1,5 @@
 import { useRef, useEffect } from 'react';
-import { googleMapsApiKey } from '../../../config';
+import { googleMapsApiKey } from '@/config';
 
 import style from './maps.module.scss';
 

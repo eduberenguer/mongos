@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { Dog } from '../../models/dog.type';
+import { Dog } from '@/models/dog.type';
 
 import style from './card.module.scss';
 

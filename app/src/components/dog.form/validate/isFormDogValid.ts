@@ -1,4 +1,4 @@
-import { Dog } from '../../../models/dog.type';
+import { Dog } from '@/models/dog.type';
 
 export const isFormDogValid = (formDataDog: Partial<Dog>) => {
   const {

@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { cloudinaryUrl, cloudinaryPreset } from '../../config';
+import { cloudinaryUrl, cloudinaryPreset } from '@/config';
 
 export const handleImageUpload = async (
   // e: React.ChangeEvent<HTMLInputElement>

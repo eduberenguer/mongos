@@ -1,4 +1,4 @@
-import { Size } from '../../../models/dog.type';
+import { Size } from '@/models/dog.type';
 
 export const optionsSize: Size[] = [
   'small',

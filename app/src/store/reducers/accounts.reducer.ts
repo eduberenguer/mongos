@@ -1,5 +1,5 @@
-import { Shelter } from '../../models/shelter.type';
-import { User } from '../../models/user.type';
+import { Shelter } from '@/models/shelter.type';
+import { User } from '@/models/user.type';
 import { AccountsActions } from '../actions.creators/accounts.action.creator';
 import { accountsActions } from '../actions/accounts.actions';
 

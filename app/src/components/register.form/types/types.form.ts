@@ -1,4 +1,4 @@
-import { Lifestyle } from '../../../models/user.type';
+import { Lifestyle } from '@/models/user.type';
 
 export interface ShelterFormFields {
   shelterName: string;

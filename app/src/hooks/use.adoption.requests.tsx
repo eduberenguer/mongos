@@ -1,9 +1,9 @@
 import { useReducer } from 'react';
-import { AdoptionRequestInput, Status } from '../models/adoption.request.type';
-import { AdoptionRequestRepository } from '../services/adoption.request/adoption.request.repository';
-import { adoptionRequestReducer } from '../store/reducers/adoption.request.reducer';
-import { initialStateAdoptionRequest } from '../mocks/initial.state.reducer';
-import * as ac from '../store/actions.creators/adoption.request.action.creator';
+import { AdoptionRequestInput, Status } from '@/models/adoption.request.type';
+import { AdoptionRequestRepository } from '@/services/adoption.request/adoption.request.repository';
+import { adoptionRequestReducer } from '@/store/reducers/adoption.request.reducer';
+import { initialStateAdoptionRequest } from '@/mocks/initial.state.reducer';
+import * as ac from '@/store/actions.creators/adoption.request.action.creator';
 
 export function useAdoptionRequests() {
   const repo = new AdoptionRequestRepository();

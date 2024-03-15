@@ -3,16 +3,16 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { Header } from '../components/header/header';
 import { AccountsContexts } from '../context/context';
 
-const Home = lazy(() => import('../pages/home/home'));
-const Register = lazy(() => import('../pages/register/register'));
-const Login = lazy(() => import('../pages/login/login'));
-const Admin = lazy(() => import('../pages/shelter.admin/shelter.admin'));
-const DogDetails = lazy(() => import('../pages/dog.details/dog.details'));
+const Home = lazy(() => import('@/pages/home/home'));
+const Register = lazy(() => import('@/pages/register/register'));
+const Login = lazy(() => import('@/pages/login/login'));
+const Admin = lazy(() => import('@/pages/shelter.admin/shelter.admin'));
+const DogDetails = lazy(() => import('@/pages/dog.details/dog.details'));
 const ShelterDetails = lazy(
-  () => import('../pages/shelter.details/shelter.details')
+  () => import('@/pages/shelter.details/shelter.details')
 );
-const Favourites = lazy(() => import('../pages/favourites/favourites'));
-const Requests = lazy(() => import('../pages/requests/requests'));
+const Favourites = lazy(() => import('@/pages/favourites/favourites'));
+const Requests = lazy(() => import('@/pages/requests/requests'));
 
 import './app.module.scss';
 import { Toaster } from 'sonner';

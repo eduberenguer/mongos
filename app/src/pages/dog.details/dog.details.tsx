@@ -1,11 +1,12 @@
 import { useEffect, useContext, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
 import {
   AccountsContexts,
   AdoptionRequestsContexts,
   DogsContexts,
-} from '../../context/context';
-import { User } from '../../models/user.type';
-import { Link, useParams } from 'react-router-dom';
+} from '@/context/context';
+import { User } from '@/models/user.type';
+import AdoptionRequestForm from '@/components/adoption.request.form/adoption.request.form';
 
 import style from './dog.details.module.scss';
 import {
@@ -20,7 +21,6 @@ import {
 } from '@heroicons/react/24/solid';
 
 import { toast } from 'sonner';
-import AdoptionRequestForm from '../../components/adoption.request.form/adoption.request.form';
 
 export default function Details() {
   let { id: dogId } = useParams();

@@ -1,11 +1,11 @@
 import { useState, ChangeEvent } from 'react';
-import { Dog, Personality, Size } from '../../models/dog.type';
+import { Dog, Personality, Size } from '@/models/dog.type';
 import { optionsSize } from './form.options/size.options';
 import { optionsPersonality } from './form.options/personality.options';
+import { isFormDogValid } from './validate/isFormDogValid';
 
 import style from './dog.form.module.scss';
-import genericStyle from '../../app/app.module.scss';
-import { isFormDogValid } from './validate/isFormDogValid';
+import genericStyle from '@/app/app.module.scss';
 
 export default function DogForm({
   handlerFormDog,

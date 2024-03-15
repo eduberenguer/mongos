@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from 'react';
-import { AccountsContexts, DogsContexts } from '../../context/context';
-import { User } from '../../models/user.type';
-import { Dog } from '../../models/dog.type';
-import { Card } from '../../components/card/card';
+import { AccountsContexts, DogsContexts } from '@/context/context';
+import { User } from '@/models/user.type';
+import { Dog } from '@/models/dog.type';
+import { Card } from '@/components/card/card';
 
 import style from './favourites.module.scss';
 

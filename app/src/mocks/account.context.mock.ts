@@ -1,5 +1,5 @@
-import { UseAccountStructured } from '../context/context';
-import { accountState } from '../store/reducers/accounts.reducer';
+import { UseAccountStructured } from '@/context/context';
+import { accountState } from '@/store/reducers/accounts.reducer';
 import { accountMock } from './account.mock';
 
 const accountState: accountState = {

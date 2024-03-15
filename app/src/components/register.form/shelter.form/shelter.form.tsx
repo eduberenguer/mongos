@@ -1,8 +1,8 @@
+import { useEffect, useState } from 'react';
 import { ShelterFormFields } from '../types/types.form';
 import style from './shelter.form.module.scss';
-import genericStyles from '../../../app/app.module.scss';
-import { useEffect, useState } from 'react';
-import { getProvinces } from '../../../services/provinces/getProvinces';
+import genericStyles from '@/app/app.module.scss';
+import { getProvinces } from '@/services/provinces/getProvinces';
 
 export const ShelterForm = ({
   shelterFields,

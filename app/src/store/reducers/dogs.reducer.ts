@@ -1,4 +1,4 @@
-import { Dog } from '../../models/dog.type';
+import { Dog } from '@/models/dog.type';
 import { dogsActions } from '../actions/dogs.actions';
 import { DogActions } from '../actions.creators/dogs.action.creator';
 

@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
-import { AccountsContexts } from '../../context/context';
 import { useNavigate } from 'react-router-dom';
-import { accountState } from '../../store/actions.creators/accounts.action.creator';
+import { AccountsContexts } from '@/context/context';
+import { accountState } from '@/store/actions.creators/accounts.action.creator';
+import { toast } from 'sonner';
 
 import style from './login.module.scss';
-import genericStyles from '../../app/app.module.scss';
-import { toast } from 'sonner';
+import genericStyles from '@/app/app.module.scss';
 
 interface LoginFields {
   email: string;

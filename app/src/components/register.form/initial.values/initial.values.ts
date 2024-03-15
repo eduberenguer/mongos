@@ -1,4 +1,4 @@
-import { User } from '../../../models/user.type';
+import { User } from '@/models/user.type';
 
 export const initialValueShelter = {
   shelterName: '',

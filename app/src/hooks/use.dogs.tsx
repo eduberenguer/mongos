@@ -1,10 +1,10 @@
 import { useReducer, useState } from 'react';
-import { initialStateDogs } from '../mocks/initial.state.reducer';
-import { DogRepository } from '../services/dogs/dogs.repository';
-import { dogReducer } from '../store/reducers/dogs.reducer';
-import * as ac from '../store/actions.creators/dogs.action.creator';
-import { Dog } from '../models/dog.type';
-import { handleImageUpload } from '../services/files/files.cloudinary.repository';
+import { initialStateDogs } from '@/mocks/initial.state.reducer';
+import { DogRepository } from '@/services/dogs/dogs.repository';
+import { dogReducer } from '@/store/reducers/dogs.reducer';
+import * as ac from '@/store/actions.creators/dogs.action.creator';
+import { Dog } from '@/models/dog.type';
+import { handleImageUpload } from '@/services/files/files.cloudinary.repository';
 
 export function useDogs() {
   const repo = new DogRepository();

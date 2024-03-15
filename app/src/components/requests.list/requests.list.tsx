@@ -1,11 +1,11 @@
 import { useContext, useState } from 'react';
-import { AccountsContexts } from '../../context/context';
-import { transformDate } from '../../utils/transformDate';
-import { AdoptionRequest } from '../../models/adoption.request.type';
 import { useNavigate } from 'react-router-dom';
+import { AccountsContexts } from '@/context/context';
+import { transformDate } from '@/utils/transformDate';
+import { AdoptionRequest } from '@/models/adoption.request.type';
 
 import style from './requests.list.module.scss';
-import genericStyle from '../../app/app.module.scss';
+import genericStyle from '@/app/app.module.scss';
 import {
   TrashIcon,
   MagnifyingGlassIcon,

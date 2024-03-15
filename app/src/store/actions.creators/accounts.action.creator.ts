@@ -1,6 +1,6 @@
 import { accountsActions } from '../actions/accounts.actions';
-import { Shelter } from '../../models/shelter.type';
-import { User } from '../../models/user.type';
+import { Shelter } from '@/models/shelter.type';
+import { User } from '@/models/user.type';
 
 export interface AccountsActions {
   type: string;

@@ -1,11 +1,11 @@
 import { useContext, useEffect, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { AccountsContexts } from '../../context/context';
+import { AccountsContexts } from '@/context/context';
+import { Navbar } from './navbar/navbar';
+import { Bars3Icon } from '@heroicons/react/24/solid';
 
 import style from './header.module.scss';
-import genericStyle from '../../app/app.module.scss';
-import { Bars3Icon } from '@heroicons/react/24/solid';
-import { Navbar } from './navbar/navbar';
+import genericStyle from '@/app/app.module.scss';
 
 export const Header = () => {
   const navigate = useNavigate();

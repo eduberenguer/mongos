@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { AccountsContexts, DogsContexts } from '../../context/context';
-import { Card } from '../../components/card/card';
+import { AccountsContexts, DogsContexts } from '@/context/context';
+import { Card } from '@/components/card/card';
 
 import style from './home.module.scss';
-import genericStyle from '../../app/app.module.scss';
-import { Dog } from '../../models/dog.type';
+import genericStyle from '@/app/app.module.scss';
+import { Dog } from '@/models/dog.type';
 
 export default function Home() {
   const { id } = useParams();

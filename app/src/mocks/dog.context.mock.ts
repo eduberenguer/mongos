@@ -1,5 +1,5 @@
-import { UseDogStructured } from '../context/context';
-import { dogState } from '../store/reducers/dogs.reducer';
+import { UseDogStructured } from '@/context/context';
+import { dogState } from '@/store/reducers/dogs.reducer';
 
 const dogState: dogState = {
   dogs: [],

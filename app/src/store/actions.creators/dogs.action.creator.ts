@@ -1,5 +1,5 @@
 import { dogsActions } from '../actions/dogs.actions';
-import { Dog } from '../../models/dog.type';
+import { Dog } from '@/models/dog.type';
 
 export interface DogActions {
   type: string;

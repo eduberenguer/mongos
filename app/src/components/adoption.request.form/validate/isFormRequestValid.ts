@@ -1,4 +1,4 @@
-import { AdoptionRequest } from '../../../models/adoption.request.type';
+import { AdoptionRequest } from '@/models/adoption.request.type';
 
 export const isFormRequestValid = (
   adoptionRequestFormData: Partial<AdoptionRequest>

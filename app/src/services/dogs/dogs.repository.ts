@@ -1,5 +1,5 @@
-import { Dog } from '../../models/dog.type';
-import { apiUrl } from '../../config';
+import { Dog } from '@/models/dog.type';
+import { apiUrl } from '@/config';
 
 export type ApiResponseDataDog = Dog[];
 export type ApiResponseDog = Dog;

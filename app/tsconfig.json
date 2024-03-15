@@ -19,9 +19,20 @@
     "strict": true,
     "noUnusedLocals": true,
     "noUnusedParameters": true,
-    "noFallthroughCasesInSwitch": true
+    "noFallthroughCasesInSwitch": true,
     // Remove the invalid "arrow-body-style" option
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
   },
   "include": ["src", "setupTests.ts", "src/config.ts"],
   "references": [{ "path": "./tsconfig.node.json" }]
 }
+
+/*
+
+    "baseUrl": ".",
+"paths": {
+"@/*": [" ./src/*"],
+*/

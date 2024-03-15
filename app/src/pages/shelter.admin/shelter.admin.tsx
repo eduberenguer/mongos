@@ -1,20 +1,19 @@
 import { useContext, useEffect, useState } from 'react';
-import { AccountsContexts, DogsContexts } from '../../context/context';
-import DogForm from '../../components/dog.form/dog.form';
-import { Dog } from '../../models/dog.type';
-import { transformDate } from '../../utils/transformDate';
+import { Link } from 'react-router-dom';
+import { AccountsContexts, DogsContexts } from '@/context/context';
+import DogForm from '@/components/dog.form/dog.form';
+import { Dog } from '@/models/dog.type';
+import { transformDate } from '@/utils/transformDate';
 import { toast } from 'sonner';
-
-import style from './shelter.admin.module.scss';
-import genericStyles from '../../app/app.module.scss';
 import {
   PencilSquareIcon,
-  ArchiveBoxArrowDownIcon,
   TrashIcon,
   ArchiveBoxXMarkIcon,
 } from '@heroicons/react/24/outline';
 import { ArchiveBoxIcon, ArrowLeftIcon } from '@heroicons/react/24/solid';
-import { Link } from 'react-router-dom';
+
+import style from './shelter.admin.module.scss';
+import genericStyles from '@/app/app.module.scss';
 
 export default function Admin() {
   const {

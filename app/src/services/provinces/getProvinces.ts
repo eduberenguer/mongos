@@ -1,4 +1,4 @@
-import { provinces } from '../../config';
+import { provinces } from '@/config';
 
 export const getProvinces = async () => {
   const provincesData = fetch(provinces).then((response) => {
