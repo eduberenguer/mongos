@@ -30,15 +30,19 @@ export class AccountRepository {
 
   async login(item: Partial<Shelter | User>) {
     const urlFinal = `${urlBase}${item.role}/login`;
-    const data = await fetch(urlFinal, {
+    const response = await fetch(urlFinal, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',
       },
       body: JSON.stringify(item),
     });
+    if (!response.ok) {
+      const responseData = await response.json();
+      throw new Error(responseData.error);
+    }
 
-    return data.json();
+    return response.json();
   }
 
   async loginWithToken({ token, role }: { token: string; role: string }) {

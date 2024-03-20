@@ -28,23 +28,28 @@ export default function Login() {
   const handleLoginChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setLoginFields({
       ...loginFields,
-      [event.target.name]: event.target.value,
+      [event.target.name]: event.target.value.trim(),
     });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!loginFields.email || !loginFields.password || !loginFields.role) {
-    } else {
-      let data = {
-        ...loginFields,
-      };
-      const result: accountState = await login(data);
-      if (result.token) {
-        toast.success('Login successful');
-        navigate('/admin');
+    try {
+      if (!loginFields.email || !loginFields.password || !loginFields.role) {
+        toast.error('Missing email or password');
+      } else {
+        let data = {
+          ...loginFields,
+        };
+        const result: accountState = await login(data);
+        if (result.token) {
+          toast.success('Login successful');
+          navigate('/admin');
+        }
       }
+    } catch (error) {
+      toast.error((error as Error).message);
     }
   };
 

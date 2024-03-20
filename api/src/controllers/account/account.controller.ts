@@ -31,7 +31,7 @@ export class AccountsController<T extends User | Shelter> extends Controller<T> 
       if (req.method === 'PATCH') {
         const tokenHeader = req.get('Authorization');
 
-        if (!tokenHeader?.startsWith('Bearer')) throw new Error('Unauthorized');
+        if (!tokenHeader?.startsWith('Bearer')) return res.status(401).send({ error: 'Unauthorized' });
 
         const token = tokenHeader.split(' ')[1];
         const tokenPayload = AuthServices.verifyJWTGettingPayload(token);
@@ -53,7 +53,7 @@ export class AccountsController<T extends User | Shelter> extends Controller<T> 
         res.send(response);
       } else {
         if (!req.body.email || !req.body.password) {
-          throw new Error('Missing email or password');
+          return res.status(401).send({ error: 'Missing email or password' });
         }
 
         const user = await this.repo.search({
@@ -67,7 +67,7 @@ export class AccountsController<T extends User | Shelter> extends Controller<T> 
 
         const isUserValid = await AuthServices.compare(req.body.password, user.password);
 
-        if (!isUserValid) throw new Error('Invalid user or password');
+        if (!isUserValid) return res.status(401).send({ error: 'Invalid user or password' });
 
         const payload: PayloadToken = {
           id: user.id,
